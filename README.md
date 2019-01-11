@@ -1,2 +1,3 @@
-# review-schedule
-Review schedule of engineers
+# Review schedule for engineers
+
+Live app: https://review-schedule.firebaseapp.com/

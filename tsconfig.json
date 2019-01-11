@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "jsx": "react",
+        "lib": [
+            "dom",
+            "es6",
+        ],
+        "allowSyntheticDefaultImports": true,
+    },
+}

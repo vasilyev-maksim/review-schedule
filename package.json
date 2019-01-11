@@ -1,0 +1,29 @@
+{
+    "name": "review-schedule",
+    "version": "1.0.0",
+    "description": "Review schedule",
+    "main": "index.html",
+    "scripts": {
+        "start": "parcel index.html --open",
+        "build": "parcel build index.html",
+        "publish": "npm run build && firebase deploy"
+    },
+    "dependencies": {
+        "moment": "^2.23.0",
+        "moment-range": "^4.0.1",
+        "react": "^16.7.0",
+        "react-dom": "^16.7.0",
+        "semantic-ui": "^2.4.2",
+        "semantic-ui-react": "^0.84.0"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@types/moment": "^2.13.0",
+        "@types/moment-range": "^3.1.0",
+        "@types/react": "^16.7.18",
+        "@types/semantic-ui": "^2.2.6",
+        "cssnano": "^4.1.8",
+        "typescript": "^3.2.2"
+    }
+}
