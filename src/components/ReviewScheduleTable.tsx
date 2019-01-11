@@ -33,7 +33,7 @@ const ReviewSchedule: React.SFC = () => {
                         </Table.Cell>
                         {
                             backendSquads.map((squad) => (
-                                <Table.Cell key={squad.name + day.day.unix()}>
+                                <Table.Cell key={squad.name}>
                                     <Reviewer reviewer={day.reviewers[squad.name]} />
                                 </Table.Cell>
                             )

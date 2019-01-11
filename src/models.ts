@@ -19,7 +19,7 @@ export interface IReviewDay {
 export interface ISquad {
     name: ESquadName;
     members: IReviewer[];
-    icon:SemanticICONS;
+    icon: SemanticICONS;
 }
 
 export interface IReviewer {
