@@ -20,6 +20,7 @@ export const backendSquads: ISquad[] = [
             },
         ],
         name: ESquadName.Factoring,
+        icon: 'shipping fast'
     },
     {
         members: [
@@ -65,6 +66,7 @@ export const backendSquads: ISquad[] = [
             },
         ],
         name: ESquadName.DailyBanking,
+        icon: 'playstation'
     },
     {
         members: [
@@ -85,5 +87,6 @@ export const backendSquads: ISquad[] = [
             },
         ],
         name: ESquadName.Onboarding,
+        icon: 'ship'
     },
 ];

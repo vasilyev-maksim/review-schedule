@@ -1,4 +1,5 @@
 import * as Moment from 'moment';
+import { SemanticICONS } from 'semantic-ui-react';
 
 export enum ESquadName {
     DailyBanking = 'DailyBanking',
@@ -18,6 +19,7 @@ export interface IReviewDay {
 export interface ISquad {
     name: ESquadName;
     members: IReviewer[];
+    icon:SemanticICONS;
 }
 
 export interface IReviewer {
