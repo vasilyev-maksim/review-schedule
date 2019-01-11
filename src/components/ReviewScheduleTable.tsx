@@ -36,7 +36,7 @@ const ReviewSchedule: React.SFC = () => {
                                 <Table.Cell key={squad.name}>
                                     <Reviewer reviewer={day.reviewers[squad.name]} />
                                 </Table.Cell>
-                            )
+                            ))
                         }
                     </Table.Row>
                 ))}
