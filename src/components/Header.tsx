@@ -6,8 +6,10 @@ export const Header: React.SFC = () => {
         <SemantiHeader as="h2">
             <Icon name="list alternate outline" />
             <SemantiHeader.Content>
-                Review schedule
-                <SemantiHeader.Subheader>For PASHABank engineers</SemantiHeader.Subheader>
+                PR review schedule
+                <SemantiHeader.Subheader>
+                    for PASHA Bank Digital Lab developers
+                </SemantiHeader.Subheader>
             </SemantiHeader.Content>
         </SemantiHeader>
     );
