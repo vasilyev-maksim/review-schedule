@@ -4,6 +4,7 @@ import * as React from 'react';
 import { Icon, Placeholder, Table } from 'semantic-ui-react';
 
 import { getWorkDaysRange } from '../utils';
+import { ReviewScheduleTableFilter } from './ReviewScheduleTableFilter';
 
 export const ReviewScheduleTablePlaceholder: React.SFC = () => {
     const start = moment().startOf('month');
@@ -13,41 +14,44 @@ export const ReviewScheduleTablePlaceholder: React.SFC = () => {
     const squadsRange = range(0, squadsCount);
 
     return (
-        <Table celled columns={(squadsCount + 1) as any}>
-            <Table.Header>
-                <Table.Row>
-                    <Table.HeaderCell>
-                        <Icon name="calendar alternate outline" /> Date
+        <>
+            <ReviewScheduleTableFilter />
+            <Table celled columns={(squadsCount + 1) as any}>
+                <Table.Header>
+                    <Table.Row>
+                        <Table.HeaderCell>
+                            <Icon name="calendar alternate outline" /> Date
                     </Table.HeaderCell>
-                    {squadsRange.map((_, i) => (
-                        <Table.HeaderCell key={i}>
-                            <Icon name="users" /> Squad #{i + 1}
-                        </Table.HeaderCell>
-                    ))}
-                </Table.Row>
-            </Table.Header>
-
-            <Table.Body>
-                {days.map((day, i) => (
-                    <Table.Row key={i}>
-                        <Table.Cell>
-                            {day.format('DD MMM YYYY')}
-                        </Table.Cell>
-                        {
-                            squadsRange.map((_, j) => (
-                                <Table.Cell key={j}>
-                                    <Placeholder>
-                                        <Placeholder.Header image>
-                                            <Placeholder.Line />
-                                            <Placeholder.Line />
-                                        </Placeholder.Header>
-                                    </Placeholder>
-                                </Table.Cell>
-                            ))
-                        }
+                        {squadsRange.map((_, i) => (
+                            <Table.HeaderCell key={i}>
+                                <Icon name="users" /> Squad #{i + 1}
+                            </Table.HeaderCell>
+                        ))}
                     </Table.Row>
-                ))}
-            </Table.Body>
-        </Table>
+                </Table.Header>
+
+                <Table.Body>
+                    {days.map((day, i) => (
+                        <Table.Row key={i}>
+                            <Table.Cell>
+                                {day.format('DD MMM YYYY')}
+                            </Table.Cell>
+                            {
+                                squadsRange.map((_, j) => (
+                                    <Table.Cell key={j}>
+                                        <Placeholder>
+                                            <Placeholder.Header image>
+                                                <Placeholder.Line />
+                                                <Placeholder.Line />
+                                            </Placeholder.Header>
+                                        </Placeholder>
+                                    </Table.Cell>
+                                ))
+                            }
+                        </Table.Row>
+                    ))}
+                </Table.Body>
+            </Table>
+        </>
     );
 };
