@@ -1,23 +1,18 @@
 import * as Moment from 'moment';
 import { SemanticICONS } from 'semantic-ui-react';
 
-export enum ESquadName {
-    DailyBanking = 'DailyBanking',
-    Factoring = 'Factoring',
-    Onboarding = 'Onboarding',
-}
-
 export interface IReviewDay {
     day: Moment.Moment;
-    reviewers: {
-        [ESquadName.DailyBanking]: IReviewer;
-        [ESquadName.Factoring]: IReviewer;
-        [ESquadName.Onboarding]: IReviewer;
-    }
+    reviewers: ISquadReviewer[];
+}
+
+export interface ISquadReviewer {
+    squad: ISquad;
+    reviewer: IReviewer;
 }
 
 export interface ISquad {
-    name: ESquadName;
+    name: string;
     members: IReviewer[];
     icon: SemanticICONS;
 }

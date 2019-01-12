@@ -15,8 +15,8 @@ export const ReviewScheduleTable: React.SFC<IProps> = ({ squads }) => {
     const schedule = squads
         ? getReviewSchedule(squads)
         : [];
-    const _squads = squads
-        ? sortBy(squads, 'name')
+    const _squads = schedule.length
+        ? schedule[0].reviewers.map((reviewer) => reviewer.squad)
         : [];
 
     return (
@@ -37,15 +37,18 @@ export const ReviewScheduleTable: React.SFC<IProps> = ({ squads }) => {
             </Table.Header>
 
             <Table.Body>
-                {schedule.map((day) => (
-                    <Table.Row negative={day.day.isSame((moment()), 'day')} key={day.day.unix()}>
+                {schedule.map(({ day, reviewers }) => (
+                    <Table.Row
+                        negative={day.isSame((moment()), 'day')}
+                        key={day.unix()}
+                    >
                         <Table.Cell>
-                            {day.day.format('DD MMM YYYY')}
+                            {day.format('DD MMM YYYY')}
                         </Table.Cell>
                         {
-                            _squads.map((squad) => (
-                                <Table.Cell key={squad.name}>
-                                    <Reviewer reviewer={day.reviewers[squad.name]} />
+                            reviewers.map((squadReviewer) => (
+                                <Table.Cell key={squadReviewer.squad.name}>
+                                    <Reviewer reviewer={squadReviewer.reviewer} />
                                 </Table.Cell>
                             ))
                         }
