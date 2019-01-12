@@ -47,7 +47,7 @@ export const SchedulePage: React.SFC<IProps> = ({ camps, loading }) => {
 
                     return (
                         <>
-                            <Grid columns={2} stackable>
+                            <Grid columns={2} stackable style={{ marginBottom: 0 }}>
                                 <Grid.Row>
                                     <Grid.Column>
                                         <Header />
