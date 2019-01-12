@@ -6,6 +6,8 @@ export interface IReviewDay {
     reviewers: ISquadReviewer[];
 }
 
+export type IReviewSchedule = IReviewDay[];
+
 export interface ISquadReviewer {
     squad: ISquad;
     reviewer: IReviewer;

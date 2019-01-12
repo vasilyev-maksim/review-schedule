@@ -1,22 +1,24 @@
 import { range } from 'lodash';
-import moment from 'moment';
 import * as React from 'react';
 import { Icon, Placeholder, Table } from 'semantic-ui-react';
 
-import { getWorkDaysRange } from '../utils';
+import { PLACEHOLDER_SQUADS_COUNT } from '../consts';
+import { getCurrentDate, getWorkDaysRange } from '../utils';
 import { ReviewScheduleTableFilter } from './ReviewScheduleTableFilter';
 
 export const ReviewScheduleTablePlaceholder: React.SFC = () => {
-    const start = moment().startOf('month');
-    const end = moment().endOf('month');
+    const start = getCurrentDate().startOf('month');
+    const end = getCurrentDate().endOf('month');
     const days = getWorkDaysRange(start, end);
-    const squadsCount = 3;
-    const squadsRange = range(0, squadsCount);
+    const squadsRange = range(0, PLACEHOLDER_SQUADS_COUNT);
 
     return (
         <>
             <ReviewScheduleTableFilter />
-            <Table celled columns={(squadsCount + 1) as any}>
+            <Table
+                celled
+                columns={(PLACEHOLDER_SQUADS_COUNT + 1) as any}
+            >
                 <Table.Header className="mobile hidden">
                     <Table.Row>
                         <Table.HeaderCell>
@@ -33,25 +35,27 @@ export const ReviewScheduleTablePlaceholder: React.SFC = () => {
                 </Table.Header>
 
                 <Table.Body>
-                    {days.map((day, i) => (
-                        <Table.Row key={i}>
-                            <Table.Cell>
-                                {day.format('DD MMM YYYY')}
-                            </Table.Cell>
-                            {
-                                squadsRange.map((_, j) => (
-                                    <Table.Cell key={j}>
-                                        <Placeholder>
-                                            <Placeholder.Header image>
-                                                <Placeholder.Line />
-                                                <Placeholder.Line />
-                                            </Placeholder.Header>
-                                        </Placeholder>
-                                    </Table.Cell>
-                                ))
-                            }
-                        </Table.Row>
-                    ))}
+                    {
+                        days.map((day, i) => (
+                            <Table.Row key={i}>
+                                <Table.Cell>
+                                    {day.format('DD MMM YYYY')}
+                                </Table.Cell>
+                                {
+                                    squadsRange.map((_, j) => (
+                                        <Table.Cell key={j}>
+                                            <Placeholder>
+                                                <Placeholder.Header as="h5" image>
+                                                    <Placeholder.Line />
+                                                    <Placeholder.Line />
+                                                </Placeholder.Header>
+                                            </Placeholder>
+                                        </Table.Cell>
+                                    ))
+                                }
+                            </Table.Row>
+                        ))
+                    }
                 </Table.Body>
             </Table>
         </>

@@ -2,8 +2,12 @@ import * as React from 'react';
 import { Container } from 'semantic-ui-react';
 
 import { db } from '../db';
+import { getReviewSchedule } from '../getReviewSchedule';
 import { ISquad } from '../models';
+import { getCurrentDate, isWorkingDay } from '../utils';
 import { Header } from './Header';
+import { ReviewersOfTheDay } from './ReviewersOfTheDay';
+import { ReviewersOfTheDayPlaceholder } from './ReviewersOfTheDayPlaceholder';
 import { ReviewScheduleTable } from './ReviewScheduleTable';
 import { ReviewScheduleTablePlaceholder } from './ReviewScheduleTablePlaceholder';
 
@@ -28,13 +32,31 @@ export class App extends React.Component<{}, IState> {
     }
 
     public render (): JSX.Element {
+        const schedule = this.state.squads
+            ? getReviewSchedule(this.state.squads)
+            : [];
+        const isTodayWorkingDay = isWorkingDay(getCurrentDate());
+
         return (
             <div style={{ margin: '40px 0' }}>
                 <Container>
                     <Header />
-                    {this.state.loading
-                        ? <ReviewScheduleTablePlaceholder />
-                        : <ReviewScheduleTable squads={this.state.squads} />
+                    {
+                        isTodayWorkingDay && (
+                            <>
+                                <br />
+                                {
+                                    this.state.loading
+                                        ? <ReviewersOfTheDayPlaceholder />
+                                        : <ReviewersOfTheDay schedule={schedule} />
+                                }
+                            </>
+                        )
+                    }
+                    {
+                        this.state.loading
+                            ? <ReviewScheduleTablePlaceholder />
+                            : <ReviewScheduleTable schedule={schedule} />
                     }
                 </Container>
             </div>

@@ -1,15 +1,13 @@
-import { sortBy } from 'lodash';
-import moment from 'moment';
 import * as React from 'react';
-import { Icon, Table } from 'semantic-ui-react';
+import { Icon, Label, Table } from 'semantic-ui-react';
 
-import { getReviewSchedule } from '../getReviewSchedule';
-import { IReviewer, ISquad } from '../models';
+import { IReviewer, IReviewSchedule } from '../models';
+import { isToday } from '../utils';
 import { Reviewer } from './Reviewer';
 import { ReviewScheduleTableFilter } from './ReviewScheduleTableFilter';
 
 interface IProps {
-    squads: ISquad[];
+    schedule: IReviewSchedule;
 }
 
 interface IState {
@@ -30,10 +28,10 @@ export class ReviewScheduleTable extends React.Component<IProps, IState> {
     }
 
     public render (): JSX.Element {
-        const { squads } = this.props;
+        const { schedule } = this.props;
 
-        const schedule = squads
-            ? getReviewSchedule(squads).filter(
+        const _schedule = schedule
+            ? schedule.filter(
                 (day) => (
                     !this.state.filteredBy ||
                     day.reviewers.some(
@@ -42,8 +40,8 @@ export class ReviewScheduleTable extends React.Component<IProps, IState> {
                 )
             )
             : [];
-        const _squads = schedule.length
-            ? schedule[0].reviewers.map((reviewer) => reviewer.squad)
+        const _squads = _schedule.length
+            ? _schedule[0].reviewers.map((reviewer) => reviewer.squad)
             : [];
 
         return (
@@ -72,25 +70,35 @@ export class ReviewScheduleTable extends React.Component<IProps, IState> {
                     </Table.Header>
 
                     <Table.Body>
-                        {schedule.map(({ day, reviewers }) => (
-                            <Table.Row
-                                negative={day.isSame((moment()), 'day')}
-                                key={day.unix()}
-                            >
-                                <Table.Cell>
-                                    {day.format('DD MMM YYYY')}
-                                </Table.Cell>
-                                {
-                                    reviewers.map(({ squad, reviewer }) => (
-                                        <Table.Cell key={squad.name} selectable>
-                                            <a href="#" onClick={() => this.handleReviewerClick(reviewer)}>
-                                                <Reviewer reviewer={reviewer} />
-                                            </a>
-                                        </Table.Cell>
-                                    ))
-                                }
-                            </Table.Row>
-                        ))}
+                        {
+                            _schedule.map(({ day, reviewers }) => (
+                                <Table.Row
+                                    positive={isToday(day)}
+                                    key={day.unix()}
+                                >
+                                    <Table.Cell>
+                                        {
+                                            isToday(day)
+                                                ? (
+                                                    <Label color="green" ribbon>
+                                                        {day.format('DD MMM YYYY')}
+                                                    </Label>
+                                                )
+                                                : day.format('DD MMM YYYY')
+                                        }
+                                    </Table.Cell>
+                                    {
+                                        reviewers.map(({ squad, reviewer }) => (
+                                            <Table.Cell key={squad.name} selectable>
+                                                <a href="#" onClick={() => this.handleReviewerClick(reviewer)}>
+                                                    <Reviewer reviewer={reviewer} />
+                                                </a>
+                                            </Table.Cell>
+                                        ))
+                                    }
+                                </Table.Row>
+                            ))
+                        }
                     </Table.Body>
                 </Table>
             </>

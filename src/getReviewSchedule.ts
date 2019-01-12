@@ -1,16 +1,12 @@
 import { sortBy } from 'lodash';
-import Moment from 'moment';
-import { extendMoment } from 'moment-range';
 
 import { REFERENCE_POINT } from './consts';
-import { IReviewDay, ISquad, ISquadReviewer } from './models';
-import { getWorkDaysRange } from './utils';
+import { IReviewSchedule, ISquad, ISquadReviewer } from './models';
+import { getCurrentDate, getWorkDaysRange } from './utils';
 
-const moment = extendMoment(Moment);
-
-export function getReviewSchedule (squads: ISquad[]): IReviewDay[] {
-    const start = moment().startOf('month');
-    const end = moment().endOf('month');
+export function getReviewSchedule (squads: ISquad[]): IReviewSchedule {
+    const start = getCurrentDate().startOf('month');
+    const end = getCurrentDate().endOf('month');
 
     const days = getWorkDaysRange(REFERENCE_POINT, end);
 
