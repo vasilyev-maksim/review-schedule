@@ -71,3 +71,5 @@ dist/
 semantic/
 
 .DS_Store
+
+tools/*.dump.json
