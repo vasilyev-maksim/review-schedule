@@ -56,11 +56,11 @@ export class ReviewScheduleTable extends React.Component<IProps, IState> {
                 </div>
 
                 <Table celled columns={(_squads.length + 1) as any}>
-                    <Table.Header>
+                    <Table.Header className="mobile hidden">
                         <Table.Row>
                             <Table.HeaderCell>
                                 <Icon name="calendar alternate outline" /> Date
-                    </Table.HeaderCell>
+                            </Table.HeaderCell>
                             {
                                 _squads.map((squad) => (
                                     <Table.HeaderCell key={squad.name}>

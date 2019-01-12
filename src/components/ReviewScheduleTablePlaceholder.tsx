@@ -17,16 +17,18 @@ export const ReviewScheduleTablePlaceholder: React.SFC = () => {
         <>
             <ReviewScheduleTableFilter />
             <Table celled columns={(squadsCount + 1) as any}>
-                <Table.Header>
+                <Table.Header className="mobile hidden">
                     <Table.Row>
                         <Table.HeaderCell>
                             <Icon name="calendar alternate outline" /> Date
-                    </Table.HeaderCell>
-                        {squadsRange.map((_, i) => (
-                            <Table.HeaderCell key={i}>
-                                <Icon name="users" /> Squad #{i + 1}
-                            </Table.HeaderCell>
-                        ))}
+                        </Table.HeaderCell>
+                        {
+                            squadsRange.map((_, i) => (
+                                <Table.HeaderCell key={i}>
+                                    <Icon name="users" /> Squad #{i + 1}
+                                </Table.HeaderCell>
+                            ))
+                        }
                     </Table.Row>
                 </Table.Header>
 
