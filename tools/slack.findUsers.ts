@@ -2,7 +2,7 @@
 
 /**
  * Usage example:
- * npm run slack:find-users jamil niyazi vahab fuad gurban lala
+ * npm run slack:find-users jamil niyazi vahab fuad gurban lala maksim
  */
 
 import axios, { AxiosResponse } from 'axios';
