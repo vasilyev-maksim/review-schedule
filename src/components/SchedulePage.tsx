@@ -39,7 +39,7 @@ export const SchedulePage: React.SFC<IProps> = ({ camps, loading }) => {
                     const { camp: currentCampName } = props.match.params;
                     const isTodayWorkingDay = isWorkingDay(getCurrentDate());
                     const currentCamp = camps && camps.find(
-                        (camp) => encodeURIComponent(camp.name) === currentCampName
+                        (camp) => encodeURIComponent(camp.name) === encodeURIComponent(currentCampName)
                     );
                     const schedule = currentCamp && currentCamp.squads
                         ? getSchedule(currentCamp.squads)
