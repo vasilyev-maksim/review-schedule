@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { Container, Header } from 'semantic-ui-react';
+import { Container } from 'semantic-ui-react';
 
 import { db } from '../db';
 import { ISquad } from '../models';
+import { Header } from './Header';
 import { ReviewScheduleTable } from './ReviewScheduleTable';
 import { ReviewScheduleTablePlaceholder } from './ReviewScheduleTablePlaceholder';
 
@@ -28,10 +29,9 @@ export class App extends React.Component<{}, IState> {
 
     public render (): JSX.Element {
         return (
-            <div style={{ margin: '20px 0' }}>
+            <div style={{ margin: '40px 0' }}>
                 <Container>
-                    <br />
-                    <Header as="h1">Review schedule 🤟</Header>
+                    <Header />
                     {this.state.loading
                         ? <ReviewScheduleTablePlaceholder />
                         : <ReviewScheduleTable squads={this.state.squads} />
