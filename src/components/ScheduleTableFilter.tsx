@@ -8,7 +8,9 @@ interface IProps {
     onClear?: () => void;
 }
 
-export const ReviewScheduleTableFilter: React.SFC<IProps> = ({ reviewer, onClear }) => {
+export const ScheduleTableFilter: React.SFC<IProps> = ({ reviewer, onClear }) => {
+    const _reviewer: IReviewer = reviewer || ({} as any);
+
     return (
         <Label
             size="medium"
@@ -18,8 +20,8 @@ export const ReviewScheduleTableFilter: React.SFC<IProps> = ({ reviewer, onClear
             style={{ visibility: reviewer ? 'visible' : 'hidden' }}
             content={(
                 <>
-                    <img src={reviewer && reviewer.photo} />
-                    {reviewer && reviewer.name} {reviewer && reviewer.surname}
+                    <img src={_reviewer.photo} />
+                    {_reviewer.name} {_reviewer.surname}
                 </>
             )}
         />

@@ -1,20 +1,20 @@
 import * as React from 'react';
 import { Icon, Label, Table } from 'semantic-ui-react';
 
-import { IReviewer, IReviewSchedule } from '../models';
+import { IReviewer, ISchedule } from '../models';
 import { isToday } from '../utils';
 import { Reviewer } from './Reviewer';
-import { ReviewScheduleTableFilter } from './ReviewScheduleTableFilter';
+import { ScheduleTableFilter } from './ScheduleTableFilter';
 
 interface IProps {
-    schedule: IReviewSchedule;
+    schedule: ISchedule;
 }
 
 interface IState {
     filteredBy: IReviewer;
 }
 
-export class ReviewScheduleTable extends React.Component<IProps, IState> {
+export class ScheduleTable extends React.Component<IProps, IState> {
     public state: IState = {
         filteredBy: null,
     };
@@ -47,7 +47,7 @@ export class ReviewScheduleTable extends React.Component<IProps, IState> {
         return (
             <>
                 <div style={{ textAlign: 'right' }}>
-                    <ReviewScheduleTableFilter
+                    <ScheduleTableFilter
                         reviewer={this.state.filteredBy}
                         onClear={this.handleFilterClear}
                     />
@@ -71,33 +71,37 @@ export class ReviewScheduleTable extends React.Component<IProps, IState> {
 
                     <Table.Body>
                         {
-                            _schedule.map(({ day, reviewers }) => (
-                                <Table.Row
-                                    positive={isToday(day)}
-                                    key={day.unix()}
-                                >
-                                    <Table.Cell>
+                            _schedule.map(
+                                ({ day, reviewers }) => (
+                                    <Table.Row
+                                        positive={isToday(day)}
+                                        key={day.unix()}
+                                    >
+                                        <Table.Cell>
+                                            {
+                                                isToday(day)
+                                                    ? (
+                                                        <Label color="green" ribbon>
+                                                            {day.format('DD MMM YYYY')}
+                                                        </Label>
+                                                    )
+                                                    : day.format('DD MMM YYYY')
+                                            }
+                                        </Table.Cell>
                                         {
-                                            isToday(day)
-                                                ? (
-                                                    <Label color="green" ribbon>
-                                                        {day.format('DD MMM YYYY')}
-                                                    </Label>
+                                            reviewers.map(
+                                                ({ squad, reviewer }) => (
+                                                    <Table.Cell key={squad.name} selectable>
+                                                        <a href="#" onClick={() => this.handleReviewerClick(reviewer)}>
+                                                            <Reviewer reviewer={reviewer} />
+                                                        </a>
+                                                    </Table.Cell>
                                                 )
-                                                : day.format('DD MMM YYYY')
+                                            )
                                         }
-                                    </Table.Cell>
-                                    {
-                                        reviewers.map(({ squad, reviewer }) => (
-                                            <Table.Cell key={squad.name} selectable>
-                                                <a href="#" onClick={() => this.handleReviewerClick(reviewer)}>
-                                                    <Reviewer reviewer={reviewer} />
-                                                </a>
-                                            </Table.Cell>
-                                        ))
-                                    }
-                                </Table.Row>
-                            ))
+                                    </Table.Row>
+                                )
+                            )
                         }
                     </Table.Body>
                 </Table>

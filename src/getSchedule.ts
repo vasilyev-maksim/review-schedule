@@ -1,10 +1,10 @@
 import { sortBy } from 'lodash';
 
 import { REFERENCE_POINT } from './consts';
-import { IReviewSchedule, ISquad, ISquadReviewer } from './models';
+import { ISchedule, ISquad, ISquadReviewer } from './models';
 import { getCurrentDate, getWorkDaysRange } from './utils';
 
-export function getReviewSchedule (squads: ISquad[]): IReviewSchedule {
+export function getSchedule (squads: ISquad[]): ISchedule {
     const start = getCurrentDate().startOf('month');
     const end = getCurrentDate().endOf('month');
 

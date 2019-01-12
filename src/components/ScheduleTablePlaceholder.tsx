@@ -4,9 +4,9 @@ import { Icon, Placeholder, Table } from 'semantic-ui-react';
 
 import { PLACEHOLDER_SQUADS_COUNT } from '../consts';
 import { getCurrentDate, getWorkDaysRange } from '../utils';
-import { ReviewScheduleTableFilter } from './ReviewScheduleTableFilter';
+import { ScheduleTableFilter } from './ScheduleTableFilter';
 
-export const ReviewScheduleTablePlaceholder: React.SFC = () => {
+export const ScheduleTablePlaceholder: React.SFC = () => {
     const start = getCurrentDate().startOf('month');
     const end = getCurrentDate().endOf('month');
     const days = getWorkDaysRange(start, end);
@@ -14,7 +14,7 @@ export const ReviewScheduleTablePlaceholder: React.SFC = () => {
 
     return (
         <>
-            <ReviewScheduleTableFilter />
+            <ScheduleTableFilter />
             <Table
                 celled
                 columns={(PLACEHOLDER_SQUADS_COUNT + 1) as any}

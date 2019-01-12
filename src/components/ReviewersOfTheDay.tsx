@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Header, Image, Table } from 'semantic-ui-react';
 
-import { IReviewSchedule } from '../models';
+import { ISchedule } from '../models';
 import { isToday } from '../utils';
 
 interface IProps {
-    schedule: IReviewSchedule;
+    schedule: ISchedule;
 }
 
 export const ReviewersOfTheDay: React.SFC<IProps> = ({ schedule }) => {

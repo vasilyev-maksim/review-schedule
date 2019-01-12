@@ -1,4 +1,4 @@
-import * as Moment from 'moment';
+import Moment from 'moment';
 import { SemanticICONS } from 'semantic-ui-react';
 
 export interface IReviewer {
@@ -24,9 +24,10 @@ export interface IReviewDay {
     reviewers: ISquadReviewer[];
 }
 
-export type IReviewSchedule = IReviewDay[];
+export type ISchedule = IReviewDay[];
 
 export interface ICamp {
     name: string;
+    icon: SemanticICONS;
     squads: ISquad[];
 }

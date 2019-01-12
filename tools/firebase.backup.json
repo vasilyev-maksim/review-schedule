@@ -1,5 +1,6 @@
 [
     {
+        "icon": "database",
         "name": "backend",
         "squads": [
             {
@@ -107,6 +108,7 @@
         ]
     },
     {
+        "icon": "computer",
         "name": "frontend",
         "squads": [
             {

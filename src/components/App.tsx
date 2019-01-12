@@ -1,67 +1,56 @@
 import * as React from 'react';
+import {
+    BrowserRouter as Router,
+    Redirect,
+    Route,
+    Switch
+} from 'react-router-dom';
 import { Container } from 'semantic-ui-react';
 
 import { db } from '../db';
-import { getReviewSchedule } from '../getReviewSchedule';
-import { ISquad } from '../models';
-import { getCurrentDate, isWorkingDay } from '../utils';
-import { Header } from './Header';
-import { ReviewersOfTheDay } from './ReviewersOfTheDay';
-import { ReviewersOfTheDayPlaceholder } from './ReviewersOfTheDayPlaceholder';
-import { ReviewScheduleTable } from './ReviewScheduleTable';
-import { ReviewScheduleTablePlaceholder } from './ReviewScheduleTablePlaceholder';
+import { ICamp } from '../models';
+import { SchedulePage } from './SchedulePage';
 
 interface IState {
-    squads: ISquad[];
+    camps: ICamp[];
     loading: boolean;
 }
 
 export class App extends React.Component<{}, IState> {
     public state: IState = {
+        camps: null,
         loading: true,
-        squads: null,
     };
 
     public componentDidMount (): void {
-        db.collection('squads').onSnapshot((querySnapshot) => {
+        db.collection('camps').onSnapshot((querySnapshot) => {
             this.setState({
+                camps: querySnapshot.docs.map((doc) => doc.data() as ICamp),
                 loading: false,
-                squads: querySnapshot.docs.map((doc) => doc.data() as ISquad),
             });
         });
     }
 
     public render (): JSX.Element {
-        const schedule = this.state.squads
-            ? getReviewSchedule(this.state.squads)
-            : [];
-        const isTodayWorkingDay = isWorkingDay(getCurrentDate());
-
         return (
             <div style={{ margin: '40px 0' }}>
                 <Container>
-                    <Header />
-                    {
-                        isTodayWorkingDay && (
-                            <>
-                                <br />
-                                {
-                                    this.state.loading
-                                        ? <ReviewersOfTheDayPlaceholder />
-                                        : <ReviewersOfTheDay schedule={schedule} />
-                                }
-                            </>
-                        )
-                    }
-                    {
-                        this.state.loading
-                            ? <ReviewScheduleTablePlaceholder />
-                            : <ReviewScheduleTable schedule={schedule} />
-                    }
+                    <Router>
+                        <Switch>
+                            <Route
+                                path="/schedule"
+                                render={() => (
+                                    <SchedulePage
+                                        camps={this.state.camps}
+                                        loading={this.state.loading}
+                                    />
+                                )}
+                            />
+                            <Redirect to="/schedule" />
+                        </Switch>
+                    </Router>
                 </Container>
             </div>
         );
     }
 }
-
-export default App;
