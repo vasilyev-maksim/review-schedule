@@ -21,7 +21,9 @@ export function getReviewSchedule (squads: ISquad[]): IReviewDay[] {
 
     function getCurrentReviewer (squadName: ESquadName, dayNumber: number): IReviewer {
         const squad = squads.find((s) => s.name === squadName);
-        return squad.members[dayNumber % squad.members.length];
+        const enabledMembers = squad.members.filter((member) => member.enabled);
+
+        return enabledMembers[dayNumber % enabledMembers.length];
     }
 
     return workingDays

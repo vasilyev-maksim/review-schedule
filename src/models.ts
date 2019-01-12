@@ -23,6 +23,7 @@ export interface ISquad {
 }
 
 export interface IReviewer {
+    enabled: boolean;
     name: string;
     surname: string;
     photo: string;
