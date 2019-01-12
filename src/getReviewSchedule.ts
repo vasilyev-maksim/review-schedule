@@ -1,11 +1,16 @@
 import Moment from 'moment';
 import { extendMoment } from 'moment-range';
 
-import { ISquad, IReviewDay, ESquadName, IReviewer } from './models';
+import {
+    ESquadName,
+    IReviewDay,
+    IReviewer,
+    ISquad
+} from './models';
 
 const moment = extendMoment(Moment);
 
-export default function getReviewSchedule (squads: ISquad[]): IReviewDay[] {
+export function getReviewSchedule (squads: ISquad[]): IReviewDay[] {
     const referencePoint = moment('2019-01-11');
     const start = moment().startOf('month');
     const end = moment().endOf('month');
