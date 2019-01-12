@@ -1,11 +1,10 @@
-import * as firebase from 'firebase';
 import * as React from 'react';
 import { Container, Header } from 'semantic-ui-react';
 
 import { db } from '../db';
-import { getReviewSchedule } from '../getReviewSchedule';
 import { ISquad } from '../models';
 import { ReviewScheduleTable } from './ReviewScheduleTable';
+import { ReviewScheduleTablePlaceholder } from './ReviewScheduleTablePlaceholder';
 
 interface IState {
     squads: ISquad[];
@@ -33,10 +32,10 @@ export class App extends React.Component<{}, IState> {
                 <Container>
                     <br />
                     <Header as="h1">Review schedule 🤟</Header>
-                    <ReviewScheduleTable
-                        loading={this.state.loading}
-                        squads={this.state.squads}
-                    />
+                    {this.state.loading
+                        ? <ReviewScheduleTablePlaceholder />
+                        : <ReviewScheduleTable squads={this.state.squads} />
+                    }
                 </Container>
             </div>
         );

@@ -3,36 +3,45 @@ import moment from 'moment';
 import * as React from 'react';
 import { Icon, Placeholder, Table } from 'semantic-ui-react';
 
+import { getWorkDaysRange } from '../utils';
+
 export const ReviewScheduleTablePlaceholder: React.SFC = () => {
+    const start = moment().startOf('month');
+    const end = moment().endOf('month');
+    const days = getWorkDaysRange(start, end);
+    const squadsCount = 3;
+    const squadsRange = range(0, squadsCount);
+
     return (
-        <Table celled>
+        <Table celled columns={(squadsCount + 1) as any}>
             <Table.Header>
                 <Table.Row>
                     <Table.HeaderCell>
                         <Icon name="calendar alternate outline" /> Date
                     </Table.HeaderCell>
-                    {
-                        range(0, 3).map((_, i) => (
-                            <Table.HeaderCell key={i}>
-                                <Placeholder>
-                                    <Placeholder.Line />
-                                </Placeholder>
-                            </Table.HeaderCell>
-                        ))
-                    }
+                    {squadsRange.map((_, i) => (
+                        <Table.HeaderCell key={i}>
+                            <Icon name="users" /> Squad #{i + 1}
+                        </Table.HeaderCell>
+                    ))}
                 </Table.Row>
             </Table.Header>
 
             <Table.Body>
-                {schedule.map((day) => (
-                    <Table.Row negative={day.day.isSame((moment()), 'day')} key={day.day.unix()}>
+                {days.map((day, i) => (
+                    <Table.Row key={i}>
                         <Table.Cell>
-                            {day.day.format('DD MMM YYYY')}
+                            {day.format('DD MMM YYYY')}
                         </Table.Cell>
                         {
-                            _squads.map((squad) => (
-                                <Table.Cell key={squad.name}>
-                                    <Reviewer reviewer={day.reviewers[squad.name]} />
+                            squadsRange.map((_, j) => (
+                                <Table.Cell key={j}>
+                                    <Placeholder>
+                                        <Placeholder.Header image>
+                                            <Placeholder.Line />
+                                            <Placeholder.Line />
+                                        </Placeholder.Header>
+                                    </Placeholder>
                                 </Table.Cell>
                             ))
                         }

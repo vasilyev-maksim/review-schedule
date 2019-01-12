@@ -8,7 +8,6 @@ import { ISquad } from '../models';
 import { Reviewer } from './Reviewer';
 
 interface IProps {
-    loading: boolean;
     squads: ISquad[];
 }
 
@@ -21,7 +20,7 @@ export const ReviewScheduleTable: React.SFC<IProps> = ({ squads }) => {
         : [];
 
     return (
-        <Table celled>
+        <Table celled columns={(_squads.length + 1) as any}>
             <Table.Header>
                 <Table.Row>
                     <Table.HeaderCell>
