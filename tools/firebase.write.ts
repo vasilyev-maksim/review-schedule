@@ -4,7 +4,7 @@ import { db } from '../src/db';
 import { ICamp } from '../src/models';
 
 const camp: ICamp = {
-    name: 'Frontend',
+    name: 'frontend',
     squads: [
         {
             icon: 'playstation',
@@ -69,5 +69,4 @@ const camp: ICamp = {
     ],
 };
 
-db.collection('camps').add(camp)
-    .then(() => process.exit());
+db.collection('camps').add(camp).then(() => process.exit());

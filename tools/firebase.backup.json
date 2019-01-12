@@ -1,6 +1,6 @@
 [
     {
-        "name": "Backend",
+        "name": "backend",
         "squads": [
             {
                 "icon": "playstation",
@@ -107,7 +107,7 @@
         ]
     },
     {
-        "name": "Frontend",
+        "name": "frontend",
         "squads": [
             {
                 "icon": "playstation",
