@@ -62,14 +62,9 @@ export const SchedulePage: React.SFC<IProps> = ({ camps, loading }) => {
                             </Grid>
                             {
                                 isTodayWorkingDay && (
-                                    <>
-                                        <br />
-                                        {
-                                            loading
-                                                ? <ReviewersOfTheDayPlaceholder />
-                                                : <ReviewersOfTheDay schedule={schedule} />
-                                        }
-                                    </>
+                                    loading
+                                        ? <ReviewersOfTheDayPlaceholder />
+                                        : <ReviewersOfTheDay schedule={schedule} />
                                 )
                             }
                             {
