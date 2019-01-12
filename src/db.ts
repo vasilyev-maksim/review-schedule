@@ -1,4 +1,5 @@
-import firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/firestore';
 
 export const config = {
     apiKey: 'AIzaSyD7GbTdXaagmPBXX0tdX_O7U721Tb0q4pc',
