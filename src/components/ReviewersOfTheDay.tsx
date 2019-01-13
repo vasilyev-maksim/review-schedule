@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { Header, Image, Table } from 'semantic-ui-react';
+import { Header, Icon, Image, Table } from 'semantic-ui-react';
 
-import { DATE_FORMAT } from '../consts';
+import { DATE_FORMAT, SLACK_TEAM_ID } from '../config';
 import { ISchedule } from '../models';
 import { isToday } from '../utils';
+import { Reviewer } from './Reviewer';
 
 interface IProps {
     schedule: ISchedule;
@@ -11,7 +12,6 @@ interface IProps {
 
 export const ReviewersOfTheDay: React.SFC<IProps> = ({ schedule }) => {
     const today = schedule.find(({ day }) => isToday(day));
-
     return today
         ? (
             <Table
@@ -34,16 +34,10 @@ export const ReviewersOfTheDay: React.SFC<IProps> = ({ schedule }) => {
                         {
                             today.reviewers.map(
                                 ({ reviewer }) => (
-                                    <Table.Cell key={reviewer.id}>
-                                        <Header as="h3" image>
-                                            <Image src={reviewer.photo} rounded size="large" />
-                                            <Header.Content>
-                                                {reviewer.name}
-                                                <Header.Subheader>
-                                                    {reviewer.surname}
-                                                </Header.Subheader>
-                                            </Header.Content>
-                                        </Header>
+                                    <Table.Cell key={reviewer.id} selectable>
+                                        <a href={`slack://user?team=${SLACK_TEAM_ID}&id=${reviewer.id}`}>
+                                            <Reviewer reviewer={reviewer} todayMode={true} />
+                                        </a>
                                     </Table.Cell>
                                 )
                             )

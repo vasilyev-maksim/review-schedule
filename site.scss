@@ -27,3 +27,20 @@
         margin-right: 0 !important;
     }
 }
+
+.reviewer {
+    display: flex;
+
+    .body {
+        flex-grow: 1;
+    }
+
+    .actions {
+        align-self: center;
+        display: none;
+    }
+}
+
+td:hover .reviewer .actions {
+    display: block !important;
+}
