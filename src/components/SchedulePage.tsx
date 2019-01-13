@@ -11,6 +11,7 @@ import { ReviewersOfTheDay } from './ReviewersOfTheDay';
 import { ReviewersOfTheDayPlaceholder } from './ReviewersOfTheDayPlaceholder';
 import { ScheduleTable } from './ScheduleTable';
 import { ScheduleTablePlaceholder } from './ScheduleTablePlaceholder';
+import { WeekendMessage } from './WeekendMessage';
 
 interface IProps {
     camps: ICamp[];
@@ -33,7 +34,11 @@ export const SchedulePage: React.SFC<IProps> = ({ camps, loading }) => {
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>
-                {isTodayWorkingDay && <ReviewersOfTheDayPlaceholder />}
+                {
+                    isTodayWorkingDay
+                        ? <ReviewersOfTheDayPlaceholder />
+                        : <WeekendMessage />
+                }
                 <ScheduleTablePlaceholder />
             </>
         );
@@ -86,7 +91,11 @@ export const SchedulePage: React.SFC<IProps> = ({ camps, loading }) => {
                                         </Grid.Column>
                                     </Grid.Row>
                                 </Grid>
-                                {isTodayWorkingDay && <ReviewersOfTheDay schedule={schedule} />}
+                                {
+                                    isTodayWorkingDay
+                                        ? <ReviewersOfTheDay schedule={schedule} />
+                                        : <WeekendMessage />
+                                }
                                 <ScheduleTable schedule={schedule} />
                             </>
                         );
