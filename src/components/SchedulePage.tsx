@@ -18,64 +18,81 @@ interface IProps {
 }
 
 export const SchedulePage: React.SFC<IProps> = ({ camps, loading }) => {
-    const defaultCampName = !loading
-        && camps
-        && camps.length
-        && camps[0]
-        && encodeURIComponent(camps[0].name);
+    const isTodayWorkingDay = isWorkingDay(getCurrentDate());
 
-    return (
-        <Switch>
-            {defaultCampName && (
-                <Redirect
-                    exact
-                    from="/schedule"
-                    to={'/schedule/' + defaultCampName}
+    if (loading) {
+        return (
+            <>
+                <Grid columns={2} stackable style={{ marginBottom: 0 }}>
+                    <Grid.Row>
+                        <Grid.Column>
+                            <Header />
+                        </Grid.Column>
+                        <Grid.Column>
+                            <CampMenu />
+                        </Grid.Column>
+                    </Grid.Row>
+                </Grid>
+                {isTodayWorkingDay && <ReviewersOfTheDayPlaceholder />}
+                <ScheduleTablePlaceholder />
+            </>
+        );
+    } else {
+        const defaultCampName = (
+            camps
+            && camps.length
+            && camps[0]
+            && camps[0].name
+            && encodeURIComponent(camps[0].name)
+        );
+
+        return (
+            <Switch>
+                {defaultCampName && (
+                    <Redirect
+                        exact
+                        from="/schedule"
+                        to={'/schedule/' + defaultCampName}
+                    />
+                )}
+                <Route
+                    path="/schedule/:camp?"
+                    render={(props) => {
+                        const { camp: currentCampName } = props.match.params;
+                        const currentCamp = camps && camps.find(
+                            (camp) => encodeURIComponent(camp.name) === encodeURIComponent(currentCampName)
+                        );
+
+                        if (!currentCamp && defaultCampName) {
+                            return <Redirect to={'/schedule/' + defaultCampName} />;
+                        }
+
+                        const schedule = currentCamp && currentCamp.squads
+                            ? getSchedule(currentCamp.squads)
+                            : [];
+
+                        return (
+                            <>
+                                <Grid columns={2} stackable style={{ marginBottom: 0 }}>
+                                    <Grid.Row>
+                                        <Grid.Column>
+                                            <Header />
+                                        </Grid.Column>
+                                        <Grid.Column>
+                                            <CampMenu
+                                                currentCampName={currentCampName}
+                                                camps={camps}
+                                            />
+                                        </Grid.Column>
+                                    </Grid.Row>
+                                </Grid>
+                                {isTodayWorkingDay && <ReviewersOfTheDay schedule={schedule} />}
+                                <ScheduleTable schedule={schedule} />
+                            </>
+                        );
+                    }}
                 />
-            )}
-            <Route
-                path="/schedule/:camp?"
-                render={(props) => {
-                    const { camp: currentCampName } = props.match.params;
-                    const isTodayWorkingDay = isWorkingDay(getCurrentDate());
-                    const currentCamp = camps && camps.find(
-                        (camp) => encodeURIComponent(camp.name) === encodeURIComponent(currentCampName)
-                    );
-                    const schedule = currentCamp && currentCamp.squads
-                        ? getSchedule(currentCamp.squads)
-                        : [];
-
-                    return (
-                        <>
-                            <Grid columns={2} stackable style={{ marginBottom: 0 }}>
-                                <Grid.Row>
-                                    <Grid.Column>
-                                        <Header />
-                                    </Grid.Column>
-                                    <Grid.Column>
-                                        <CampMenu
-                                            currentCampName={currentCampName}
-                                            camps={camps}
-                                        />
-                                    </Grid.Column>
-                                </Grid.Row>
-                            </Grid>
-                            {
-                                isTodayWorkingDay && (
-                                    loading
-                                        ? <ReviewersOfTheDayPlaceholder />
-                                        : <ReviewersOfTheDay schedule={schedule} />
-                                )
-                            }
-                            {
-                                loading
-                                    ? <ScheduleTablePlaceholder />
-                                    : <ScheduleTable schedule={schedule} />
-                            }
-                        </>
-                    );
-                }}
-            />
-        </Switch>
-    );
+            </Switch>
+        );
+    }
 };

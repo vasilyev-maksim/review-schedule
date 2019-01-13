@@ -5,8 +5,8 @@ import { Icon, Menu } from 'semantic-ui-react';
 import { ICamp } from '../models';
 
 interface IProps {
-    camps: ICamp[];
-    currentCampName: string;
+    camps?: ICamp[];
+    currentCampName?: string;
 }
 
 export const CampMenu: React.SFC<IProps> = ({ camps, currentCampName }) => {
