@@ -1,0 +1,25 @@
+#app {
+    height: 100%;
+}
+
+.footer {
+    padding: 2em 0em !important;
+
+    a {
+        &:hover {
+            color: white;
+            text-decoration: none;
+        }
+    
+        color: #bbbaba;
+        text-decoration: none;
+    }
+
+    .autors {
+        display: inline-block;
+    }
+
+    .icon.heart, .footer-link {
+        margin: 0 5px !important;
+    }
+}

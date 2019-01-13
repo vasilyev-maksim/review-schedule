@@ -9,6 +9,7 @@ import { Container } from 'semantic-ui-react';
 
 import { db } from '../db';
 import { ICamp } from '../models';
+import { Footer } from './Footer';
 import { SchedulePage } from './SchedulePage';
 
 interface IState {
@@ -33,23 +34,33 @@ export class App extends React.Component<{}, IState> {
 
     public render (): JSX.Element {
         return (
-            <div style={{ margin: '40px 0' }}>
-                <Container>
-                    <Router>
-                        <Switch>
-                            <Route
-                                path="/schedule"
-                                render={() => (
-                                    <SchedulePage
-                                        camps={this.state.camps}
-                                        loading={this.state.loading}
-                                    />
-                                )}
-                            />
-                            <Redirect to="/schedule" />
-                        </Switch>
-                    </Router>
-                </Container>
+            <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                height: '100%',
+            }}>
+                <div style={{
+                    flexGrow: 1,
+                    margin: '40px 0',
+                }}>
+                    <Container>
+                        <Router>
+                            <Switch>
+                                <Route
+                                    path="/schedule"
+                                    render={() => (
+                                        <SchedulePage
+                                            camps={this.state.camps}
+                                            loading={this.state.loading}
+                                        />
+                                    )}
+                                />
+                                <Redirect to="/schedule" />
+                            </Switch>
+                        </Router>
+                    </Container>
+                </div>
+                <Footer />
             </div>
         );
     }

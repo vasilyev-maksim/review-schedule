@@ -36,6 +36,7 @@
         "@types/react-router-dom": "4.3.1",
         "@types/semantic-ui": "2.2.6",
         "cssnano": "4.1.8",
+        "sass": "1.16.0",
         "ts-node": "7.0.1",
         "tslint": "5.9.1",
         "tslint-config-airbnb": "5.11.0",
