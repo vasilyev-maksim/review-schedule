@@ -35,6 +35,7 @@ axios.get(url).then(({ data }: AxiosResponse<IResponse>) => {
         const [name, surname] = user.profile.real_name.split(' ');
         return {
             enabled: true,
+            id: user.id,
             name,
             photo: user.profile.image_48,
             surname,

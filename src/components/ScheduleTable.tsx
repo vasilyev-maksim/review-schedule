@@ -91,8 +91,8 @@ export class ScheduleTable extends React.Component<IProps, IState> {
                                         </Table.Cell>
                                         {
                                             reviewers.map(
-                                                ({ squad, reviewer }) => (
-                                                    <Table.Cell key={squad.name} selectable>
+                                                ({ reviewer }) => (
+                                                    <Table.Cell key={reviewer.id} selectable>
                                                         <a href="#" onClick={() => this.handleReviewerClick(reviewer)}>
                                                             <Reviewer reviewer={reviewer} />
                                                         </a>

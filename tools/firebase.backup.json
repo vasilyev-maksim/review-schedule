@@ -8,48 +8,56 @@
                 "members": [
                     {
                         "enabled": true,
+                        "id": "UBQA7CJBH",
                         "name": "Bekir",
                         "photo": "https://secure.gravatar.com/avatar/778beda258ab0b0866c0700de5ecf726.jpg?s=48&d=https%3A%2F%2Fa.slack-edge.com%2F66f9%2Fimg%2Favatars%2Fava_0007-48.png",
                         "surname": "Bekirov"
                     },
                     {
                         "enabled": true,
+                        "id": "UDEFBN221",
                         "name": "Zaur",
                         "photo": "https://secure.gravatar.com/avatar/ed62f820aae196a1773b5dd0e545f257.jpg?s=48&d=https%3A%2F%2Fa.slack-edge.com%2F66f9%2Fimg%2Favatars%2Fava_0009-48.png",
                         "surname": "Aliyev"
                     },
                     {
                         "enabled": true,
+                        "id": "UA6H5J5V5",
                         "name": "Yusif",
                         "photo": "https://secure.gravatar.com/avatar/5de88e77a48ac50ec74f427772c44c5e.jpg?s=48&d=https%3A%2F%2Fa.slack-edge.com%2F66f9%2Fimg%2Favatars%2Fava_0015-48.png",
                         "surname": "Ibrahimov"
                     },
                     {
                         "enabled": true,
+                        "id": "UB0Q7EYJ2",
                         "name": "Farid",
                         "photo": "https://avatars.slack-edge.com/2018-06-08/377809423300_aee764a6ce693d66ccf8_48.jpg",
                         "surname": "Mammadov"
                     },
                     {
                         "enabled": true,
+                        "id": "UE6MU0SQ3",
                         "name": "Fariz",
                         "photo": "https://secure.gravatar.com/avatar/4850fd954b4b5f6315d14de5a9178217.jpg?s=48&d=https%3A%2F%2Fa.slack-edge.com%2F66f9%2Fimg%2Favatars%2Fava_0008-48.png",
                         "surname": "Sirajli"
                     },
                     {
                         "enabled": true,
+                        "id": "U9YU9U4QG",
                         "name": "Rashad",
                         "photo": "https://avatars.slack-edge.com/2018-09-10/432516819877_5c9b188b1ae94af182b2_48.jpg",
                         "surname": "Amirjanov"
                     },
                     {
                         "enabled": true,
+                        "id": "UF6KYKKGX",
                         "name": "Ilgar",
                         "photo": "https://secure.gravatar.com/avatar/769babe0ffca8bdbcafc20e2339ee688.jpg?s=48&d=https%3A%2F%2Fa.slack-edge.com%2F66f9%2Fimg%2Favatars%2Fava_0025-48.png",
                         "surname": "Mammadov"
                     },
                     {
                         "enabled": true,
+                        "id": "UEJTF74EN",
                         "name": "Rashid",
                         "photo": "https://avatars.slack-edge.com/2018-12-06/496838071188_f237877d5be1bdb19015_48.jpg",
                         "surname": "Alyarov"
@@ -62,18 +70,21 @@
                 "members": [
                     {
                         "enabled": true,
+                        "id": "UCUJTQSVD",
                         "name": "Emin",
                         "photo": "https://avatars.slack-edge.com/2018-12-16/505004245154_5f96679d1018772a196a_48.jpg",
                         "surname": "Yahyayev"
                     },
                     {
                         "enabled": true,
+                        "id": "UD05J2P8B",
                         "name": "Rahim",
                         "photo": "https://secure.gravatar.com/avatar/d3a219202d322b7712a72a7ff75292b9.jpg?s=48&d=https%3A%2F%2Fa.slack-edge.com%2F66f9%2Fimg%2Favatars%2Fava_0023-48.png",
                         "surname": "Rahimli"
                     },
                     {
                         "enabled": true,
+                        "id": "UAS7S2VFU",
                         "name": "Aykhan",
                         "photo": "https://avatars.slack-edge.com/2018-05-21/368465655958_32ac754441f61737ee1b_48.jpg",
                         "surname": "Aghazada"
@@ -86,18 +97,21 @@
                 "members": [
                     {
                         "enabled": true,
+                        "id": "UAZ5YHMME",
                         "name": "Elvin",
                         "photo": "https://avatars.slack-edge.com/2018-06-14/381484806098_fbc4b10033cee0da93e0_48.jpg",
                         "surname": "Mahmudov"
                     },
                     {
                         "enabled": true,
+                        "id": "UA1MVSKD0",
                         "name": "Rashad",
                         "photo": "https://avatars.slack-edge.com/2018-06-20/384220165952_a425d59ca3a19b3a3740_48.jpg",
                         "surname": "Farajullayev"
                     },
                     {
                         "enabled": true,
+                        "id": "UCKG67XSM",
                         "name": "Murad",
                         "photo": "https://avatars.slack-edge.com/2018-09-03/428017255459_daff2f6aacf496bbca10_48.jpg",
                         "surname": "Imanbayli"
@@ -116,18 +130,21 @@
                 "members": [
                     {
                         "enabled": true,
+                        "id": "UB01XJSKF",
                         "name": "Gurban",
                         "photo": "https://avatars.slack-edge.com/2018-06-01/374093410293_c7d1df136d5890df9fba_48.jpg",
                         "surname": "Gurbanov"
                     },
                     {
                         "enabled": true,
+                        "id": "UC1KV2BE3",
                         "name": "Maksim",
                         "photo": "https://avatars.slack-edge.com/2018-08-01/408435003684_134c7b78965a623e3d22_48.jpg",
                         "surname": "Vasilyev"
                     },
                     {
-                        "enabled": false,
+                        "enabled": true,
+                        "id": "UEVECLTMY",
                         "name": "Lala",
                         "photo": "https://avatars.slack-edge.com/2018-12-17/507034165494_68e6dc72f5a106ab1857_48.jpg",
                         "surname": "Guliyeva"
@@ -140,12 +157,14 @@
                 "members": [
                     {
                         "enabled": true,
+                        "id": "UD4JKDN2Z",
                         "name": "Vahab",
                         "photo": "https://avatars.slack-edge.com/2018-10-16/457567093653_07c9a96ebb3818794195_48.jpg",
                         "surname": "Valiyev"
                     },
                     {
                         "enabled": true,
+                        "id": "UDJFRD2V9",
                         "name": "Fuad",
                         "photo": "https://avatars.slack-edge.com/2018-10-20/460634091522_19dba47dd5d2573ba31e_48.jpg",
                         "surname": "Huseynov"
@@ -158,12 +177,14 @@
                 "members": [
                     {
                         "enabled": true,
+                        "id": "UBH7N6TEY",
                         "name": "Niyazi",
                         "photo": "https://avatars.slack-edge.com/2018-07-05/392666667553_7002dc3b6cee14997dc5_48.jpg",
                         "surname": "Hummatov"
                     },
                     {
                         "enabled": true,
+                        "id": "UCCPL91HC",
                         "name": "Jamil",
                         "photo": "https://avatars.slack-edge.com/2018-08-28/424478790436_0d47862072655452f619_48.jpg",
                         "surname": "Alisgandarov"

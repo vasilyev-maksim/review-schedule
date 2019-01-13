@@ -34,8 +34,7 @@ export const ReviewersOfTheDay: React.SFC<IProps> = ({ schedule }) => {
                         {
                             today.reviewers.map(
                                 ({ reviewer }) => (
-                                    <Table.Cell key={reviewer.name + reviewer.surname}>
-                                        {/* // TODO: add `username`to model and use as a key */}
+                                    <Table.Cell key={reviewer.id}>
                                         <Header as="h3" image>
                                             <Image src={reviewer.photo} rounded size="large" />
                                             <Header.Content>

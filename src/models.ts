@@ -2,6 +2,7 @@ import Moment from 'moment';
 import { SemanticICONS } from 'semantic-ui-react';
 
 export interface IReviewer {
+    id: string;
     enabled: boolean;
     name: string;
     surname: string;
