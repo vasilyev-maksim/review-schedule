@@ -22,4 +22,8 @@
     .icon.heart, .footer-link {
         margin: 0 5px !important;
     }
+
+    .footer-link:last-of-type {
+        margin-right: 0 !important;
+    }
 }
