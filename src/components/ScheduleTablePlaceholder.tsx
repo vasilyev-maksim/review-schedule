@@ -2,7 +2,7 @@ import { range } from 'lodash';
 import * as React from 'react';
 import { Icon, Placeholder, Table } from 'semantic-ui-react';
 
-import { DATE_FORMAT, PLACEHOLDER_SQUADS_COUNT } from '../consts';
+import { DATE_FORMAT, PLACEHOLDER_SQUADS_COUNT } from '../config';
 import { getCurrentDate, getWorkDaysRange } from '../utils';
 import { ScheduleTableFilter } from './ScheduleTableFilter';
 

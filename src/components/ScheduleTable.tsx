@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Icon, Label, Table } from 'semantic-ui-react';
 
-import { DATE_FORMAT } from '../consts';
+import { DATE_FORMAT } from '../config';
 import { IReviewer, ISchedule } from '../models';
 import { isToday } from '../utils';
 import { Reviewer } from './Reviewer';

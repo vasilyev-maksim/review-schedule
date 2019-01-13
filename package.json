@@ -6,9 +6,12 @@
     "scripts": {
         "start": "parcel index.html --open",
         "build": "rm -R dist && parcel build index.html --no-source-maps",
-        "publish": "npm run build && firebase deploy",
-        "firebase:read": "ts-node tools/firebase.read.ts",
-        "firebase:write": "ts-node tools/firebase.write.ts",
+        "publish:prod": "cross-env NODE_ENV=production npm run build && firebase use prod && firebase deploy",
+        "publish:staging": "cross-env NODE_ENV=staging npm run build && firebase use staging && firebase deploy",
+        "firebase:read:prod": "cross-env NODE_ENV=production ts-node tools/firebase.read.ts",
+        "firebase:read:staging": "cross-env NODE_ENV=staging ts-node tools/firebase.read.ts",
+        "firebase:write:prod": "cross-env NODE_ENV=production ts-node tools/firebase.write.ts",
+        "firebase:write:staging": "cross-env NODE_ENV=staging ts-node tools/firebase.write.ts",
         "slack:find-users": "ts-node tools/slack.findUsers.ts"
     },
     "dependencies": {
@@ -36,6 +39,7 @@
         "@types/react-router-dom": "4.3.1",
         "@types/semantic-ui": "2.2.6",
         "cssnano": "4.1.8",
+        "cross-env": "5.2.0",
         "sass": "1.16.0",
         "ts-node": "7.0.1",
         "tslint": "5.9.1",
