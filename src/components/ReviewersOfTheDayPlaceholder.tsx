@@ -2,7 +2,7 @@ import { range } from 'lodash';
 import * as React from 'react';
 import { Header, Placeholder, Table } from 'semantic-ui-react';
 
-import { PLACEHOLDER_SQUADS_COUNT } from '../consts';
+import { DATE_FORMAT, PLACEHOLDER_SQUADS_COUNT } from '../consts';
 import { getCurrentDate } from '../utils';
 
 export const ReviewersOfTheDayPlaceholder: React.SFC = () => {
@@ -22,7 +22,7 @@ export const ReviewersOfTheDayPlaceholder: React.SFC = () => {
                             <Header.Content>
                                 Today
                                 <Header.Subheader>
-                                    {today.format('DD MMM YYYY')}
+                                    {today.format(DATE_FORMAT)}
                                 </Header.Subheader>
                             </Header.Content>
                         </Header>

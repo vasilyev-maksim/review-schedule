@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Icon, Label, Table } from 'semantic-ui-react';
 
+import { DATE_FORMAT } from '../consts';
 import { IReviewer, ISchedule } from '../models';
 import { isToday } from '../utils';
 import { Reviewer } from './Reviewer';
@@ -82,10 +83,10 @@ export class ScheduleTable extends React.Component<IProps, IState> {
                                                 isToday(day)
                                                     ? (
                                                         <Label color="green" ribbon>
-                                                            {day.format('DD MMM YYYY')}
+                                                            {day.format(DATE_FORMAT)}
                                                         </Label>
                                                     )
-                                                    : day.format('DD MMM YYYY')
+                                                    : day.format(DATE_FORMAT)
                                             }
                                         </Table.Cell>
                                         {
