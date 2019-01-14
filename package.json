@@ -6,8 +6,8 @@
     "scripts": {
         "start": "parcel index.html --open",
         "build": "rm -R dist && parcel build index.html --no-source-maps",
-        "publish:prod": "cross-env NODE_ENV=production npm run build && firebase use prod && firebase deploy",
-        "publish:staging": "cross-env NODE_ENV=staging npm run build && firebase use staging && firebase deploy",
+        "publish:prod": "cross-env-shell NODE_ENV=production \"npm run build && firebase use prod && firebase deploy\"",
+        "publish:staging": "cross-env-shell NODE_ENV=staging \"npm run build && firebase use staging && firebase deploy\"",
         "firebase:read:prod": "cross-env NODE_ENV=production ts-node tools/firebase.read.ts",
         "firebase:read:staging": "cross-env NODE_ENV=staging ts-node tools/firebase.read.ts",
         "firebase:write:prod": "cross-env NODE_ENV=production ts-node tools/firebase.write.ts",
