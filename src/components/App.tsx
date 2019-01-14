@@ -11,6 +11,7 @@ import { db } from '../db';
 import { ICamp } from '../models';
 import { Footer } from './Footer';
 import { SchedulePage } from './SchedulePage';
+import { StagingEnvIndicator } from './StagingEnvIndicator';
 
 interface IState {
     camps: ICamp[];
@@ -39,6 +40,7 @@ export class App extends React.Component<{}, IState> {
                 flexDirection: 'column',
                 height: '100%',
             }}>
+                <StagingEnvIndicator />
                 <div style={{
                     flexGrow: 1,
                     margin: '40px 0',
@@ -61,7 +63,7 @@ export class App extends React.Component<{}, IState> {
                     </Container>
                 </div>
                 <Footer />
-            </div>
+            </div >
         );
     }
 }

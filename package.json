@@ -5,7 +5,9 @@
     "main": "index.html",
     "scripts": {
         "start": "parcel index.html --open",
+        "start:prod": "cross-env NODE_ENV=production parcel index.html --open",
         "build": "rm -R dist && parcel build index.html --no-source-maps",
+        "tslint": "tslint --project ./package.json",
         "publish:prod": "cross-env-shell NODE_ENV=production \"npm run build && firebase use prod && firebase deploy\"",
         "publish:staging": "cross-env-shell NODE_ENV=staging \"npm run build && firebase use staging && firebase deploy\"",
         "firebase:read:prod": "cross-env NODE_ENV=production ts-node tools/firebase.read.ts",
@@ -22,6 +24,7 @@
         "moment-range": "4.0.1",
         "react": "16.7.0",
         "react-dom": "16.7.0",
+        "react-responsive": "6.0.1",
         "react-router-dom": "4.3.1",
         "semantic-ui": "2.4.2",
         "semantic-ui-react": "0.84.0"
@@ -29,6 +32,7 @@
     "author": "",
     "license": "ISC",
     "devDependencies": {
+        "@types/react-responsive": "3.0.2",
         "@types/axios": "0.14.0",
         "@types/firebase": "3.2.1",
         "@types/lodash": "4.14.119",

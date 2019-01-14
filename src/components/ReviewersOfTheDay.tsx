@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Header, Icon, Image, Table } from 'semantic-ui-react';
+import { Header, Table } from 'semantic-ui-react';
 
 import { DATE_FORMAT, SLACK_TEAM_ID } from '../config';
 import { ISchedule } from '../models';
@@ -36,7 +36,10 @@ export const ReviewersOfTheDay: React.SFC<IProps> = ({ schedule }) => {
                                 ({ reviewer }) => (
                                     <Table.Cell key={reviewer.id} selectable>
                                         <a href={`slack://user?team=${SLACK_TEAM_ID}&id=${reviewer.id}`}>
-                                            <Reviewer reviewer={reviewer} todayMode={true} />
+                                            <Reviewer
+                                                reviewer={reviewer}
+                                                todayMode={true}
+                                            />
                                         </a>
                                     </Table.Cell>
                                 )
