@@ -16,7 +16,7 @@ export const Footer: React.SFC = () => {
                 <div className="autors">
                     by
                     <FooterLink href="https://github.com/jamil-alisgandarov">
-                        Jasmil Alisgandarov
+                        Jamil Alisgandarov
                     </FooterLink>
                     and
                     <FooterLink href="https://github.com/maksim-vasilyev-pb">
