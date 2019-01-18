@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Icon, Menu } from 'semantic-ui-react';
 
 import { ICamp } from '../models';
+import { saveSelectedCampToCookies } from '../utils';
 
 interface IProps {
     camps?: ICamp[] | null;
@@ -27,6 +28,7 @@ export const CampMenu: React.SFC<IProps> = ({ camps, currentCampName }) => {
                                 as={Link}
                                 to={'/schedule/' + encodeURIComponent(camp.name)}
                                 style={{ textTransform: 'capitalize' }}
+                                onClick={() => saveSelectedCampToCookies(camp)}
                             >
                                 <Icon name={camp.icon} />
                                 &nbsp;
