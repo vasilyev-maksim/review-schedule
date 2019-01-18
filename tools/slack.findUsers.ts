@@ -32,7 +32,7 @@ axios.get(url).then(({ data }: AxiosResponse<IResponse>) => {
                 member.profile.display_name_normalized,
             ].some(
                 (name) => namesToFindBy.some(
-                    (nameToFindBy) => name && name.indexOf(nameToFindBy) > -1
+                    (nameToFindBy) => Boolean(name && name.indexOf(nameToFindBy) > -1)
                 )
             )
         ).map((user) => {

@@ -14,7 +14,7 @@ import { ScheduleTablePlaceholder } from './ScheduleTablePlaceholder';
 import { WeekendMessage } from './WeekendMessage';
 
 interface IProps {
-    camps: ICamp[];
+    camps: ICamp[] | null;
     loading: boolean;
 }
 

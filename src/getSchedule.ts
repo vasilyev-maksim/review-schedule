@@ -18,16 +18,14 @@ export function getSchedule (squads: ISquad[]): ISchedule {
     }
 
     return days.map((day, i) => {
-        if (day >= start) {
-            const reviewers = sortBy(
-                squads.map((squad) => getReviewer(squad, i)),
-                (r) => r.squad.name
-            );
+        const reviewers = sortBy(
+            squads.map((squad) => getReviewer(squad, i)),
+            (r) => r.squad.name
+        );
 
-            return {
-                day,
-                reviewers,
-            };
-        }
-    }).filter(Boolean);
+        return {
+            day,
+            reviewers,
+        };
+    }).filter((reviewDay) => reviewDay.day >= start);
 }

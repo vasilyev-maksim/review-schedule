@@ -12,7 +12,7 @@ interface IProps {
 }
 
 interface IState {
-    filteredBy: IReviewer;
+    filteredBy: IReviewer | null;
 }
 
 export class ScheduleTable extends React.Component<IProps, IState> {

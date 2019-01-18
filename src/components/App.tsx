@@ -14,7 +14,7 @@ import { SchedulePage } from './SchedulePage';
 import { StagingEnvIndicator } from './StagingEnvIndicator';
 
 interface IState {
-    camps: ICamp[];
+    camps: ICamp[] | null;
     loading: boolean;
 }
 
