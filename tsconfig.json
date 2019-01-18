@@ -6,5 +6,11 @@
             "es6",
         ],
         "allowSyntheticDefaultImports": true,
-    },
+        "allowUnreachableCode": false,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitReturns": true,
+        "noImplicitAny": true,
+        "noUnusedLocals": true,
+        "strict": true,
+    }
 }

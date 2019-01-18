@@ -4,7 +4,7 @@ import { Label } from 'semantic-ui-react';
 import { IReviewer } from '../models';
 
 interface IProps {
-    reviewer?: IReviewer;
+    reviewer?: IReviewer | null;
     onClear?: () => void;
 }
 

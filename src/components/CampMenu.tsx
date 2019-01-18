@@ -6,7 +6,7 @@ import { ICamp } from '../models';
 import { saveSelectedCampToCookies } from '../utils';
 
 interface IProps {
-    camps?: ICamp[];
+    camps?: ICamp[] | null;
     currentCampName?: string;
 }
 
