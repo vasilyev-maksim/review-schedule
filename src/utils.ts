@@ -3,7 +3,7 @@ import * as Cookies from 'js-cookie';
 import Moment from 'moment';
 import { extendMoment } from 'moment-range';
 
-import { SELECTED_CAMP_COOKIE_KEY } from './consts';
+import { SELECTED_CAMP_COOKIE_KEY } from './config';
 import { ICamp } from './models';
 
 const moment = extendMoment(Moment);
@@ -26,7 +26,7 @@ export function isToday (date: Moment.Moment): boolean {
     return date.isSame(getCurrentDate(), 'day');
 }
 
-export function getSelectedCampFromCookies (): string {
+export function getSelectedCampFromCookies (): string | undefined {
     return Cookies.get(SELECTED_CAMP_COOKIE_KEY);
 }
 

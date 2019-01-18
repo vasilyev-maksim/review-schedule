@@ -43,14 +43,22 @@ export const SchedulePage: React.SFC<IProps> = ({ camps, loading }) => {
             </>
         );
     } else {
-        const selectedCampFromCookies = camps.some((camp) => camp.name === getSelectedCampFromCookies()) && getSelectedCampFromCookies();
-        const defaultCampName = selectedCampFromCookies || (
-            camps
-            && camps.length
-            && camps[0]
-            && camps[0].name
-            && encodeURIComponent(camps[0].name)
-        );
+        let defaultCampName: string | null = null;
+
+        if (camps && camps.length) {
+            const cookieCampName = getSelectedCampFromCookies();
+            if (cookieCampName) {
+                const cookieCamp = camps.some((camp) => camp.name === cookieCampName);
+                if (cookieCamp) {
+                    defaultCampName = cookieCampName;
+                }
+            } else {
+                const firstCampName = camps[0].name;
+                if (firstCampName) {
+                    defaultCampName = encodeURIComponent(firstCampName);
+                }
+            }
+        }
 
         return (
             <Switch>
