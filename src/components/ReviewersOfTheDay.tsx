@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Header, Table } from 'semantic-ui-react';
 
-import { DATE_FORMAT, SLACK_TEAM_ID } from '../config';
+import { DATE_FORMAT } from '../config';
 import { ISchedule } from '../models';
 import { isToday } from '../utils';
 import { Reviewer } from './Reviewer';
