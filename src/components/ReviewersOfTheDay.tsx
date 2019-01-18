@@ -5,6 +5,7 @@ import { DATE_FORMAT, SLACK_TEAM_ID } from '../config';
 import { ISchedule } from '../models';
 import { isToday } from '../utils';
 import { Reviewer } from './Reviewer';
+import { SlackDeepLink } from './SlackDeepLink';
 
 interface IProps {
     schedule: ISchedule;
@@ -35,12 +36,12 @@ export const ReviewersOfTheDay: React.SFC<IProps> = ({ schedule }) => {
                             today.reviewers.map(
                                 ({ reviewer }) => (
                                     <Table.Cell key={reviewer.id} selectable>
-                                        <a href={`slack://user?team=${SLACK_TEAM_ID}&id=${reviewer.id}`}>
+                                        <SlackDeepLink userId={reviewer.id}>
                                             <Reviewer
                                                 reviewer={reviewer}
                                                 todayMode={true}
                                             />
-                                        </a>
+                                        </SlackDeepLink>
                                     </Table.Cell>
                                 )
                             )
