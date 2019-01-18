@@ -2,10 +2,11 @@
 import * as Cookies from 'js-cookie';
 import Moment from 'moment';
 import { extendMoment } from 'moment-range';
-const moment = extendMoment(Moment);
 
-import { COOKIE_CAMP_NAME_KEY } from './consts';
+import { SELECTED_CAMP_COOKIE_KEY } from './consts';
 import { ICamp } from './models';
+
+const moment = extendMoment(Moment);
 
 export function getWorkDaysRange (start: Moment.Moment, end: Moment.Moment): Moment.Moment[] {
     const days = moment.range(start, end);
@@ -25,10 +26,10 @@ export function isToday (date: Moment.Moment): boolean {
     return date.isSame(getCurrentDate(), 'day');
 }
 
-export function getSelectedCampFromCookie (): string {
-    return Cookies.get(COOKIE_CAMP_NAME_KEY);
+export function getSelectedCampFromCookies (): string {
+    return Cookies.get(SELECTED_CAMP_COOKIE_KEY);
 }
 
-export function setCampToCookie (camp: ICamp): void {
-    Cookies.set(COOKIE_CAMP_NAME_KEY, camp.name);
+export function saveSelectedCampToCookies (camp: ICamp): void {
+    Cookies.set(SELECTED_CAMP_COOKIE_KEY, camp.name);
 }

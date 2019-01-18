@@ -4,7 +4,7 @@ import { Grid } from 'semantic-ui-react';
 
 import { getSchedule } from '../getSchedule';
 import { ICamp } from '../models';
-import { getCurrentDate, getSelectedCampFromCookie, isWorkingDay } from '../utils';
+import { getCurrentDate, getSelectedCampFromCookies, isWorkingDay } from '../utils';
 import { CampMenu } from './CampMenu';
 import { Header } from './Header';
 import { ReviewersOfTheDay } from './ReviewersOfTheDay';
@@ -43,7 +43,8 @@ export const SchedulePage: React.SFC<IProps> = ({ camps, loading }) => {
             </>
         );
     } else {
-        const defaultCampName = getSelectedCampFromCookie() || (
+        const selectedCampFromCookies = camps.some((camp) => camp.name === getSelectedCampFromCookies()) && getSelectedCampFromCookies();
+        const defaultCampName = selectedCampFromCookies || (
             camps
             && camps.length
             && camps[0]

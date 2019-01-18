@@ -1,1 +1,1 @@
-export const COOKIE_CAMP_NAME_KEY = 'reviewer-camp';
+export const SELECTED_CAMP_COOKIE_KEY = 'reviewer-camp';
