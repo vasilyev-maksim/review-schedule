@@ -33,3 +33,26 @@ export function getSelectedCampFromCookies (): string | undefined {
 export function saveSelectedCampToCookies (camp: ICamp): void {
     Cookies.set(SELECTED_CAMP_COOKIE_KEY, camp.name);
 }
+
+export function getDefaultCampName (camps: ICamp[] | null): string | null {
+    let defaultCampName: string | null = null;
+
+    if (camps && camps.length) {
+        const cookieCampName = getSelectedCampFromCookies();
+        if (cookieCampName) {
+            const cookieCamp = camps.some((camp) => camp.name === cookieCampName);
+            if (cookieCamp) {
+                defaultCampName = cookieCampName;
+            }
+        }
+
+        if (!defaultCampName) {
+            const firstCampName = camps[0].name;
+            if (firstCampName) {
+                defaultCampName = encodeURIComponent(firstCampName);
+            }
+        }
+    }
+
+    return defaultCampName;
+}
