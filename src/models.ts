@@ -1,4 +1,4 @@
-import Moment from 'moment';
+import { Moment } from 'moment';
 import { SemanticICONS } from 'semantic-ui-react';
 
 import { NodeEnv } from './enums';
@@ -25,7 +25,7 @@ export interface ISquadReviewer {
 }
 
 export interface IReviewDay {
-    day: Moment.Moment;
+    day: Moment;
     reviewers: ISquadReviewer[];
 }
 

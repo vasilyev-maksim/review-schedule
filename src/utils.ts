@@ -1,6 +1,6 @@
 
 import * as Cookies from 'js-cookie';
-import Moment from 'moment';
+import Moment = require('moment');
 import { extendMoment } from 'moment-range';
 
 import { SELECTED_CAMP_COOKIE_KEY } from './config';
