@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import { Container } from 'semantic-ui-react';
 
-import { db } from '../db';
+import { API } from '../API';
 import { ICamp } from '../models';
 import { ErrorBoundary } from './ErrorBoundary';
 import { Footer } from './Footer';
@@ -28,9 +28,9 @@ export class App extends React.Component<{}, IState> {
     };
 
     public componentDidMount (): void {
-        db.collection('camps').onSnapshot((querySnapshot) => {
+        API.getCamps((camps) => {
             this.setState({
-                camps: querySnapshot.docs.map((doc) => doc.data() as ICamp),
+                camps,
                 loading: false,
             });
         });
