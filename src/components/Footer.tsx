@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Container, Icon, Segment } from 'semantic-ui-react';
 
+import { github } from '../providers/github';
 import { AuthorsList } from './AuthorsList';
 
 export const Footer: React.SFC = () => {
@@ -16,7 +17,10 @@ export const Footer: React.SFC = () => {
 
                 <div className="autors">
                     by
-                    <AuthorsList linkClassName="footer-link" />
+                    <AuthorsList
+                        linkClassName="footer-link"
+                        provider={github}
+                    />
                 </div>
 
                 <br />

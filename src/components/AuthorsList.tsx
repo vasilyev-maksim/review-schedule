@@ -1,25 +1,28 @@
 import * as React from 'react';
+
 import { AUTHORS } from '../config';
+import { IProvider } from '../providers/models';
+import { ReviewerLink } from './ReviewerLink';
 
 interface IProps {
     linkClassName?: string;
+    provider: IProvider;
 }
 
-export const AuthorsList: React.SFC<IProps> = ({ linkClassName }) => {
+export const AuthorsList: React.SFC<IProps> = ({ linkClassName, provider }) => {
     return (
         <>
             {
                 AUTHORS.map((author, i) => {
-                    const href = 'https://github.com/' + author.githubUsername;
                     return (
                         <React.Fragment key={author.githubId}>
-                            <a
-                                href={href}
-                                target="_blank"
+                            <ReviewerLink
+                                reviewer={author}
+                                provider={provider}
                                 className={linkClassName}
                             >
                                 {author.name} {author.surname}
-                            </a>
+                            </ReviewerLink>
                             {/* TODO: improve - author1, author2 and author3 */}
                             {i < AUTHORS.length - 1 && <>and</>}
                         </React.Fragment>
