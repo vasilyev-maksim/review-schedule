@@ -19,7 +19,7 @@ const namesToFindBy = _namesToFindBy.map((name) => name.toLowerCase());
 
 axios.get(url).then(({ data }: AxiosResponse<IResponse>) => {
     if (data.ok) {
-        const users: IReviewer[] = data.members.filter(
+        const users: Partial<IReviewer>[] = data.members.filter(
             (member) => !member.is_bot && [
                 member.name,
                 member.real_name,
@@ -39,9 +39,9 @@ axios.get(url).then(({ data }: AxiosResponse<IResponse>) => {
             const [name, surname] = user.profile.real_name.split(' ');
             return {
                 enabled: true,
-                id: user.id,
                 name,
                 photo: user.profile.image_48,
+                slackId: user.id,
                 surname,
             };
         });

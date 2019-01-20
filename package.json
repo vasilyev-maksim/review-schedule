@@ -35,7 +35,7 @@
     "license": "ISC",
     "devDependencies": {
         "@types/axios": "0.14.0",
-        "@types/firebase": "3.2.1",
+        "@types/firebase": "^3.2.1",
         "@types/js-cookie": "^2.2.0",
         "@types/lodash": "4.14.119",
         "@types/moment": "2.13.0",
