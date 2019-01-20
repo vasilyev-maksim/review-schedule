@@ -63,9 +63,8 @@ export function getEnvironmentVariableValue (variable: EnvironmentVariable): str
     // Perhaps parcel injects env variables at compile time.
     // So we can't refer to `process.env` properties by indexer: process.env['NODE_ENV'].
     // Only by dot: `process.env.NODE_ENV`.
-    if (variable === EnvironmentVariable.NodeEnv) {
-        return process.env.NODE_ENV!;
-    } else {
-        return null;
-    }
+    return {
+        [EnvironmentVariable.NodeEnv]: process.env.NODE_ENV!,
+        [EnvironmentVariable.Mock]: process.env.MOCK!,
+    }[variable] || null;
 }

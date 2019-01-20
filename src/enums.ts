@@ -1,5 +1,6 @@
 export enum EnvironmentVariable {
     NodeEnv = 'NODE_ENV',
+    Mock = 'MOCK',
 }
 
 export enum NodeEnv {

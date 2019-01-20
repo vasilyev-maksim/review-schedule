@@ -2,8 +2,8 @@ import * as React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { Grid } from 'semantic-ui-react';
 
-import { getSchedule } from '../getSchedule';
 import { ICamp } from '../models';
+import { scheduleService } from '../services/scheduleService';
 import { getCurrentDate, getDefaultCampName, isWorkingDay } from '../utils';
 import { CampMenu } from './CampMenu';
 import { Header } from './Header';
@@ -67,7 +67,7 @@ export const SchedulePage: React.SFC<IProps> = ({ camps, loading }) => {
                         }
 
                         const schedule = currentCamp && currentCamp.squads
-                            ? getSchedule(currentCamp.squads)
+                            ? scheduleService.generateSchedule(currentCamp.squads)
                             : [];
 
                         return (
