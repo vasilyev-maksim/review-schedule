@@ -2,22 +2,24 @@ import Moment from 'moment';
 import { SemanticICONS } from 'semantic-ui-react';
 
 export interface IReviewer {
-    id: string;
-    enabled: boolean;
+    enabled?: boolean;
+    githubId: string;
+    githubUsername: string;
     name: string;
-    surname: string;
     photo: string;
+    slackId: string;
+    surname: string;
 }
 
 export interface ISquad {
-    name: string;
-    members: IReviewer[];
     icon: SemanticICONS;
+    members: IReviewer[];
+    name: string;
 }
 
 export interface ISquadReviewer {
-    squad: ISquad;
     reviewer: IReviewer;
+    squad: ISquad;
 }
 
 export interface IReviewDay {
@@ -28,7 +30,7 @@ export interface IReviewDay {
 export type ISchedule = IReviewDay[];
 
 export interface ICamp {
-    name: string;
     icon: SemanticICONS;
+    name: string;
     squads: ISquad[];
 }

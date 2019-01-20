@@ -35,8 +35,8 @@ export const ReviewersOfTheDay: React.SFC<IProps> = ({ schedule }) => {
                         {
                             today.reviewers.map(
                                 ({ reviewer }) => (
-                                    <Table.Cell key={reviewer.id} selectable>
-                                        <SlackDeepLink userId={reviewer.id}>
+                                    <Table.Cell key={reviewer.slackId} selectable>
+                                        <SlackDeepLink userId={reviewer.slackId}>
                                             <Reviewer
                                                 reviewer={reviewer}
                                                 todayMode={true}
