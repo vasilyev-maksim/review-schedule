@@ -2,11 +2,16 @@ import * as React from 'react';
 import MediaQuery from 'react-responsive';
 import { Icon, Responsive } from 'semantic-ui-react';
 
-import { HideOnProdEnv } from './HideOnProdEnv';
+import { EnvironmentVariable, NodeEnv } from '../enums';
+import { VisibilityFilterByEnv } from './VisibilityFilterByEnv';
 
-export const StagingEnvIndicator: React.SFC = () => {
+export const TestEnvIndicator: React.SFC = () => {
     return (
-        <HideOnProdEnv>
+        <VisibilityFilterByEnv
+            variable={EnvironmentVariable.NodeEnv}
+            not
+            value={NodeEnv.Production}
+        >
             <MediaQuery {...Responsive.onlyMobile}>
                 {(isMobile) => {
                     const position = isMobile ? 'right' : 'left';
@@ -18,6 +23,6 @@ export const StagingEnvIndicator: React.SFC = () => {
                     );
                 }}
             </MediaQuery>
-        </HideOnProdEnv>
+        </VisibilityFilterByEnv>
     );
 };

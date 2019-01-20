@@ -4,6 +4,7 @@ import Moment from 'moment';
 import { extendMoment } from 'moment-range';
 
 import { SELECTED_CAMP_COOKIE_KEY } from './config';
+import { EnvironmentVariable } from './enums';
 import { ICamp } from './models';
 
 const moment = extendMoment(Moment);
@@ -55,4 +56,8 @@ export function getDefaultCampName (camps: ICamp[] | null): string | null {
     }
 
     return defaultCampName;
+}
+
+export function getEnvironmentVariableValue (variable: EnvironmentVariable): string | null {
+    return process.env[variable] || null;
 }

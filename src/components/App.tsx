@@ -12,7 +12,7 @@ import { ICamp } from '../models';
 import { ErrorBoundary } from './ErrorBoundary';
 import { Footer } from './Footer';
 import { SchedulePage } from './SchedulePage';
-import { StagingEnvIndicator } from './StagingEnvIndicator';
+import { TestEnvIndicator } from './TestEnvIndicator';
 
 interface IState {
     camps: ICamp[] | null;
@@ -43,7 +43,7 @@ export class App extends React.Component<{}, IState> {
                 flexDirection: 'column',
                 height: '100%',
             }}>
-                <StagingEnvIndicator />
+                <TestEnvIndicator />
                 <Container
                     style={{
                         flexGrow: 1,

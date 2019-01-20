@@ -1,6 +1,8 @@
 import Moment from 'moment';
 import { SemanticICONS } from 'semantic-ui-react';
 
+import { NodeEnv } from './enums';
+
 export interface IReviewer {
     enabled?: boolean;
     githubId: string;
@@ -34,3 +36,11 @@ export interface ICamp {
     name: string;
     squads: ISquad[];
 }
+
+export interface IDBConfig {
+    apiKey: string;
+    authDomain: string;
+    projectId: string;
+}
+
+export type IDBConfigDict = { [key in NodeEnv]?: IDBConfig };
