@@ -2,7 +2,7 @@
 
 import { writeFileSync } from 'fs';
 
-import { db } from '../src/db';
+import { db } from '../src/API/db';
 
 async function main (): Promise<any> {
     const snapshot = await db.collection('camps').get();
