@@ -2,11 +2,10 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 
 import { FIRESTORE_CONFIG } from './config';
-import { EnvironmentVariable, NodeEnv } from './enums';
-import { getEnvironmentVariableValue } from './utils';
+import { NodeEnv } from './enums';
+import { environment } from './environment';
 
-const nodeEnv = getEnvironmentVariableValue(EnvironmentVariable.NodeEnv) as NodeEnv;
-const config = (nodeEnv && FIRESTORE_CONFIG[nodeEnv]) || FIRESTORE_CONFIG[NodeEnv.Staging];
+const config = FIRESTORE_CONFIG[environment.nodeEnv] || FIRESTORE_CONFIG[NodeEnv.Development];
 
 firebase.initializeApp(config!);
 
