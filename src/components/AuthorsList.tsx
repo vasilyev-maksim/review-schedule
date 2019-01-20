@@ -5,13 +5,12 @@ import { IProvider } from '../providers/models';
 import { ReviewerLink } from './ReviewerLink';
 
 interface IProps {
-    linkClassName?: string;
     provider: IProvider;
 }
 
-export const AuthorsList: React.SFC<IProps> = ({ linkClassName, provider }) => {
+export const AuthorsList: React.SFC<IProps> = ({ provider }) => {
     return (
-        <>
+        <div className="authors">
             {
                 AUTHORS.map((author, i) => {
                     return (
@@ -19,7 +18,6 @@ export const AuthorsList: React.SFC<IProps> = ({ linkClassName, provider }) => {
                             <ReviewerLink
                                 reviewer={author}
                                 provider={provider}
-                                className={linkClassName}
                             >
                                 {author.name} {author.surname}
                             </ReviewerLink>
@@ -29,6 +27,6 @@ export const AuthorsList: React.SFC<IProps> = ({ linkClassName, provider }) => {
                     );
                 })
             }
-        </>
+        </div>
     );
 };

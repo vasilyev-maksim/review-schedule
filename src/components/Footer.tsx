@@ -15,21 +15,12 @@ export const Footer: React.SFC = () => {
                 Developed with
                 <Icon name="heart" fitted />
 
-                <div className="autors">
-                    by
-                    <AuthorsList
-                        linkClassName="footer-link"
-                        provider={github}
-                    />
-                </div>
+                by
+                <AuthorsList provider={github} />
 
                 <br />
                 <br />
-                <a
-                    href="https://github.com/PB-Digital/review-schedule"
-                    target="_blank"
-                    className="footer-link"
-                >
+                <a href="https://github.com/PB-Digital/review-schedule" target="_blank">
                     <Icon
                         name="github"
                         size="big"
