@@ -2,10 +2,12 @@ import * as React from 'react';
 import MediaQuery from 'react-responsive';
 import { Icon, Responsive } from 'semantic-ui-react';
 
+import { FIRESTORE_CONFIG } from '../config';
 import { EnvironmentVariable, NodeEnv } from '../enums';
 import { VisibilityFilterByEnv } from './VisibilityFilterByEnv';
 
 export const TestEnvIndicator: React.SFC = () => {
+    const href = `http://${FIRESTORE_CONFIG[NodeEnv.Production]!.authDomain}`;
     return (
         <VisibilityFilterByEnv
             variable={EnvironmentVariable.NodeEnv}
@@ -17,9 +19,13 @@ export const TestEnvIndicator: React.SFC = () => {
                     const position = isMobile ? 'right' : 'left';
                     const size = isMobile ? 'big' : 'huge';
                     return (
-                        <span className={`ui ${position} ${size} corner label green`}>
+                        <a
+                            href={href}
+                            target="_blank"
+                            className={`ui ${position} ${size} corner label green`}
+                        >
                             <Icon name="wrench" />
-                        </span>
+                        </a>
                     );
                 }}
             </MediaQuery>
