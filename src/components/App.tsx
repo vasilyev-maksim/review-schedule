@@ -7,27 +7,30 @@ import {
 } from 'react-router-dom';
 import { Container } from 'semantic-ui-react';
 
-import { db } from '../db';
+import { API } from '../API';
 import { ICamp } from '../models';
+import { ErrorBoundary } from './ErrorBoundary';
 import { Footer } from './Footer';
 import { SchedulePage } from './SchedulePage';
-import { StagingEnvIndicator } from './StagingEnvIndicator';
+import { TestEnvIndicator } from './TestEnvIndicator';
 
 interface IState {
     camps: ICamp[] | null;
+    error: boolean;
     loading: boolean;
 }
 
 export class App extends React.Component<{}, IState> {
     public state: IState = {
         camps: null,
+        error: false,
         loading: true,
     };
 
     public componentDidMount (): void {
-        db.collection('camps').onSnapshot((querySnapshot) => {
+        API.getCamps((camps) => {
             this.setState({
-                camps: querySnapshot.docs.map((doc) => doc.data() as ICamp),
+                camps,
                 loading: false,
             });
         });
@@ -40,12 +43,14 @@ export class App extends React.Component<{}, IState> {
                 flexDirection: 'column',
                 height: '100%',
             }}>
-                <StagingEnvIndicator />
-                <div style={{
-                    flexGrow: 1,
-                    margin: '40px 0',
-                }}>
-                    <Container>
+                <TestEnvIndicator />
+                <Container
+                    style={{
+                        flexGrow: 1,
+                        margin: '40px 0',
+                    }}
+                >
+                    <ErrorBoundary>
                         <Router>
                             <Switch>
                                 <Route
@@ -60,8 +65,8 @@ export class App extends React.Component<{}, IState> {
                                 <Redirect to="/schedule" />
                             </Switch>
                         </Router>
-                    </Container>
-                </div>
+                    </ErrorBoundary>
+                </Container>
                 <Footer />
             </div >
         );

@@ -2,12 +2,13 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 
 import { FIRESTORE_CONFIG } from './config';
+import { EnvironmentVariable, NodeEnv } from './enums';
+import { getEnvironmentVariableValue } from './utils';
 
-firebase.initializeApp(
-    process.env.NODE_ENV === 'production'
-        ? FIRESTORE_CONFIG.prod
-        : FIRESTORE_CONFIG.staging
-);
+const nodeEnv = getEnvironmentVariableValue(EnvironmentVariable.NodeEnv) as NodeEnv;
+const config = (nodeEnv && FIRESTORE_CONFIG[nodeEnv]) || FIRESTORE_CONFIG[NodeEnv.Staging];
+
+firebase.initializeApp(config!);
 
 // Initialize Cloud Firestore through Firebase
 export const db = firebase.firestore();

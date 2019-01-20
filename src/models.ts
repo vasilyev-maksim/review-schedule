@@ -1,34 +1,46 @@
-import Moment from 'moment';
+import { Moment } from 'moment';
 import { SemanticICONS } from 'semantic-ui-react';
 
+import { NodeEnv } from './enums';
+
 export interface IReviewer {
-    id: string;
-    enabled: boolean;
+    enabled?: boolean;
+    githubId: string;
+    githubUsername: string;
     name: string;
-    surname: string;
     photo: string;
+    slackId: string;
+    surname: string;
 }
 
 export interface ISquad {
-    name: string;
-    members: IReviewer[];
     icon: SemanticICONS;
+    members: IReviewer[];
+    name: string;
 }
 
 export interface ISquadReviewer {
-    squad: ISquad;
     reviewer: IReviewer;
+    squad: ISquad;
 }
 
 export interface IReviewDay {
-    day: Moment.Moment;
+    day: Moment;
     reviewers: ISquadReviewer[];
 }
 
 export type ISchedule = IReviewDay[];
 
 export interface ICamp {
-    name: string;
     icon: SemanticICONS;
+    name: string;
     squads: ISquad[];
 }
+
+export interface IDBConfig {
+    apiKey: string;
+    authDomain: string;
+    projectId: string;
+}
+
+export type IDBConfigDict = { [key in NodeEnv]?: IDBConfig };

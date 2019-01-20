@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { Container, Icon, Segment } from 'semantic-ui-react';
 
-import { FooterLink } from './Link';
+import { github } from '../providers/github';
+import { AuthorsList } from './AuthorsList';
 
 export const Footer: React.SFC = () => {
     return (
@@ -13,26 +14,19 @@ export const Footer: React.SFC = () => {
             <Container textAlign="center">
                 Developed with
                 <Icon name="heart" fitted />
-                <div className="autors">
-                    by
-                    <FooterLink href="https://github.com/jamil-alisgandarov">
-                        Jamil Alisgandarov
-                    </FooterLink>
-                    and
-                    <FooterLink href="https://github.com/maksim-vasilyev-pb">
-                        Vasilyev Maksim
-                    </FooterLink>
-                </div>
+
+                by
+                <AuthorsList provider={github} />
 
                 <br />
                 <br />
-                <FooterLink href="https://github.com/PB-Digital/review-schedule">
+                <a href="https://github.com/PB-Digital/review-schedule" target="_blank">
                     <Icon
                         name="github"
                         size="big"
                         link
                     />
-                </FooterLink>
+                </a>
             </Container>
         </Segment>
     );

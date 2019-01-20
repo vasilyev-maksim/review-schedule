@@ -1,9 +1,10 @@
 
 import * as Cookies from 'js-cookie';
-import Moment from 'moment';
+import Moment = require('moment');
 import { extendMoment } from 'moment-range';
 
 import { SELECTED_CAMP_COOKIE_KEY } from './config';
+import { EnvironmentVariable } from './enums';
 import { ICamp } from './models';
 
 const moment = extendMoment(Moment);
@@ -32,4 +33,38 @@ export function getSelectedCampFromCookies (): string | undefined {
 
 export function saveSelectedCampToCookies (camp: ICamp): void {
     Cookies.set(SELECTED_CAMP_COOKIE_KEY, camp.name);
+}
+
+export function getDefaultCampName (camps: ICamp[] | null): string | null {
+    let defaultCampName: string | null = null;
+
+    if (camps && camps.length) {
+        const cookieCampName = getSelectedCampFromCookies();
+        if (cookieCampName) {
+            const cookieCamp = camps.some((camp) => camp.name === cookieCampName);
+            if (cookieCamp) {
+                defaultCampName = cookieCampName;
+            }
+        }
+
+        if (!defaultCampName) {
+            const firstCampName = camps[0].name;
+            if (firstCampName) {
+                defaultCampName = encodeURIComponent(firstCampName);
+            }
+        }
+    }
+
+    return defaultCampName;
+}
+
+export function getEnvironmentVariableValue (variable: EnvironmentVariable): string | null {
+    // `process.env` object is empty in runtime.
+    // Perhaps parcel injects env variables at compile time.
+    // So we can't refer to `process.env` properties by indexer: process.env['NODE_ENV'].
+    // Only by dot: `process.env.NODE_ENV`.
+    return {
+        [EnvironmentVariable.NodeEnv]: process.env.NODE_ENV!,
+        [EnvironmentVariable.Mock]: process.env.MOCK!,
+    }[variable] || null;
 }

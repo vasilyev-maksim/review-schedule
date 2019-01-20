@@ -1,0 +1,50 @@
+#app {
+    height: 100%;
+}
+
+.footer {
+    padding: 2em 0em !important;
+    
+    .icon.heart {
+        margin: 0 5px !important;
+    }   
+
+    .github.icon {
+        text-decoration: none;
+    }
+}
+
+.authors, .footer {
+    a {
+        &:hover {
+            opacity: 1;
+        }
+        
+        margin: 0 5px !important;
+        color: inherit;
+        opacity: 0.75;
+        text-decoration: underline;
+
+        &:last-of-type {
+            margin-right: 0 !important;
+        }
+    }
+    display: inline-block;
+}
+
+.reviewer {
+    display: flex;
+
+    .body {
+        flex-grow: 1;
+    }
+
+    .actions {
+        align-self: center;
+        display: none;
+    }
+}
+
+td:hover .reviewer .actions {
+    display: block !important;
+}

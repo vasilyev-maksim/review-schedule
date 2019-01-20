@@ -2,9 +2,9 @@ import * as React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { Grid } from 'semantic-ui-react';
 
-import { getSchedule } from '../getSchedule';
 import { ICamp } from '../models';
-import { getCurrentDate, getSelectedCampFromCookies, isWorkingDay } from '../utils';
+import { scheduleService } from '../services/scheduleService';
+import { getCurrentDate, getDefaultCampName, isWorkingDay } from '../utils';
 import { CampMenu } from './CampMenu';
 import { Header } from './Header';
 import { ReviewersOfTheDay } from './ReviewersOfTheDay';
@@ -43,22 +43,7 @@ export const SchedulePage: React.SFC<IProps> = ({ camps, loading }) => {
             </>
         );
     } else {
-        let defaultCampName: string | null = null;
-
-        if (camps && camps.length) {
-            const cookieCampName = getSelectedCampFromCookies();
-            if (cookieCampName) {
-                const cookieCamp = camps.some((camp) => camp.name === cookieCampName);
-                if (cookieCamp) {
-                    defaultCampName = cookieCampName;
-                }
-            } else {
-                const firstCampName = camps[0].name;
-                if (firstCampName) {
-                    defaultCampName = encodeURIComponent(firstCampName);
-                }
-            }
-        }
+        const defaultCampName = getDefaultCampName(camps);
 
         return (
             <Switch>
@@ -82,7 +67,7 @@ export const SchedulePage: React.SFC<IProps> = ({ camps, loading }) => {
                         }
 
                         const schedule = currentCamp && currentCamp.squads
-                            ? getSchedule(currentCamp.squads)
+                            ? scheduleService.generateSchedule(currentCamp.squads)
                             : [];
 
                         return (
