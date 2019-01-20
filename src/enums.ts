@@ -6,3 +6,8 @@ export enum NodeEnv {
     /** https://review-schedule-staging.firebaseapp.com */
     Staging = 'staging',
 }
+
+export enum Provider {
+    Slack = 'Slack',
+    GitHub = 'GitHub',
+}

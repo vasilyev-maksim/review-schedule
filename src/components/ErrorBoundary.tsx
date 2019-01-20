@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Header, Icon } from 'semantic-ui-react';
 
-import { slack } from '../providers/slack';
+import { Provider } from '../enums';
 import { AuthorsList } from './AuthorsList';
 
 interface IState {
@@ -32,7 +32,7 @@ export class ErrorBoundary extends React.Component<{}, IState> {
                     </Header>
                     <br />
                     <Header>
-                        Please contact <AuthorsList provider={slack} /> as soon as possible.
+                        Please contact <AuthorsList provider={Provider.Slack} /> as soon as possible.
                     </Header>
                 </div>
             )

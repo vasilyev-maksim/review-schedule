@@ -2,8 +2,8 @@ import * as React from 'react';
 import { Header, Table } from 'semantic-ui-react';
 
 import { DATE_FORMAT } from '../config';
+import { Provider } from '../enums';
 import { ISchedule } from '../models';
-import { slack } from '../providers/slack';
 import { isToday } from '../utils';
 import { Reviewer } from './Reviewer';
 import { ReviewerLink } from './ReviewerLink';
@@ -39,7 +39,7 @@ export const ReviewersOfTheDay: React.SFC<IProps> = ({ schedule }) => {
                                     <Table.Cell key={reviewer.slackId} selectable>
                                         <ReviewerLink
                                             reviewer={reviewer}
-                                            provider={slack}
+                                            provider={Provider.Slack}
                                         >
                                             <Reviewer
                                                 reviewer={reviewer}
