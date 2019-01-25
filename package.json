@@ -14,8 +14,8 @@
         "publish:staging": "cross-env NODE_ENV=staging npm run build && firebase use staging && firebase deploy",
         "firebase:read:prod": "cross-env NODE_ENV=production ts-node tools/firebase.read.ts",
         "firebase:read:staging": "cross-env NODE_ENV=staging ts-node tools/firebase.read.ts",
-        "firebase:write:prod": "cross-env NODE_ENV=production ts-node tools/firebase.write.ts",
-        "firebase:write:staging": "cross-env NODE_ENV=staging ts-node tools/firebase.write.ts",
+        "firebase:write:prod": "firebase use prod && cross-env NODE_ENV=production ts-node tools/firebase.write.ts",
+        "firebase:write:staging": "firebase use staging && cross-env NODE_ENV=staging ts-node tools/firebase.write.ts",
         "find-users": "ts-node tools/findUsers.ts"
     },
     "dependencies": {
