@@ -77,6 +77,15 @@
                         "photo": "https://avatars1.githubusercontent.com/u/45560983?v=4",
                         "slackId": "UEJTF74EN",
                         "surname": "Alyarov"
+                    },
+                    {
+                        "enabled": false,
+                        "githubId": "46884462",
+                        "githubUsername": "fmusayev",
+                        "name": "Fuad",
+                        "photo": "https://avatars0.githubusercontent.com/u/46884462?v=4'",
+                        "slackId": "UFJJW4Y82",
+                        "surname": "Musayev"
                     }
                 ],
                 "name": "Daily Banking"
