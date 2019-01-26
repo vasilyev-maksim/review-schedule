@@ -7,7 +7,7 @@ import { NodeEnv } from '../enums';
 import { environment } from '../environment';
 
 export const TestEnvIndicator: React.SFC = () => {
-    const href = `http://${FIRESTORE_CONFIG[NodeEnv.Production]!.authDomain}`;
+    const href = `http://${FIRESTORE_CONFIG.authDomain}`;
 
     return environment.nodeEnv !== NodeEnv.Production
         ? (
@@ -15,13 +15,15 @@ export const TestEnvIndicator: React.SFC = () => {
                 {(isMobile) => {
                     const position = isMobile ? 'right' : 'left';
                     const size = isMobile ? 'big' : 'huge';
+                    const iconName = environment.mockAPI ? 'database' : 'code';
+
                     return (
                         <a
                             href={href}
                             target="_blank"
                             className={`ui ${position} ${size} corner label green`}
                         >
-                            <Icon name="wrench" />
+                            <Icon name={iconName} />
                         </a>
                     );
                 }}

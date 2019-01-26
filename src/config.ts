@@ -1,25 +1,13 @@
-import { NodeEnv } from './enums';
-import { IDBConfigDict, IReviewer } from './models';
+import { environment } from './environment';
+import { IDBConfig, IReviewer } from './models';
 
 export const REFERENCE_POINT = '2019-01-09';
 export const DATE_FORMAT = 'DD MMM YYYY - dddd';
 export const PLACEHOLDER_SQUADS_COUNT = 3;
-export const FIRESTORE_CONFIG: IDBConfigDict = {
-    [NodeEnv.Development]: {
-        apiKey: 'AIzaSyBRPDIZwbYjh8kOg8JKJ2-YCASNkWvxiVQ',
-        authDomain: 'review-schedule-staging.firebaseapp.com',
-        projectId: 'review-schedule-staging',
-    },
-    [NodeEnv.Staging]: {
-        apiKey: 'AIzaSyBRPDIZwbYjh8kOg8JKJ2-YCASNkWvxiVQ',
-        authDomain: 'review-schedule-staging.firebaseapp.com',
-        projectId: 'review-schedule-staging',
-    },
-    [NodeEnv.Production]: {
-        apiKey: 'AIzaSyD7GbTdXaagmPBXX0tdX_O7U721Tb0q4pc',
-        authDomain: 'review-schedule.firebaseapp.com',
-        projectId: 'review-schedule'
-    }
+export const FIRESTORE_CONFIG: IDBConfig = {
+    apiKey: environment.firebaseApiKey,
+    authDomain: environment.firebaseAuthDomain,
+    projectId: environment.firebaseProjectId,
 };
 
 export const SELECTED_CAMP_COOKIE_KEY = 'reviewer-camp';
