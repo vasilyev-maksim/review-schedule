@@ -2,6 +2,7 @@
 
 import axios from 'axios';
 
+import { Provider } from '../../src/enums';
 import { IReviewer } from '../../src/models';
 import { IProvider } from './models';
 
@@ -9,6 +10,10 @@ const token = 'ecbbd561d0b52b95762492f29d64ad5e9447c238';
 const url = `https://api.github.com/orgs/PB-Digital/members`;
 
 class GithubProvider implements IProvider {
+    public getProviderName (): Provider {
+        return Provider.GitHub;
+    }
+
     public async getAllReviewers (): Promise<Partial<IReviewer>[]> {
         const githubUsers = (await axios.get<IGithubUser[]>(
             url,
@@ -17,11 +22,12 @@ class GithubProvider implements IProvider {
 
         const reviewers: Partial<IReviewer>[] = githubUsers
             .map((user) => {
-                return {
+                const reviewer: Partial<IReviewer> = {
                     githubId: user.id.toString(),
                     githubUsername: user.login,
                     photo: user.avatar_url,
                 };
+                return reviewer;
             });
 
         return reviewers;

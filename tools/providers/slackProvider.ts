@@ -2,6 +2,7 @@
 
 import axios from 'axios';
 
+import { Provider } from '../../src/enums';
 import { IReviewer } from '../../src/models';
 import { IProvider } from './models';
 
@@ -9,6 +10,10 @@ const token = 'xoxp-330924193331-522722404979-524993675889-1ba121bc802eb43e9f60f
 const url = `https://slack.com/api/users.list?token=${token}&pretty=1`;
 
 class SlackProvider implements IProvider {
+    public getProviderName (): Provider {
+        return Provider.Slack;
+    }
+
     public async getAllReviewers (filter?: (member: IMember) => boolean): Promise<Partial<IReviewer>[]> {
         const response = (await axios.get<IResponse>(url)).data;
 
@@ -17,13 +22,14 @@ class SlackProvider implements IProvider {
                 .filter(filter || (() => true))
                 .map((user) => {
                     const [name, surname] = user.profile.real_name.split(' ');
-                    return {
+                    const reviewer: Partial<IReviewer> = {
                         enabled: true,
                         name,
                         photo: user.profile.image_48,
                         slackId: user.id,
                         surname,
                     };
+                    return reviewer;
                 });
 
             return users;
