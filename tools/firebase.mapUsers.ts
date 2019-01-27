@@ -5,7 +5,7 @@ import { githubProvider } from './providers/githubProvider';
 
 async function main (): Promise<any> {
     const camps: ICamp[] = JSON.parse(readFileSync('./tools/firebase.dump.json').toString());
-    const githubUsers = await githubProvider.getAllReviewers();
+    const githubUsers = await githubProvider.getAllUsers();
 
     const updatedCamps: ICamp[] = camps.map((camp) => {
         return {
@@ -15,15 +15,17 @@ async function main (): Promise<any> {
                     ...squad,
                     members: squad.members.map((member) => {
                         const githubUser = githubUsers.find((user) => {
+                            const reviewer = githubProvider.convertToReviewer(user);
+
                             return Boolean(
                                 user
-                                && user.githubId
-                                && user.githubId.toString() === member.githubId
+                                && reviewer.githubId
+                                && reviewer.githubId.toString() === member.githubId
                             );
                         });
 
-                        return githubUser && githubUser.photo
-                            ? { ...member, photo: githubUser.photo }
+                        return githubUser && githubUser.avatar_url
+                            ? { ...member, photo: githubUser.avatar_url }
                             : member;
                     })
                 };

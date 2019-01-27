@@ -9,47 +9,13 @@ import { IProvider } from './models';
 const token = 'xoxp-330924193331-522722404979-524993675889-1ba121bc802eb43e9f60f62724ffa6bd';
 const url = `https://slack.com/api/users.list?token=${token}&pretty=1`;
 
-class SlackProvider implements IProvider {
+class SlackProvider implements IProvider<ISlackUser> {
     public getProviderName (): Provider {
         return Provider.Slack;
     }
 
-    public async getAllReviewers (filter?: (member: IMember) => boolean): Promise<Partial<IReviewer>[]> {
-        const response = (await axios.get<IResponse>(url)).data;
-
-        if (response.ok) {
-            const users: Partial<IReviewer>[] = response.members
-                .filter(filter || (() => true))
-                .map((user) => {
-                    const [name, surname] = user.profile.real_name.split(' ');
-                    const reviewer: Partial<IReviewer> = {
-                        enabled: true,
-                        name,
-                        photo: user.profile.image_48,
-                        slackId: user.id,
-                        surname,
-                    };
-                    return reviewer;
-                });
-
-            return users;
-        } else {
-            if (response.error === 'token_revoked') {
-                throw Error(
-                    'Slack token revoked: Vasilyev Maksim\'s token was revoked because he has'
-                    + ' new account in Slack or his token somehow expired or he has even been fired :('
-                    + ' Please use this link'
-                    + '\n\nhttps://api.slack.com/custom-integrations/legacy-tokens#legacy-info\n\n'
-                    + 'to generate new token and replace the old one with it.'
-                );
-            } else {
-                throw Error(`Unknown error from Slack API: ${response.error}`);
-            }
-        }
-    }
-
-    public async findReviewers (names: string[]): Promise<Partial<IReviewer>[]> {
-        return this.getAllReviewers(
+    public findUsers (names: string[], list: ISlackUser[]): ISlackUser[] {
+        return list.filter(
             (member) => !member.is_bot && [
                 member.name,
                 member.real_name,
@@ -66,6 +32,38 @@ class SlackProvider implements IProvider {
             )
         );
     }
+
+    public async getAllUsers (): Promise<ISlackUser[]> {
+        const response = (await axios.get<IResponse>(url)).data;
+
+        if (response.ok) {
+            return response.members;
+        } else {
+            if (response.error === 'token_revoked') {
+                throw Error(
+                    'Slack token rn evoked: Vasilyev Maksim\'s token was revoked because he has'
+                    + ' new account in Slack or his token somehow expired or he has even been fired :('
+                    + ' Please use this link'
+                    + '\n\nhttps://api.slack.com/custom-integrations/legacy-tokens#legacy-info\n\n'
+                    + 'to generate new token and replace the old one with it.'
+                );
+            } else {
+                throw Error(`Unknown error from Slack API: ${response.error}`);
+            }
+        }
+    }
+
+    public convertToReviewer (user: ISlackUser): Partial<IReviewer> {
+        const [name, surname] = user.profile.real_name.split(' ');
+        const reviewer: Partial<IReviewer> = {
+            enabled: true,
+            name,
+            photo: user.profile.image_48,
+            slackId: user.id,
+            surname,
+        };
+        return reviewer;
+    }
 }
 
 export const slackProvider = new SlackProvider();
@@ -77,12 +75,12 @@ export const slackProvider = new SlackProvider();
 
 interface IResponse {
     ok: boolean;
-    members: IMember[];
+    members: ISlackUser[];
     cache_ts: number;
     error: string;
 }
 
-interface IMember {
+interface ISlackUser {
     id: string;
     team_id: string;
     name: string;
