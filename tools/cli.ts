@@ -1,6 +1,7 @@
 // tslint:disable:object-literal-sort-keys
 // tslint:disable:no-console
 
+import * as dotenv from 'dotenv';
 import * as inquirer from 'inquirer';
 
 import { main as firebaseRead } from './firebase.read';
@@ -26,6 +27,8 @@ async function main (): Promise<any> {
             ],
         },
     );
+
+    dotenv.config({ path: '.env.development' }); // temporary 'development'
 
     switch (command) {
         case Command.GetReviewer:

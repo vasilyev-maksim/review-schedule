@@ -4,7 +4,7 @@ import Moment = require('moment');
 import { extendMoment } from 'moment-range';
 
 import { SELECTED_CAMP_COOKIE_KEY } from './config';
-import { environment } from './environment';
+import { getEnvironment } from './environment';
 import { ICamp } from './models';
 
 const moment = extendMoment(Moment);
@@ -16,8 +16,9 @@ export function getWorkDaysRange (start: Moment.Moment, end: Moment.Moment): Mom
 }
 
 export function getCurrentDate (): Moment.Moment {
-    return environment.mockCurrentDate
-        ? moment(environment.mockCurrentDate)
+    const env = getEnvironment();
+    return env.mockCurrentDate
+        ? moment(env.mockCurrentDate)
         : moment();
 }
 
