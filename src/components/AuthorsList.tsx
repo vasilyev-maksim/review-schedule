@@ -1,11 +1,11 @@
 import * as React from 'react';
 
 import { AUTHORS } from '../config';
-import { IProvider } from '../providers/models';
+import { Provider } from '../enums';
 import { ReviewerLink } from './ReviewerLink';
 
 interface IProps {
-    provider: IProvider;
+    provider: Provider;
 }
 
 export const AuthorsList: React.SFC<IProps> = ({ provider }) => {

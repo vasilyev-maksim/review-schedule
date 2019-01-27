@@ -3,7 +3,7 @@
 import { exec } from 'child_process';
 import { readFileSync } from 'fs';
 
-import { db } from '../src/db';
+import { db } from '../src/API/db';
 import { ICamp } from '../src/models';
 
 async function main (): Promise<any> {

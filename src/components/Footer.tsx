@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Container, Icon, Segment } from 'semantic-ui-react';
 
-import { github } from '../providers/github';
+import { Provider } from '../enums';
 import { AuthorsList } from './AuthorsList';
 
 export const Footer: React.SFC = () => {
@@ -16,7 +16,7 @@ export const Footer: React.SFC = () => {
                 <Icon name="heart" fitted />
 
                 by
-                <AuthorsList provider={github} />
+                <AuthorsList provider={Provider.GitHub} />
 
                 <br />
                 <br />

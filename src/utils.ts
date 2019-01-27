@@ -4,7 +4,7 @@ import Moment = require('moment');
 import { extendMoment } from 'moment-range';
 
 import { SELECTED_CAMP_COOKIE_KEY } from './config';
-import { EnvironmentVariable } from './enums';
+import { environment } from './environment';
 import { ICamp } from './models';
 
 const moment = extendMoment(Moment);
@@ -16,7 +16,9 @@ export function getWorkDaysRange (start: Moment.Moment, end: Moment.Moment): Mom
 }
 
 export function getCurrentDate (): Moment.Moment {
-    return moment();
+    return environment.mockCurrentDate
+        ? moment(environment.mockCurrentDate)
+        : moment();
 }
 
 export function isWorkingDay (day: Moment.Moment): boolean {
@@ -56,15 +58,4 @@ export function getDefaultCampName (camps: ICamp[] | null): string | null {
     }
 
     return defaultCampName;
-}
-
-export function getEnvironmentVariableValue (variable: EnvironmentVariable): string | null {
-    // `process.env` object is empty in runtime.
-    // Perhaps parcel injects env variables at compile time.
-    // So we can't refer to `process.env` properties by indexer: process.env['NODE_ENV'].
-    // Only by dot: `process.env.NODE_ENV`.
-    return {
-        [EnvironmentVariable.NodeEnv]: process.env.NODE_ENV!,
-        [EnvironmentVariable.Mock]: process.env.MOCK!,
-    }[variable] || null;
 }

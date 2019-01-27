@@ -5,18 +5,18 @@
     "main": "public/index.html",
     "scripts": {
         "start": "parcel public/index.html --open",
-        "start:mock": "cross-env MOCK=true npm run start",
         "start:prod": "cross-env NODE_ENV=production npm run start",
+        "start:staging": "cross-env NODE_ENV=staging npm run start",
         "build": "rm -R -f dist .cache && parcel build public/index.html --no-source-maps",
         "tsc": "tsc --noEmit",
         "tslint": "tslint --project ./package.json",
         "publish:prod": "cross-env NODE_ENV=production npm run build && firebase use prod && firebase deploy",
         "publish:staging": "cross-env NODE_ENV=staging npm run build && firebase use staging && firebase deploy",
-        "firebase:read:prod": "cross-env NODE_ENV=production ts-node tools/firebase.read.ts",
-        "firebase:read:staging": "cross-env NODE_ENV=staging ts-node tools/firebase.read.ts",
-        "firebase:write:prod": "cross-env NODE_ENV=production ts-node tools/firebase.write.ts",
-        "firebase:write:staging": "cross-env NODE_ENV=staging ts-node tools/firebase.write.ts",
-        "slack:find-users": "ts-node tools/slack.findUsers.ts"
+        "firebase:read:prod": "dotenv -e .env.production ts-node tools/firebase.read.ts",
+        "firebase:read:staging": "dotenv -e .env.staging ts-node tools/firebase.read.ts",
+        "firebase:write:prod": "firebase use prod && dotenv -e .env.production ts-node tools/firebase.write.ts",
+        "firebase:write:staging": "firebase use staging && dotenv -e .env.staging ts-node tools/firebase.write.ts",
+        "find-users": "ts-node tools/findUsers.ts"
     },
     "dependencies": {
         "axios": "0.18.0",
@@ -48,6 +48,7 @@
         "@types/semantic-ui": "2.2.6",
         "cross-env": "5.2.0",
         "cssnano": "4.1.8",
+        "dotenv-cli": "^1.4.0",
         "husky": "^1.3.1",
         "sass": "1.16.0",
         "ts-node": "7.0.1",

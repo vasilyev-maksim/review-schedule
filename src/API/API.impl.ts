@@ -1,5 +1,5 @@
-import { db } from '../db';
 import { ICamp } from '../models';
+import { db } from './db';
 import { IAPI } from './models';
 
 export const APIImpl: IAPI = {
