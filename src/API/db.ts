@@ -3,10 +3,13 @@ import 'firebase/firestore';
 
 import { FIRESTORE_CONFIG } from '../config';
 
-firebase.initializeApp(FIRESTORE_CONFIG);
+let db: firebase.firestore.Firestore;
 
-// Initialize Cloud Firestore through Firebase
-export const db = firebase.firestore();
-
-// Disable deprecated features
-db.settings({ timestampsInSnapshots: true });
+export function getDBInstance (): firebase.firestore.Firestore {
+    if (!db) {
+        firebase.initializeApp(FIRESTORE_CONFIG);
+        db = firebase.firestore();
+        db.settings({ timestampsInSnapshots: true });
+    }
+    return db;
+}

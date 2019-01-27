@@ -15,7 +15,7 @@ import { githubProvider } from './providers/githubProvider';
 import { IProvider } from './providers/models';
 import { slackProvider } from './providers/slackProvider';
 
-async function main (): Promise<any> {
+export async function main (): Promise<any> {
     const [, , ...namesToFindBy] = process.argv;
 
     try {
@@ -33,10 +33,8 @@ async function main (): Promise<any> {
         await Promise.all(promises);
 
         console.log(result);
-        writeFileSync('./tools/findUsers.dump.json', JSON.stringify(result, null, 4));
+        writeFileSync('./tools/getReviewer.dump.json', JSON.stringify(result, null, 4));
     } catch (error) {
         console.error(error);
     }
 }
-
-main();
