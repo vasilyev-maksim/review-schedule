@@ -9,6 +9,7 @@ export interface IReviewer {
     photo: string;
     slackId: string;
     surname: string;
+    createdOn?: string;
 }
 
 export interface ISquad {
