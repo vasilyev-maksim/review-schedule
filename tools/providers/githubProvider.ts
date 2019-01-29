@@ -4,27 +4,23 @@ import axios from 'axios';
 
 import { Provider } from '../../src/enums';
 import { IReviewer } from '../../src/models';
+import { isSubstring } from '../utils';
 import { IProvider } from './models';
 
 const token = 'ecbbd561d0b52b95762492f29d64ad5e9447c238';
 const url = `https://api.github.com/orgs/PB-Digital/members`;
 
 class GithubProvider implements IProvider<IGithubUser> {
+    public getUserName (user: IGithubUser): string {
+        return user.login;
+    }
+
     public getProviderName (): Provider {
         return Provider.GitHub;
     }
 
-    public findUsers (names: string[], list: IGithubUser[]): IGithubUser[] {
-        return list.filter((user) => {
-            return names.some((name) => {
-                return Boolean(
-                    name
-                    && user
-                    && user.login
-                    && user.login.toLowerCase().indexOf(name.toLowerCase()) > -1
-                );
-            });
-        });
+    public findUserByName (query: string, list: IGithubUser[]): IGithubUser | null {
+        return list.find((user) => user && isSubstring(user.login, query)) || null;
     }
 
     public async getAllUsers (): Promise<IGithubUser[]> {

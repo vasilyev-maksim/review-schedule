@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Header, Table } from 'semantic-ui-react';
 
-import { DATE_FORMAT } from '../config';
+import { UI_DATE_FORMAT } from '../config';
 import { Provider } from '../enums';
 import { ISchedule } from '../models';
 import { isToday } from '../utils';
@@ -28,7 +28,7 @@ export const ReviewersOfTheDay: React.SFC<IProps> = ({ schedule }) => {
                                 <Header.Content>
                                     Today
                                     <Header.Subheader>
-                                        {today.day.format(DATE_FORMAT)}
+                                        {today.day.format(UI_DATE_FORMAT)}
                                     </Header.Subheader>
                                 </Header.Content>
                             </Header>

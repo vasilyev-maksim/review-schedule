@@ -26,3 +26,11 @@ export async function setupEnvironment (): Promise<void> {
     const nodeEnv = await readNodeEnv();
     dotenv.config({ path: `.env.${nodeEnv}` });
 }
+
+export function isSubstring (str?: string, substr?: string): boolean {
+    return Boolean(
+        str
+        && substr
+        && str.toLowerCase().indexOf(substr.toLowerCase()) > -1
+    );
+}

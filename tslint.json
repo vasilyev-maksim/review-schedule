@@ -42,7 +42,7 @@
         ],
         "curly": true,
         "eofline": true,
-        "forin": true,
+        "forin": false,
         "import-name": false,
         "indent": [
             true,

@@ -3,25 +3,28 @@
 
 import * as inquirer from 'inquirer';
 
+import { main as addReviewer } from './addReviewer';
 import { main as firebaseRead } from './firebase.read';
 import { main as firebaseWrite } from './firebase.write';
-import { main as getReviewer } from './getReviewer';
 import { setupEnvironment } from './utils';
 
 enum Command {
-    GetReviewer = 'Get reviewer from providers by name',
+    AddReviewer = 'Add reviewer',
     FirebaseRead = 'Read from firebase',
     FirebaseWrite = 'Write to firebase',
 }
 
+inquirer.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'));
+
 async function main (): Promise<void> {
+
     const { command } = await inquirer.prompt(
         {
             type: 'list',
             name: 'command',
             message: 'Select a command',
             choices: [
-                Command.GetReviewer,
+                Command.AddReviewer,
                 Command.FirebaseRead,
                 Command.FirebaseWrite,
             ],
@@ -29,8 +32,8 @@ async function main (): Promise<void> {
     );
 
     switch (command) {
-        case Command.GetReviewer:
-            return getReviewer();
+        case Command.AddReviewer:
+            return addReviewer();
         case Command.FirebaseRead:
             await setupEnvironment();
             return firebaseRead();

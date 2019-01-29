@@ -3,7 +3,8 @@ import { IReviewer } from '../../src/models';
 
 export interface IProvider<T> {
     getProviderName (): Provider;
-    findUsers (names: string[], list: T[]): T[];
+    findUserByName (query: string, users: T[]): T | null;
     getAllUsers (): Promise<T[]>;
     convertToReviewer (user: T): Partial<IReviewer>;
+    getUserName (user: T): string;
 }

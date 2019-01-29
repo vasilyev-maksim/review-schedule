@@ -4,40 +4,41 @@ import axios from 'axios';
 
 import { Provider } from '../../src/enums';
 import { IReviewer } from '../../src/models';
+import { isSubstring } from '../utils';
 import { IProvider } from './models';
 
 const token = 'xoxp-330924193331-522722404979-524993675889-1ba121bc802eb43e9f60f62724ffa6bd';
 const url = `https://slack.com/api/users.list?token=${token}&pretty=1`;
 
 class SlackProvider implements IProvider<ISlackUser> {
+    public getUserName (user: ISlackUser): string {
+        return user.profile && user.profile.real_name_normalized;
+    }
+
     public getProviderName (): Provider {
         return Provider.Slack;
     }
 
-    public findUsers (names: string[], list: ISlackUser[]): ISlackUser[] {
-        return list.filter(
-            (member) => !member.is_bot && [
-                member.name,
-                member.real_name,
-                member.profile.first_name,
-                member.profile.last_name,
-                member.profile.real_name,
-                member.profile.real_name_normalized,
-                member.profile.display_name,
-                member.profile.display_name_normalized,
-            ].some(
-                (name) => names.some((nameToFindBy) =>
-                    Boolean(name && name.toLowerCase().indexOf(nameToFindBy.toLowerCase()) > -1)
-                )
-            )
-        );
+    public findUserByName (query: string, users: ISlackUser[]): ISlackUser | null {
+        return users.find((user) => {
+            return [
+                user.name,
+                user.real_name,
+                user.profile.first_name,
+                user.profile.last_name,
+                user.profile.real_name,
+                user.profile.real_name_normalized,
+                user.profile.display_name,
+                user.profile.display_name_normalized,
+            ].some((name) => isSubstring(name, query));
+        }) || null;
     }
 
     public async getAllUsers (): Promise<ISlackUser[]> {
         const response = (await axios.get<IResponse>(url)).data;
 
         if (response.ok) {
-            return response.members;
+            return response.members.filter((user) => !user.is_bot);
         } else {
             if (response.error === 'token_revoked') {
                 throw Error(
