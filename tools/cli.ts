@@ -1,12 +1,12 @@
 // tslint:disable:object-literal-sort-keys
 // tslint:disable:no-console
 
-import * as dotenv from 'dotenv';
 import * as inquirer from 'inquirer';
 
 import { main as firebaseRead } from './firebase.read';
 import { main as firebaseWrite } from './firebase.write';
 import { main as getReviewer } from './getReviewer';
+import { setupEnvironment } from './utils';
 
 enum Command {
     GetReviewer = 'Get reviewer from providers by name',
@@ -14,7 +14,7 @@ enum Command {
     FirebaseWrite = 'Write to firebase',
 }
 
-async function main (): Promise<any> {
+async function main (): Promise<void> {
     const { command } = await inquirer.prompt(
         {
             type: 'list',
@@ -28,14 +28,14 @@ async function main (): Promise<any> {
         },
     );
 
-    dotenv.config({ path: '.env.development' }); // temporary 'development'
-
     switch (command) {
         case Command.GetReviewer:
             return getReviewer();
         case Command.FirebaseRead:
+            await setupEnvironment();
             return firebaseRead();
         case Command.FirebaseWrite:
+            await setupEnvironment();
             return firebaseWrite();
         default:
             return;
