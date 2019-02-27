@@ -2,35 +2,47 @@
 
 import axios from 'axios';
 
+import { Provider } from '../../src/enums';
 import { IReviewer } from '../../src/models';
+import { isSubstring } from '../utils';
 import { IProvider } from './models';
 
 const token = 'xoxp-330924193331-522722404979-524993675889-1ba121bc802eb43e9f60f62724ffa6bd';
 const url = `https://slack.com/api/users.list?token=${token}&pretty=1`;
 
-class SlackProvider implements IProvider {
-    public async getAllReviewers (filter?: (member: IMember) => boolean): Promise<Partial<IReviewer>[]> {
+class SlackProvider implements IProvider<ISlackUser> {
+    public getUserName (user: ISlackUser): string {
+        return user.profile && user.profile.real_name_normalized;
+    }
+
+    public getProviderName (): Provider {
+        return Provider.Slack;
+    }
+
+    public findUserByName (query: string, users: ISlackUser[]): ISlackUser | null {
+        return users.find((user) => {
+            return [
+                user.name,
+                user.real_name,
+                user.profile.first_name,
+                user.profile.last_name,
+                user.profile.real_name,
+                user.profile.real_name_normalized,
+                user.profile.display_name,
+                user.profile.display_name_normalized,
+            ].some((name) => isSubstring(name, query));
+        }) || null;
+    }
+
+    public async getAllUsers (): Promise<ISlackUser[]> {
         const response = (await axios.get<IResponse>(url)).data;
 
         if (response.ok) {
-            const users: Partial<IReviewer>[] = response.members
-                .filter(filter || (() => true))
-                .map((user) => {
-                    const [name, surname] = user.profile.real_name.split(' ');
-                    return {
-                        enabled: true,
-                        name,
-                        photo: user.profile.image_48,
-                        slackId: user.id,
-                        surname,
-                    };
-                });
-
-            return users;
+            return response.members.filter((user) => !user.is_bot);
         } else {
             if (response.error === 'token_revoked') {
                 throw Error(
-                    'Slack token revoked: Vasilyev Maksim\'s token was revoked because he has'
+                    'Slack token rn evoked: Vasilyev Maksim\'s token was revoked because he has'
                     + ' new account in Slack or his token somehow expired or he has even been fired :('
                     + ' Please use this link'
                     + '\n\nhttps://api.slack.com/custom-integrations/legacy-tokens#legacy-info\n\n'
@@ -42,23 +54,16 @@ class SlackProvider implements IProvider {
         }
     }
 
-    public async findReviewers (names: string[]): Promise<Partial<IReviewer>[]> {
-        return this.getAllReviewers(
-            (member) => !member.is_bot && [
-                member.name,
-                member.real_name,
-                member.profile.first_name,
-                member.profile.last_name,
-                member.profile.real_name,
-                member.profile.real_name_normalized,
-                member.profile.display_name,
-                member.profile.display_name_normalized,
-            ].some(
-                (name) => names.some((nameToFindBy) =>
-                    Boolean(name && name.toLowerCase().indexOf(nameToFindBy.toLowerCase()) > -1)
-                )
-            )
-        );
+    public convertToReviewer (user: ISlackUser): Partial<IReviewer> {
+        const [name, surname] = user.profile.real_name.split(' ');
+        const reviewer: Partial<IReviewer> = {
+            enabled: true,
+            name,
+            photo: user.profile.image_48,
+            slackId: user.id,
+            surname,
+        };
+        return reviewer;
     }
 }
 
@@ -71,12 +76,12 @@ export const slackProvider = new SlackProvider();
 
 interface IResponse {
     ok: boolean;
-    members: IMember[];
+    members: ISlackUser[];
     cache_ts: number;
     error: string;
 }
 
-interface IMember {
+interface ISlackUser {
     id: string;
     team_id: string;
     name: string;

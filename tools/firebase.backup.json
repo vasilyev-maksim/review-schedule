@@ -8,24 +8,6 @@
                 "members": [
                     {
                         "enabled": true,
-                        "githubId": "42234297",
-                        "githubUsername": "bkbekirov",
-                        "name": "Bekir",
-                        "photo": "https://avatars1.githubusercontent.com/u/42234297?v=4",
-                        "slackId": "UBQA7CJBH",
-                        "surname": "Bekirov"
-                    },
-                    {
-                        "enabled": true,
-                        "githubId": "44164074",
-                        "githubUsername": "zaliyev1994",
-                        "name": "Zaur",
-                        "photo": "https://avatars3.githubusercontent.com/u/44164074?v=4",
-                        "slackId": "UDEFBN221",
-                        "surname": "Aliyev"
-                    },
-                    {
-                        "enabled": true,
                         "githubId": "42429599",
                         "githubUsername": "yibrahimov",
                         "name": "Yusif",
@@ -44,33 +26,6 @@
                     },
                     {
                         "enabled": true,
-                        "githubId": "45159564",
-                        "githubUsername": "fariz-sirajli",
-                        "name": "Fariz",
-                        "photo": "https://avatars1.githubusercontent.com/u/45159564?v=4",
-                        "slackId": "UE6MU0SQ3",
-                        "surname": "Sirajli"
-                    },
-                    {
-                        "enabled": true,
-                        "githubId": "15357881",
-                        "githubUsername": "amirashad",
-                        "name": "Rashad",
-                        "photo": "https://avatars2.githubusercontent.com/u/15357881?v=4",
-                        "slackId": "U9YU9U4QG",
-                        "surname": "Amirjanov"
-                    },
-                    {
-                        "enabled": true,
-                        "githubId": "46346417",
-                        "githubUsername": "IlqarMammadovPB",
-                        "name": "Ilgar",
-                        "photo": "https://avatars2.githubusercontent.com/u/46346417?v=4",
-                        "slackId": "UF6KYKKGX",
-                        "surname": "Mammadov"
-                    },
-                    {
-                        "enabled": true,
                         "githubId": "45560983",
                         "githubUsername": "ralyarov",
                         "name": "Rashid",
@@ -79,7 +34,7 @@
                         "surname": "Alyarov"
                     },
                     {
-                        "enabled": false,
+                        "enabled": true,
                         "githubId": "46884462",
                         "githubUsername": "fmusayev",
                         "name": "Fuad",
@@ -113,12 +68,12 @@
                     },
                     {
                         "enabled": true,
-                        "githubId": "42234308",
-                        "githubUsername": "AykhanAghazadaPB",
-                        "name": "Aykhan",
-                        "photo": "https://avatars0.githubusercontent.com/u/42234308?v=4",
-                        "slackId": "UAS7S2VFU",
-                        "surname": "Aghazada"
+                        "githubId": "42234297",
+                        "githubUsername": "bkbekirov",
+                        "name": "Bekir",
+                        "photo": "https://avatars1.githubusercontent.com/u/42234297?v=4",
+                        "slackId": "UBQA7CJBH",
+                        "surname": "Bekirov"
                     }
                 ],
                 "name": "Onboarding"
@@ -155,6 +110,63 @@
                     }
                 ],
                 "name": "Factoring"
+            },
+            {
+                "icon": "money bill alternate",
+                "members": [
+                    {
+                        "enabled": true,
+                        "githubId": "45159564",
+                        "githubUsername": "fariz-sirajli",
+                        "name": "Fariz",
+                        "photo": "https://avatars1.githubusercontent.com/u/45159564?v=4",
+                        "slackId": "UE6MU0SQ3",
+                        "surname": "Sirajli"
+                    },
+                    {
+                        "enabled": true,
+                        "githubId": "44164074",
+                        "githubUsername": "zaliyev1994",
+                        "name": "Zaur",
+                        "photo": "https://avatars3.githubusercontent.com/u/44164074?v=4",
+                        "slackId": "UDEFBN221",
+                        "surname": "Aliyev"
+                    },
+                    {
+                        "enabled": true,
+                        "githubId": "42234308",
+                        "githubUsername": "AykhanAghazadaPB",
+                        "name": "Aykhan",
+                        "photo": "https://avatars0.githubusercontent.com/u/42234308?v=4",
+                        "slackId": "UAS7S2VFU",
+                        "surname": "Aghazada"
+                    }
+                ],
+                "name": "Salary Project"
+            },
+            {
+                "icon": "user secret",
+                "members": [
+                    {
+                        "enabled": true,
+                        "githubId": "15357881",
+                        "githubUsername": "amirashad",
+                        "name": "Rashad",
+                        "photo": "https://avatars2.githubusercontent.com/u/15357881?v=4",
+                        "slackId": "U9YU9U4QG",
+                        "surname": "Amirjanov"
+                    },
+                    {
+                        "enabled": true,
+                        "githubId": "46346417",
+                        "githubUsername": "IlqarMammadovPB",
+                        "name": "Ilgar",
+                        "photo": "https://avatars2.githubusercontent.com/u/46346417?v=4",
+                        "slackId": "UF6KYKKGX",
+                        "surname": "Mammadov"
+                    }
+                ],
+                "name": "Digital Platform"
             }
         ]
     },
@@ -165,15 +177,6 @@
             {
                 "icon": "playstation",
                 "members": [
-                    {
-                        "enabled": true,
-                        "githubId": "42234405",
-                        "githubUsername": "GGurbanov",
-                        "name": "Gurban",
-                        "photo": "https://avatars3.githubusercontent.com/u/42234405?v=4",
-                        "slackId": "UB01XJSKF",
-                        "surname": "Gurbanov"
-                    },
                     {
                         "enabled": true,
                         "githubId": "42234410",
@@ -242,6 +245,30 @@
                     }
                 ],
                 "name": "Factoring"
+            },
+            {
+                "icon": "money bill alternate",
+                "members": [
+                    {
+                        "enabled": true,
+                        "githubId": "42234405",
+                        "githubUsername": "GGurbanov",
+                        "name": "Gurban",
+                        "photo": "https://avatars3.githubusercontent.com/u/42234405?v=4",
+                        "slackId": "UB01XJSKF",
+                        "surname": "Gurbanov"
+                    },
+                    {
+                        "enabled": false,
+                        "githubId": null,
+                        "githubUsername": null,
+                        "name": "Mammad",
+                        "photo": "https://secure.gravatar.com/avatar/89471baadcdc9b53032c1dbcd3e92375.jpg?s=48&d=https%3A%2F%2Fa.slack-edge.com%2F00b63%2Fimg%2Favatars%2Fava_0006-48.png",
+                        "slackId": "UG4BSLWN6",
+                        "surname": "Mammadli"
+                    }
+                ],
+                "name": "Salary Project"
             }
         ]
     }

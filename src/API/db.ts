@@ -1,12 +1,23 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 
-import { FIRESTORE_CONFIG } from '../config';
+import { getEnvironment } from '../environment';
+import { IDBConfig } from '../models';
 
-firebase.initializeApp(FIRESTORE_CONFIG);
+let db: firebase.firestore.Firestore;
 
-// Initialize Cloud Firestore through Firebase
-export const db = firebase.firestore();
+export function getDBInstance (): firebase.firestore.Firestore {
+    if (!db) {
+        const env = getEnvironment();
+        const config: IDBConfig = {
+            apiKey: env.firebaseApiKey,
+            authDomain: env.firebaseAuthDomain,
+            projectId: env.firebaseProjectId,
+        };
 
-// Disable deprecated features
-db.settings({ timestampsInSnapshots: true });
+        firebase.initializeApp(config);
+        db = firebase.firestore();
+        db.settings({ timestampsInSnapshots: true });
+    }
+    return db;
+}

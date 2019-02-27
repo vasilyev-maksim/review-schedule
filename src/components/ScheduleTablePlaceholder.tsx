@@ -2,7 +2,7 @@ import { range } from 'lodash';
 import * as React from 'react';
 import { Icon, Placeholder, Table } from 'semantic-ui-react';
 
-import { DATE_FORMAT, PLACEHOLDER_SQUADS_COUNT } from '../config';
+import { PLACEHOLDER_SQUADS_COUNT, UI_DATE_FORMAT } from '../config';
 import { getCurrentDate, getWorkDaysRange } from '../utils';
 import { ScheduleTableFilter } from './ScheduleTableFilter';
 
@@ -39,7 +39,7 @@ export const ScheduleTablePlaceholder: React.SFC = () => {
                         days.map((day, i) => (
                             <Table.Row key={i}>
                                 <Table.Cell>
-                                    {day.format(DATE_FORMAT)}
+                                    {day.format(UI_DATE_FORMAT)}
                                 </Table.Cell>
                                 {
                                     squadsRange.map((_, j) => (

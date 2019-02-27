@@ -1,7 +1,7 @@
-import { environment } from '../environment';
+import { getEnvironment } from '../environment';
 import { APIImpl } from './API.impl';
 import { APIMock } from './API.mock';
 
-export const API = environment.mockAPI
+export const API = getEnvironment().mockAPI
     ? APIMock
     : APIImpl;

@@ -1,14 +1,9 @@
-import { environment } from './environment';
-import { IDBConfig, IReviewer } from './models';
+import { IReviewer } from './models';
 
 export const REFERENCE_POINT = '2019-01-09';
-export const DATE_FORMAT = 'DD MMM YYYY - dddd';
+export const UI_DATE_FORMAT = 'DD MMM YYYY - dddd';
+export const SERVER_DATE_FORMAT = 'YYYY-MM-DD HH:mm:ss';
 export const PLACEHOLDER_SQUADS_COUNT = 3;
-export const FIRESTORE_CONFIG: IDBConfig = {
-    apiKey: environment.firebaseApiKey,
-    authDomain: environment.firebaseAuthDomain,
-    projectId: environment.firebaseProjectId,
-};
 
 export const SELECTED_CAMP_COOKIE_KEY = 'reviewer-camp';
 export const AUTHORS: IReviewer[] = [

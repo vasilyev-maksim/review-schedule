@@ -12,14 +12,13 @@ export const scheduleService = {
         const days = getWorkDaysRange(moment(REFERENCE_POINT), end);
         const schedule = days.map((day, i) => {
             const reviewers = sortBy(
-                squads.map((squad) => getReviewer(squad, i)),
+                squads
+                    .map((squad) => getReviewer(squad, i))
+                    .filter(({ reviewer }) => Boolean(reviewer)),
                 (r) => r.squad.name
             );
 
-            return {
-                day,
-                reviewers,
-            };
+            return { day, reviewers };
         }).filter((reviewDay) => reviewDay.day >= start);
 
         return schedule;
