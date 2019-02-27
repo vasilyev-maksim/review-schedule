@@ -5,6 +5,8 @@ export const UI_DATE_FORMAT = 'DD MMM YYYY - dddd';
 export const SERVER_DATE_FORMAT = 'YYYY-MM-DD HH:mm:ss';
 export const PLACEHOLDER_SQUADS_COUNT = 3;
 
+export const SLACK_TEAM_ID = 'T9QT65P9R';
+
 export const SELECTED_CAMP_COOKIE_KEY = 'reviewer-camp';
 export const AUTHORS: IReviewer[] = [
     {
