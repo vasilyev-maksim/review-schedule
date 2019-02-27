@@ -13,7 +13,7 @@ export async function main (): Promise<any> {
             console.log(err);
         }
 
-        const camps: ICamp[] = JSON.parse(readFileSync('./tools/firebase.dump.json').toString());
+        const camps: ICamp[] = JSON.parse(readFileSync(__dirname + '/firebase.dump.json').toString());
         const db = getDBInstance();
         const requests = camps.map((camp) => db.collection('camps').add(camp));
 
