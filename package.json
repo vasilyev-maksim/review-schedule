@@ -16,7 +16,6 @@
         "firebase:read:staging": "dotenv -e .env.staging ts-node tools/firebase.read.ts",
         "firebase:write:prod": "firebase use prod && dotenv -e .env.production ts-node tools/firebase.write.ts",
         "firebase:write:staging": "firebase use staging && dotenv -e .env.staging ts-node tools/firebase.write.ts",
-        "find-users": "ts-node tools/findUsers.ts",
         "tools": "ts-node tools/cli.ts"
     },
     "dependencies": {
