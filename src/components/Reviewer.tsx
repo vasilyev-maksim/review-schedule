@@ -1,5 +1,6 @@
 import React from 'react';
 import { Header, Icon, Image } from 'semantic-ui-react';
+
 import { IReviewer } from '../models';
 
 interface IProps {

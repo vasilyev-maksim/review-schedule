@@ -3,10 +3,11 @@
 // tslint:disable:no-console
 // tslint:disable:object-literal-sort-keys
 
-import { writeFileSync } from 'fs';
 import * as inquirer from 'inquirer';
 import * as moment from 'moment';
 import * as ora from 'ora';
+
+import { writeFileSync } from 'fs';
 
 import { SERVER_DATE_FORMAT } from '../src/config';
 import { IReviewer } from '../src/models';

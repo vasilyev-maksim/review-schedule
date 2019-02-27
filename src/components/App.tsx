@@ -38,11 +38,13 @@ export class App extends React.Component<{}, IState> {
 
     public render (): JSX.Element {
         return (
-            <div style={{
-                display: 'flex',
-                flexDirection: 'column',
-                height: '100%',
-            }}>
+            <div
+                style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: '100%',
+                }}
+            >
                 <TestEnvIndicator />
                 <Container
                     style={{
