@@ -6,6 +6,7 @@ import { IReviewer, ISchedule } from '../models';
 import { isToday } from '../utils';
 import { Reviewer } from './Reviewer';
 import { ScheduleTableFilter } from './ScheduleTableFilter';
+import { ThemeConsumer } from './ThemeContext';
 
 interface IProps {
     schedule: ISchedule;
@@ -54,58 +55,66 @@ export class ScheduleTable extends React.Component<IProps, IState> {
                     />
                 </div>
 
-                <Table celled columns={(_squads.length + 1) as any}>
-                    <Table.Header className="mobile hidden">
-                        <Table.Row>
-                            <Table.HeaderCell>
-                                <Icon name="calendar alternate outline" /> Date
-                            </Table.HeaderCell>
-                            {
-                                _squads.map((squad) => (
-                                    <Table.HeaderCell key={squad.name}>
-                                        <Icon name={squad.icon} /> {squad.name}
-                                    </Table.HeaderCell>
-                                ))
-                            }
-                        </Table.Row>
-                    </Table.Header>
+                <ThemeConsumer>
+                    {({ darkTheme }) => (
+                        <Table
+                            celled
+                            columns={(_squads.length + 1) as any}
+                            inverted={darkTheme}
+                        >
+                            <Table.Header className="mobile hidden">
+                                <Table.Row>
+                                    <Table.HeaderCell>
+                                        <Icon name="calendar alternate outline" /> Date
+                                </Table.HeaderCell>
+                                    {
+                                        _squads.map((squad) => (
+                                            <Table.HeaderCell key={squad.name}>
+                                                <Icon name={squad.icon} /> {squad.name}
+                                            </Table.HeaderCell>
+                                        ))
+                                    }
+                                </Table.Row>
+                            </Table.Header>
 
-                    <Table.Body>
-                        {
-                            _schedule.map(
-                                ({ day, reviewers }) => (
-                                    <Table.Row
-                                        positive={isToday(day)}
-                                        key={day.unix()}
-                                    >
-                                        <Table.Cell>
-                                            {
-                                                isToday(day)
-                                                    ? (
-                                                        <Label color="green" ribbon>
-                                                            {day.format(UI_DATE_FORMAT)}
-                                                        </Label>
+                            <Table.Body>
+                                {
+                                    _schedule.map(
+                                        ({ day, reviewers }) => (
+                                            <Table.Row
+                                                positive={!darkTheme && isToday(day)}
+                                                key={day.unix()}
+                                            >
+                                                <Table.Cell>
+                                                    {
+                                                        isToday(day)
+                                                            ? (
+                                                                <Label color="green" ribbon>
+                                                                    {day.format(UI_DATE_FORMAT)}
+                                                                </Label>
+                                                            )
+                                                            : day.format(UI_DATE_FORMAT)
+                                                    }
+                                                </Table.Cell>
+                                                {
+                                                    reviewers.map(
+                                                        ({ reviewer }) => (
+                                                            <Table.Cell key={reviewer.slackId} selectable>
+                                                                <a href="#" onClick={() => this.handleReviewerClick(reviewer)}>
+                                                                    <Reviewer reviewer={reviewer} />
+                                                                </a>
+                                                            </Table.Cell>
+                                                        )
                                                     )
-                                                    : day.format(UI_DATE_FORMAT)
-                                            }
-                                        </Table.Cell>
-                                        {
-                                            reviewers.map(
-                                                ({ reviewer }) => (
-                                                    <Table.Cell key={reviewer.slackId} selectable>
-                                                        <a href="#" onClick={() => this.handleReviewerClick(reviewer)}>
-                                                            <Reviewer reviewer={reviewer} />
-                                                        </a>
-                                                    </Table.Cell>
-                                                )
-                                            )
-                                        }
-                                    </Table.Row>
-                                )
-                            )
-                        }
-                    </Table.Body>
-                </Table>
+                                                }
+                                            </Table.Row>
+                                        )
+                                    )
+                                }
+                            </Table.Body>
+                        </Table>
+                    )}
+                </ThemeConsumer>
             </>
         );
     }

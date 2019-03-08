@@ -1,11 +1,11 @@
-
 import * as Cookies from 'js-cookie';
-import Moment = require('moment');
 import { extendMoment } from 'moment-range';
 
 import { SELECTED_CAMP_COOKIE_KEY } from './config';
 import { getEnvironment } from './environment';
 import { ICamp } from './models';
+
+import Moment = require('moment');
 
 const moment = extendMoment(Moment);
 

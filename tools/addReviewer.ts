@@ -3,7 +3,6 @@
 // tslint:disable:no-console
 // tslint:disable:object-literal-sort-keys
 
-import { writeFileSync } from 'fs';
 import * as inquirer from 'inquirer';
 import * as moment from 'moment';
 import * as ora from 'ora';
@@ -13,7 +12,7 @@ import { IReviewer } from '../src/models';
 import { githubProvider } from './providers/githubProvider';
 import { IProvider } from './providers/models';
 import { slackProvider } from './providers/slackProvider';
-import { isSubstring } from './utils';
+import { isSubstring, writeOutputJsonToFile } from './utils';
 
 interface Indexer { [K: string]: any }
 type Template<T> = { [K in keyof T]: T[K] | undefined } & Indexer;
@@ -83,9 +82,7 @@ export async function main (): Promise<any> {
             }
         }
 
-        console.log();
-        console.log(reviewer);
-        writeFileSync('./tools/getReviewer.dump.json', JSON.stringify(reviewer, null, 4));
+        writeOutputJsonToFile('./tools/getReviewer.dump.json', reviewer);
     } catch (error) {
         console.error(error);
     }

@@ -32,15 +32,6 @@
                         "photo": "https://avatars1.githubusercontent.com/u/45560983?v=4",
                         "slackId": "UEJTF74EN",
                         "surname": "Alyarov"
-                    },
-                    {
-                        "enabled": true,
-                        "githubId": "46884462",
-                        "githubUsername": "fmusayev",
-                        "name": "Fuad",
-                        "photo": "https://avatars0.githubusercontent.com/u/46884462?v=4'",
-                        "slackId": "UFJJW4Y82",
-                        "surname": "Musayev"
                     }
                 ],
                 "name": "Daily Banking"
@@ -74,13 +65,7 @@
                         "photo": "https://avatars1.githubusercontent.com/u/42234297?v=4",
                         "slackId": "UBQA7CJBH",
                         "surname": "Bekirov"
-                    }
-                ],
-                "name": "Onboarding"
-            },
-            {
-                "icon": "shipping fast",
-                "members": [
+                    },
                     {
                         "enabled": true,
                         "githubId": "42234128",
@@ -89,27 +74,9 @@
                         "photo": "https://avatars2.githubusercontent.com/u/42234128?v=4",
                         "slackId": "UAZ5YHMME",
                         "surname": "Mahmudov"
-                    },
-                    {
-                        "enabled": true,
-                        "githubId": "35254859",
-                        "githubUsername": "rashad-farajullayev",
-                        "name": "Rashad",
-                        "photo": "https://avatars3.githubusercontent.com/u/35254859?v=4",
-                        "slackId": "UA1MVSKD0",
-                        "surname": "Farajullayev"
-                    },
-                    {
-                        "enabled": true,
-                        "githubId": "42934926",
-                        "githubUsername": "mimanbayli",
-                        "name": "Murad",
-                        "photo": "https://avatars3.githubusercontent.com/u/42934926?v=4",
-                        "slackId": "UCKG67XSM",
-                        "surname": "Imanbayli"
                     }
                 ],
-                "name": "Factoring"
+                "name": "Onboarding"
             },
             {
                 "icon": "money bill alternate",
@@ -164,6 +131,24 @@
                         "photo": "https://avatars2.githubusercontent.com/u/46346417?v=4",
                         "slackId": "UF6KYKKGX",
                         "surname": "Mammadov"
+                    },
+                    {
+                        "enabled": true,
+                        "githubId": "46884462",
+                        "githubUsername": "fmusayev",
+                        "name": "Fuad",
+                        "photo": "https://avatars0.githubusercontent.com/u/46884462?v=4'",
+                        "slackId": "UFJJW4Y82",
+                        "surname": "Musayev"
+                    },
+                    {
+                        "enabled": true,
+                        "githubId": "42934926",
+                        "githubUsername": "mimanbayli",
+                        "name": "Murad",
+                        "photo": "https://avatars3.githubusercontent.com/u/42934926?v=4",
+                        "slackId": "UCKG67XSM",
+                        "surname": "Imanbayli"
                     }
                 ],
                 "name": "Digital Platform"
@@ -187,13 +172,14 @@
                         "surname": "Vasilyev"
                     },
                     {
+                        "createdOn": "2019-03-07 12:17:58",
                         "enabled": true,
-                        "githubId": "45932748",
-                        "githubUsername": "lalaguliyeva",
-                        "name": "Lala",
-                        "photo": "https://avatars2.githubusercontent.com/u/45932748?v=4",
-                        "slackId": "UEVECLTMY",
-                        "surname": "Guliyeva"
+                        "githubId": "48205235",
+                        "githubUsername": "murad-guliyev-pb",
+                        "name": "Murad",
+                        "photo": "https://avatars0.githubusercontent.com/u/48205235?v=4",
+                        "slackId": "UGMK52WKT",
+                        "surname": "Guliyev"
                     }
                 ],
                 "name": "Daily Banking"
@@ -218,13 +204,7 @@
                         "photo": "https://avatars2.githubusercontent.com/u/26136461?v=4",
                         "slackId": "UDJFRD2V9",
                         "surname": "Huseynov"
-                    }
-                ],
-                "name": "Onboarding"
-            },
-            {
-                "icon": "shipping fast",
-                "members": [
+                    },
                     {
                         "enabled": true,
                         "githubId": "42234413",
@@ -233,18 +213,9 @@
                         "photo": "https://avatars2.githubusercontent.com/u/42234413?v=4",
                         "slackId": "UBH7N6TEY",
                         "surname": "Hummatov"
-                    },
-                    {
-                        "enabled": true,
-                        "githubId": "42533732",
-                        "githubUsername": "jamil-alisgandarov",
-                        "name": "Jamil",
-                        "photo": "https://avatars0.githubusercontent.com/u/42533732?v=4",
-                        "slackId": "UCCPL91HC",
-                        "surname": "Alisgandarov"
                     }
                 ],
-                "name": "Factoring"
+                "name": "Onboarding"
             },
             {
                 "icon": "money bill alternate",
@@ -259,11 +230,30 @@
                         "surname": "Gurbanov"
                     },
                     {
-                        "enabled": false,
-                        "githubId": null,
-                        "githubUsername": null,
+                        "enabled": true,
+                        "githubId": "45932748",
+                        "githubUsername": "lalaguliyeva",
+                        "name": "Lala",
+                        "photo": "https://avatars2.githubusercontent.com/u/45932748?v=4",
+                        "slackId": "UEVECLTMY",
+                        "surname": "Guliyeva"
+                    },
+                    {
+                        "enabled": true,
+                        "githubId": "42533732",
+                        "githubUsername": "jamil-alisgandarov",
+                        "name": "Jamil",
+                        "photo": "https://avatars0.githubusercontent.com/u/42533732?v=4",
+                        "slackId": "UCCPL91HC",
+                        "surname": "Alisgandarov"
+                    },
+                    {
+                        "createdOn": "2019-03-07 12:19:59",
+                        "enabled": true,
+                        "githubId": "47442970",
+                        "githubUsername": "mammadmammadli",
                         "name": "Mammad",
-                        "photo": "https://secure.gravatar.com/avatar/89471baadcdc9b53032c1dbcd3e92375.jpg?s=48&d=https%3A%2F%2Fa.slack-edge.com%2F00b63%2Fimg%2Favatars%2Fava_0006-48.png",
+                        "photo": "https://avatars0.githubusercontent.com/u/47442970?v=4",
                         "slackId": "UG4BSLWN6",
                         "surname": "Mammadli"
                     }

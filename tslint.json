@@ -3,7 +3,8 @@
         "tslint:latest",
         "tslint-eslint-rules",
         "tslint-react",
-        "tslint-config-airbnb"
+        "tslint-config-airbnb",
+        "tslint-import-group-ordering"
     ],
     "rules": {
         "object-shorthand-properties-first": false,
@@ -43,6 +44,48 @@
         "curly": true,
         "eofline": true,
         "forin": false,
+        "import-group-ordering": {
+            "severity": "error",
+            "options": {
+                "imports-groups": [
+                    {
+                        "name": "dependencies"
+                    },
+                    {
+                        "name": "global"
+                    },
+                    {
+                        "name": "relative"
+                    },
+                    {
+                        "name": "styling"
+                    }
+                ],
+                "matching-rules": [
+                    {
+                        "type": "project",
+                        "matches": ".\\.s?css$",
+                        "imports-group": "styling"
+                    },
+                    {
+                        "type": "dependencies",
+                        "imports-group": "dependencies",
+                        "disable-native-nodejs-modules": true,
+                        "from-package.json": true
+                    },
+                    {
+                        "type": "project",
+                        "matches": "^(.\/|..\/)",
+                        "imports-group": "relative"
+                    },
+                    {
+                        "type": "project",
+                        "matches": "^[a-zA-Z0-9]+",
+                        "imports-group": "global"
+                    }
+                ]
+            }
+        },
         "import-name": false,
         "indent": [
             true,
@@ -52,6 +95,12 @@
         "interface-name": [
             true,
             "always-prefix"
+        ],
+        "import-max-length": [
+            true,
+            120,
+            85,
+            3
         ],
         "jsdoc-format": true,
         "jsx-boolean-value": false,
@@ -167,5 +216,8 @@
             "check-type",
             "check-typecast"
         ]
-    }
+    },
+    "rulesDirectory": [
+        "tools/linterRules"
+    ]
 }

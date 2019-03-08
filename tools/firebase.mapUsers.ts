@@ -1,7 +1,8 @@
-import { readFileSync, writeFileSync } from 'fs';
+import { readFileSync } from 'fs';
 
 import { ICamp } from '../src/models';
 import { githubProvider } from './providers/githubProvider';
+import { writeOutputJsonToFile } from './utils';
 
 async function main (): Promise<any> {
     const camps: ICamp[] = JSON.parse(readFileSync('./tools/firebase.dump.json').toString());
@@ -33,7 +34,7 @@ async function main (): Promise<any> {
         };
     });
 
-    writeFileSync('./tools/firebase.dump.json', JSON.stringify(updatedCamps, null, 4));
+    writeOutputJsonToFile('./tools/firebase.dump.json', updatedCamps);
 }
 
 main();

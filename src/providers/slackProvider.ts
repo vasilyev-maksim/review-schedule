@@ -1,7 +1,6 @@
+import { SLACK_TEAM_ID } from '../config';
 import { IReviewer } from '../models';
 import { ILink, IProvider } from './models';
-
-export const SLACK_TEAM_ID = 'T9QT65P9R';
 
 export const slackProvider: IProvider = {
     getLink (reviewer: IReviewer): ILink {

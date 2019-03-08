@@ -1,5 +1,17 @@
+body {
+    display: flex;
+    flex-direction: column;
+}
+
 #app {
-    height: 100%;
+    flex-grow: 1;
+}
+
+.theme-switch {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
 }
 
 .footer {
