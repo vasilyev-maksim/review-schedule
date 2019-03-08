@@ -11,6 +11,7 @@ import { ReviewersOfTheDay } from './ReviewersOfTheDay';
 import { ReviewersOfTheDayPlaceholder } from './ReviewersOfTheDayPlaceholder';
 import { ScheduleTable } from './ScheduleTable';
 import { ScheduleTablePlaceholder } from './ScheduleTablePlaceholder';
+import { ThemeSwitch } from './ThemeSwitch';
 import { WeekendMessage } from './WeekendMessage';
 
 interface IProps {
@@ -30,6 +31,7 @@ export const SchedulePage: React.SFC<IProps> = ({ camps, loading }) => {
                             <Header />
                         </Grid.Column>
                         <Grid.Column>
+                            <ThemeSwitch />
                             <CampMenu />
                         </Grid.Column>
                     </Grid.Row>
@@ -78,6 +80,7 @@ export const SchedulePage: React.SFC<IProps> = ({ camps, loading }) => {
                                             <Header />
                                         </Grid.Column>
                                         <Grid.Column>
+                                            <ThemeSwitch />
                                             <CampMenu
                                                 currentCampName={currentCampName}
                                                 camps={camps}
