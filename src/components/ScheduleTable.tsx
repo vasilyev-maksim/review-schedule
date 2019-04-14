@@ -1,19 +1,22 @@
+import { sortBy } from 'lodash';
 import * as React from 'react';
 import { Icon, Label, Table } from 'semantic-ui-react';
 
 import { UI_DATE_FORMAT } from '../config';
-import { IReviewer, ISchedule } from '../models';
-import { isToday } from '../utils';
-import { Reviewer } from './Reviewer';
+import { IMember, ISquad } from '../models';
+import { IScheduleService } from '../services/schedule/models';
+import { getCurrentDate, isToday } from '../utils';
+import { MemberView } from './MemberView';
 import { ScheduleTableFilter } from './ScheduleTableFilter';
 import { ThemeConsumer } from './ThemeContext';
 
 interface IProps {
-    schedule: ISchedule;
+    squads: ISquad[];
+    scheduleService: IScheduleService;
 }
 
 interface IState {
-    filteredBy: IReviewer | null;
+    filteredBy: IMember | null;
 }
 
 export class ScheduleTable extends React.Component<IProps, IState> {
@@ -21,36 +24,53 @@ export class ScheduleTable extends React.Component<IProps, IState> {
         filteredBy: null,
     };
 
-    private handleReviewerClick = (reviewer: IReviewer): void => {
-        this.setState({ filteredBy: reviewer });
+    private handleMemberClick = (member: IMember): void => {
+        this.setState({ filteredBy: member });
     }
 
     private handleFilterClear = () => {
         this.setState({ filteredBy: null });
     }
 
-    public render (): JSX.Element {
-        const { schedule } = this.props;
+    private generateSchedule = (squads: ISquad[]) => {
+        const { scheduleService } = this.props;
+        const start = getCurrentDate().startOf('month');
+        const end = getCurrentDate().endOf('month');
 
-        const _schedule = schedule
-            ? schedule.filter(
-                (day) => (
+        const squadSchedules = squads.map((squad) =>
+            scheduleService.getSchedule(squad.members, start, end)
+        );
+
+        const schedule = scheduleService.getDaysRange(start, end)
+            .map((day) => {
+                const members = squadSchedules.map((squadSchedule) => {
+                    const scheduleDay = squadSchedule.find(_scheduleDay => _scheduleDay.day.isSame(day));
+                    return scheduleDay ? scheduleDay.member : null;
+                });
+                return { day, members };
+            })
+            .filter(({ members }) =>
+                // do not show day with no members at all
+                members.filter(Boolean).length !== 0 &&
+                // filtration by concrete member
+                (
                     !this.state.filteredBy ||
-                    day.reviewers.some(
-                        ({ reviewer }) => reviewer === this.state.filteredBy
-                    )
+                    members.some((member) => member === this.state.filteredBy)
                 )
-            )
-            : [];
-        const _squads = _schedule.length
-            ? _schedule[0].reviewers.map((reviewer) => reviewer.squad)
-            : [];
+            );
+
+        return schedule;
+    }
+
+    public render (): JSX.Element {
+        const sortedSquads = sortBy(this.props.squads, (squad) => squad.name);
+        const schedule = this.generateSchedule(sortedSquads);
 
         return (
             <>
                 <div style={{ textAlign: 'right' }}>
                     <ScheduleTableFilter
-                        reviewer={this.state.filteredBy}
+                        memeber={this.state.filteredBy}
                         onClear={this.handleFilterClear}
                     />
                 </div>
@@ -59,7 +79,7 @@ export class ScheduleTable extends React.Component<IProps, IState> {
                     {({ darkTheme }) => (
                         <Table
                             celled
-                            columns={(_squads.length + 1) as any}
+                            columns={(sortedSquads.length + 1) as any}
                             inverted={darkTheme}
                         >
                             <Table.Header className="mobile hidden">
@@ -68,7 +88,7 @@ export class ScheduleTable extends React.Component<IProps, IState> {
                                         <Icon name="calendar alternate outline" /> Date
                                 </Table.HeaderCell>
                                     {
-                                        _squads.map((squad) => (
+                                        sortedSquads.map((squad) => (
                                             <Table.HeaderCell key={squad.name}>
                                                 <Icon name={squad.icon} /> {squad.name}
                                             </Table.HeaderCell>
@@ -79,8 +99,8 @@ export class ScheduleTable extends React.Component<IProps, IState> {
 
                             <Table.Body>
                                 {
-                                    _schedule.map(
-                                        ({ day, reviewers }) => (
+                                    schedule.map(
+                                        ({ day, members }) => (
                                             <Table.Row
                                                 positive={!darkTheme && isToday(day)}
                                                 key={day.unix()}
@@ -97,12 +117,14 @@ export class ScheduleTable extends React.Component<IProps, IState> {
                                                     }
                                                 </Table.Cell>
                                                 {
-                                                    reviewers.map(
-                                                        ({ reviewer }) => (
-                                                            <Table.Cell key={reviewer.slackId} selectable>
-                                                                <a href="#" onClick={() => this.handleReviewerClick(reviewer)}>
-                                                                    <Reviewer reviewer={reviewer} />
-                                                                </a>
+                                                    members.map(
+                                                        (member, i) => (
+                                                            <Table.Cell key={member ? member.slackId : i} selectable>
+                                                                {member && (
+                                                                    <a href="#" onClick={() => this.handleMemberClick(member)}>
+                                                                        <MemberView member={member} />
+                                                                    </a>
+                                                                )}
                                                             </Table.Cell>
                                                         )
                                                     )

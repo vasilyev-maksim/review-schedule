@@ -3,14 +3,19 @@ import * as React from 'react';
 import { Icon, Placeholder, Table } from 'semantic-ui-react';
 
 import { PLACEHOLDER_SQUADS_COUNT, UI_DATE_FORMAT } from '../config';
-import { getCurrentDate, getWorkDaysRange } from '../utils';
+import { IScheduleService } from '../services/schedule/models';
+import { getCurrentDate } from '../utils';
 import { ScheduleTableFilter } from './ScheduleTableFilter';
 import { ThemeConsumer } from './ThemeContext';
 
-export const ScheduleTablePlaceholder: React.SFC = () => {
+interface IProps {
+    scheduleService: IScheduleService;
+}
+
+export const ScheduleTablePlaceholder: React.SFC<IProps> = ({ scheduleService }) => {
     const start = getCurrentDate().startOf('month');
     const end = getCurrentDate().endOf('month');
-    const days = getWorkDaysRange(start, end);
+    const days = scheduleService.getDaysRange(start, end);
     const squadsRange = range(0, PLACEHOLDER_SQUADS_COUNT);
 
     return (

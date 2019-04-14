@@ -1,10 +1,10 @@
-import { IReviewer } from '../models';
+import { IMember } from '../models';
 import { ILink, IProvider } from './models';
 
 export const githubProvider: IProvider = {
-    getLink (reviewer: IReviewer): ILink {
+    getLink (member: IMember): ILink {
         return {
-            href: `https://github.com/${reviewer.githubUsername}`,
+            href: `https://github.com/${member.githubUsername}`,
             target: '_target'
         };
     }

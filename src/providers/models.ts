@@ -1,4 +1,4 @@
-import { IReviewer } from '../models';
+import { IMember } from '../models';
 
 export interface ILink {
     href: string;
@@ -6,5 +6,5 @@ export interface ILink {
 }
 
 export interface IProvider {
-    getLink (reviewer: IReviewer): ILink;
+    getLink (member: IMember): ILink;
 }

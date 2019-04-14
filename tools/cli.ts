@@ -3,13 +3,13 @@
 
 import * as inquirer from 'inquirer';
 
-import { main as addReviewer } from './addReviewer';
+import { main as addMember } from './addMember';
 import { main as firebaseRead } from './firebase.read';
 import { main as firebaseWrite } from './firebase.write';
 import { setupEnvironment } from './utils';
 
 enum Command {
-    AddReviewer = 'Add reviewer',
+    AddMember = 'Add member',
     FirebaseRead = 'Read from firebase',
     FirebaseWrite = 'Write to firebase',
 }
@@ -24,7 +24,7 @@ async function main (): Promise<void> {
             name: 'command',
             message: 'Select a command',
             choices: [
-                Command.AddReviewer,
+                Command.AddMember,
                 Command.FirebaseRead,
                 Command.FirebaseWrite,
             ],
@@ -32,8 +32,8 @@ async function main (): Promise<void> {
     );
 
     switch (command) {
-        case Command.AddReviewer:
-            return addReviewer();
+        case Command.AddMember:
+            return addMember();
         case Command.FirebaseRead:
             await setupEnvironment();
             return firebaseRead();

@@ -132,7 +132,6 @@
         "no-eval": true,
         "no-inferrable-types": false,
         "no-internal-module": true,
-        "no-parameter-properties": true,
         "no-require-imports": false,
         "no-shadowed-variable": true,
         "no-string-literal": true,

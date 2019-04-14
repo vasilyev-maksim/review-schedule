@@ -6,7 +6,7 @@ import { PLACEHOLDER_SQUADS_COUNT, UI_DATE_FORMAT } from '../config';
 import { getCurrentDate } from '../utils';
 import { ThemeConsumer } from './ThemeContext';
 
-export const ReviewersOfTheDayPlaceholder: React.SFC = () => {
+export const MembersOfTheDayPlaceholder: React.SFC = () => {
     const today = getCurrentDate();
     const squadsRange = range(0, PLACEHOLDER_SQUADS_COUNT);
 

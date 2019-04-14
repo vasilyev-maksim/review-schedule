@@ -1,28 +1,34 @@
+import { sortBy } from 'lodash';
 import * as React from 'react';
 import { Header, Table } from 'semantic-ui-react';
 
 import { UI_DATE_FORMAT } from '../config';
 import { Provider } from '../enums';
-import { ISchedule } from '../models';
-import { isToday } from '../utils';
-import { Reviewer } from './Reviewer';
-import { ReviewerLink } from './ReviewerLink';
+import { ISquad } from '../models';
+import { IScheduleService } from '../services/schedule/models';
+import { getCurrentDate } from '../utils';
+import { MemberLink } from './MemberLink';
+import { MemberView } from './MemberView';
 import { ThemeConsumer } from './ThemeContext';
 
 interface IProps {
-    schedule: ISchedule;
+    squads: ISquad[];
+    scheduleService: IScheduleService;
 }
 
-export const ReviewersOfTheDay: React.SFC<IProps> = ({ schedule }) => {
-    const today = schedule.find(({ day }) => isToday(day));
-    return today
+export const MembersOfTheDay: React.SFC<IProps> = ({ squads, scheduleService }) => {
+    const today = getCurrentDate().startOf('day');
+    const members = sortBy(squads, (squad) => squad.name)
+        .map((squad) => scheduleService.getSchedule(squad.members, today)[0].member);
+
+    return members.length
         ? (
             <ThemeConsumer>
                 {({ darkTheme }) => (
                     <Table
                         inverted={darkTheme}
                         celled
-                        columns={(today.reviewers.length + 1) as any}
+                        columns={(members.length + 1) as any}
                         color={darkTheme ? 'black' : 'green'}
                     >
                         <Table.Body>
@@ -32,24 +38,24 @@ export const ReviewersOfTheDay: React.SFC<IProps> = ({ schedule }) => {
                                         <Header.Content>
                                             Today
                                         <Header.Subheader>
-                                                {today.day.format(UI_DATE_FORMAT)}
+                                                {today.format(UI_DATE_FORMAT)}
                                             </Header.Subheader>
                                         </Header.Content>
                                     </Header>
                                 </Table.Cell>
                                 {
-                                    today.reviewers.map(
-                                        ({ reviewer }) => (
-                                            <Table.Cell key={reviewer.slackId} selectable>
-                                                <ReviewerLink
-                                                    reviewer={reviewer}
+                                    members.map(
+                                        (member) => (
+                                            <Table.Cell key={member.slackId} selectable>
+                                                <MemberLink
+                                                    member={member}
                                                     provider={Provider.Slack}
                                                 >
-                                                    <Reviewer
-                                                        reviewer={reviewer}
+                                                    <MemberView
+                                                        member={member}
                                                         todayMode={true}
                                                     />
-                                                </ReviewerLink>
+                                                </MemberLink>
                                             </Table.Cell>
                                         )
                                     )

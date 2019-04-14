@@ -1,16 +1,16 @@
 import * as React from 'react';
 import { Label } from 'semantic-ui-react';
 
-import { IReviewer } from '../models';
+import { IMember } from '../models';
 import { ThemeConsumer } from './ThemeContext';
 
 interface IProps {
-    reviewer?: IReviewer | null;
+    memeber?: IMember | null;
     onClear?: () => void;
 }
 
-export const ScheduleTableFilter: React.SFC<IProps> = ({ reviewer, onClear }) => {
-    const _reviewer: IReviewer = reviewer || ({} as any);
+export const ScheduleTableFilter: React.SFC<IProps> = ({ memeber: member, onClear }) => {
+    const _member: IMember = member || ({} as any);
 
     return (
         <ThemeConsumer>
@@ -21,11 +21,11 @@ export const ScheduleTableFilter: React.SFC<IProps> = ({ reviewer, onClear }) =>
                     color={darkTheme ? 'black' : undefined}
                     onRemove={onClear}
                     removeIcon="delete"
-                    style={{ visibility: reviewer ? 'visible' : 'hidden' }}
+                    style={{ visibility: member ? 'visible' : 'hidden' }}
                     content={(
                         <>
-                            <img src={_reviewer.photo} />
-                            {_reviewer.name} {_reviewer.surname}
+                            <img src={_member.photo} />
+                            {_member.name} {_member.surname}
                         </>
                     )}
                 />
