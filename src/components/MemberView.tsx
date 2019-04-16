@@ -1,16 +1,16 @@
 import React from 'react';
 import { Header, Icon, Image } from 'semantic-ui-react';
 
-import { IReviewer } from '../models';
+import { IMember } from '../models';
 import { ThemeConsumer } from './ThemeContext';
 
 interface IProps {
-    reviewer: IReviewer;
+    member: IMember;
     todayMode?: boolean;
 }
 
-export const Reviewer: React.SFC<IProps> = ({ reviewer, todayMode }) => (
-    <div className="reviewer">
+export const MemberView: React.SFC<IProps> = ({ member, todayMode }) => (
+    <div className="member">
         <div className="body">
             <ThemeConsumer>
                 {({ darkTheme }) => (
@@ -20,14 +20,14 @@ export const Reviewer: React.SFC<IProps> = ({ reviewer, todayMode }) => (
                         inverted={darkTheme}
                     >
                         <Image
-                            src={reviewer.photo}
+                            src={member.photo}
                             rounded
                             size={todayMode ? 'large' : 'mini'}
                         />
                         <Header.Content>
-                            {reviewer.name}
+                            {member.name}
                             <Header.Subheader>
-                                {reviewer.surname}
+                                {member.surname}
                             </Header.Subheader>
                         </Header.Content>
                     </Header>

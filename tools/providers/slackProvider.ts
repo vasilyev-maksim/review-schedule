@@ -3,7 +3,7 @@
 import axios from 'axios';
 
 import { Provider } from '../../src/enums';
-import { IReviewer } from '../../src/models';
+import { IMember } from '../../src/models';
 import { isSubstring } from '../utils';
 import { IProvider } from './models';
 
@@ -54,16 +54,15 @@ class SlackProvider implements IProvider<ISlackUser> {
         }
     }
 
-    public convertToReviewer (user: ISlackUser): Partial<IReviewer> {
+    public convertToMember (user: ISlackUser): Partial<IMember> {
         const [name, surname] = user.profile.real_name.split(' ');
-        const reviewer: Partial<IReviewer> = {
-            enabled: true,
+        const member: Partial<IMember> = {
             name,
             photo: user.profile.image_48,
             slackId: user.id,
             surname,
         };
-        return reviewer;
+        return member;
     }
 }
 

@@ -3,7 +3,7 @@
 import axios from 'axios';
 
 import { Provider } from '../../src/enums';
-import { IReviewer } from '../../src/models';
+import { IMember } from '../../src/models';
 import { isSubstring } from '../utils';
 import { IProvider } from './models';
 
@@ -30,7 +30,7 @@ class GithubProvider implements IProvider<IGithubUser> {
         )).data;
     }
 
-    public convertToReviewer (user: IGithubUser): Partial<IReviewer> {
+    public convertToMember (user: IGithubUser): Partial<IMember> {
         return {
             githubId: user.id.toString(),
             githubUsername: user.login,

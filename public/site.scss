@@ -44,7 +44,7 @@ body {
     display: inline-block;
 }
 
-.reviewer {
+.member {
     display: flex;
 
     .body {
@@ -57,6 +57,6 @@ body {
     }
 }
 
-td:hover .reviewer .actions {
+td:hover .member .actions {
     display: block !important;
 }

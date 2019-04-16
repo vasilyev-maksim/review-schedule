@@ -8,7 +8,7 @@ import * as moment from 'moment';
 import * as ora from 'ora';
 
 import { SERVER_DATE_FORMAT } from '../src/config';
-import { IReviewer } from '../src/models';
+import { IMember } from '../src/models';
 import { githubProvider } from './providers/githubProvider';
 import { IProvider } from './providers/models';
 import { slackProvider } from './providers/slackProvider';
@@ -20,7 +20,7 @@ type Template<T> = { [K in keyof T]: T[K] | undefined } & Indexer;
 export async function main (): Promise<any> {
     try {
         const providers: IProvider<any>[] = [githubProvider, slackProvider];
-        const reviewer: Template<IReviewer> = {
+        const member: Template<IMember> = {
             githubId: undefined,
             githubUsername: undefined,
             name: undefined,
@@ -31,7 +31,7 @@ export async function main (): Promise<any> {
             createdOn: moment().format(SERVER_DATE_FORMAT),
         };
 
-        const partials: Array<Partial<IReviewer> & Indexer> = [];
+        const partials: Array<Partial<IMember> & Indexer> = [];
 
         for (const provider of providers) {
             const providerName = provider.getProviderName();
@@ -55,13 +55,13 @@ export async function main (): Promise<any> {
             } as any));
 
             const user = provider.findUserByName(query, allUsers);
-            const partial = provider.convertToReviewer(user);
+            const partial = provider.convertToMember(user);
 
             partials.push(partial);
         }
 
-        for (const prop in reviewer) {
-            if (!reviewer[prop]) {
+        for (const prop in member) {
+            if (!member[prop]) {
                 const choices = partials
                     .map((partial) => partial[prop])
                     .filter(Boolean);
@@ -78,11 +78,11 @@ export async function main (): Promise<any> {
                     value = choices[0];
                 }
 
-                reviewer[prop] = value;
+                member[prop] = value;
             }
         }
 
-        writeOutputJsonToFile('./tools/getReviewer.dump.json', reviewer);
+        writeOutputJsonToFile('./tools/getMember.dump.json', member);
     } catch (error) {
         console.error(error);
     }

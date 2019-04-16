@@ -3,12 +3,12 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import { Grid } from 'semantic-ui-react';
 
 import { ICamp } from '../models';
-import { scheduleService } from '../services/scheduleService';
+import { reviewService } from '../services/schedule/reviewService';
 import { getCurrentDate, getDefaultCampName, isWorkingDay } from '../utils';
 import { CampMenu } from './CampMenu';
 import { Header } from './Header';
-import { ReviewersOfTheDay } from './ReviewersOfTheDay';
-import { ReviewersOfTheDayPlaceholder } from './ReviewersOfTheDayPlaceholder';
+import { MembersOfTheDay } from './MembersOfTheDay';
+import { MembersOfTheDayPlaceholder } from './MembersOfTheDayPlaceholder';
 import { ScheduleTable } from './ScheduleTable';
 import { ScheduleTablePlaceholder } from './ScheduleTablePlaceholder';
 import { ThemeSwitch } from './ThemeSwitch';
@@ -38,10 +38,10 @@ export const SchedulePage: React.SFC<IProps> = ({ camps, loading }) => {
                 </Grid>
                 {
                     isTodayWorkingDay
-                        ? <ReviewersOfTheDayPlaceholder />
+                        ? <MembersOfTheDayPlaceholder />
                         : <WeekendMessage />
                 }
-                <ScheduleTablePlaceholder />
+                <ScheduleTablePlaceholder scheduleService={reviewService} />
             </>
         );
     } else {
@@ -68,9 +68,7 @@ export const SchedulePage: React.SFC<IProps> = ({ camps, loading }) => {
                             return <Redirect to={'/schedule/' + defaultCampName} />;
                         }
 
-                        const schedule = currentCamp && currentCamp.squads
-                            ? scheduleService.generateSchedule(currentCamp.squads)
-                            : [];
+                        const squads = currentCamp && currentCamp.squads || [];
 
                         return (
                             <>
@@ -90,10 +88,10 @@ export const SchedulePage: React.SFC<IProps> = ({ camps, loading }) => {
                                 </Grid>
                                 {
                                     isTodayWorkingDay
-                                        ? <ReviewersOfTheDay schedule={schedule} />
+                                        ? <MembersOfTheDay squads={squads} scheduleService={reviewService} />
                                         : <WeekendMessage />
                                 }
-                                <ScheduleTable schedule={schedule} />
+                                <ScheduleTable squads={squads} scheduleService={reviewService} />
                             </>
                         );
                     }}

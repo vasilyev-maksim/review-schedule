@@ -1,17 +1,17 @@
 import * as React from 'react';
 
 import { Provider } from '../enums';
-import { IReviewer } from '../models';
+import { IMember } from '../models';
 import { getProvider } from '../providers/utils';
 
 interface IProps {
-    reviewer: IReviewer;
+    member: IMember;
     provider: Provider;
     className?: string;
 }
 
-export const ReviewerLink: React.SFC<IProps> = ({ children, reviewer, provider, className }) => {
-    const { href, target } = getProvider(provider).getLink(reviewer);
+export const MemberLink: React.SFC<IProps> = ({ children, member, provider, className }) => {
+    const { href, target } = getProvider(provider).getLink(member);
 
     return (
         <a

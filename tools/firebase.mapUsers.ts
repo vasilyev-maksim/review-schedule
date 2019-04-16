@@ -16,12 +16,12 @@ async function main (): Promise<any> {
                     ...squad,
                     members: squad.members.map((member) => {
                         const githubUser = githubUsers.find((user) => {
-                            const reviewer = githubProvider.convertToReviewer(user);
+                            const _member = githubProvider.convertToMember(user);
 
                             return Boolean(
                                 user
-                                && reviewer.githubId
-                                && reviewer.githubId.toString() === member.githubId
+                                && _member.githubId
+                                && _member.githubId.toString() === member.githubId
                             );
                         });
 
