@@ -10,7 +10,6 @@ export const ThemeSwitch: React.SFC = () => {
                 <Menu
                     inverted={darkTheme}
                     compact
-                    floated="right"
                 >
                     <Menu.Item onClick={toggleDarkTheme}>
                         <Icon fitted name={darkTheme ? 'sun' : 'moon'} />

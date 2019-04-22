@@ -31,18 +31,16 @@ export const MembersOfTheDayPlaceholder: React.SFC = () => {
                                     </Header.Content>
                                 </Header>
                             </Table.Cell>
-                            {
-                                squadsRange.map((_, j) => (
-                                    <Table.Cell key={j}>
-                                        <Placeholder inverted={darkTheme}>
-                                            <Placeholder.Header as="h5" image>
-                                                <Placeholder.Line />
-                                                <Placeholder.Line />
-                                            </Placeholder.Header>
-                                        </Placeholder>
-                                    </Table.Cell>
-                                ))
-                            }
+                            {squadsRange.map((_, j) => (
+                                <Table.Cell key={j}>
+                                    <Placeholder inverted={darkTheme}>
+                                        <Placeholder.Header as="h5" image>
+                                            <Placeholder.Line />
+                                            <Placeholder.Line />
+                                        </Placeholder.Header>
+                                    </Placeholder>
+                                </Table.Cell>
+                            ))}
                         </Table.Row>
                     </Table.Body>
                 </Table>

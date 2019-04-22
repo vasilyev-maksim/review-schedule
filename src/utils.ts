@@ -9,21 +9,11 @@ import Moment = require('moment');
 
 const moment = extendMoment(Moment);
 
-export function getWorkDaysRange (start: Moment.Moment, end: Moment.Moment): Moment.Moment[] {
-    const days = moment.range(start, end);
-    const workingDays = Array.from(days.by('day')).filter(isWorkingDay);
-    return workingDays;
-}
-
 export function getCurrentDate (): Moment.Moment {
     const env = getEnvironment();
     return env.mockCurrentDate
         ? moment(env.mockCurrentDate)
         : moment();
-}
-
-export function isWorkingDay (day: Moment.Moment): boolean {
-    return day.isoWeekday() !== 6 && day.isoWeekday() !== 7;
 }
 
 export function isToday (date: Moment.Moment): boolean {
@@ -38,7 +28,7 @@ export function saveSelectedCampToCookies (camp: ICamp): void {
     Cookies.set(SELECTED_CAMP_COOKIE_KEY, camp.name);
 }
 
-export function getDefaultCampName (camps: ICamp[] | null): string | null {
+export function getDefaultCampName (camps: ICamp[] | null | undefined): string | null {
     let defaultCampName: string | null = null;
 
     if (camps && camps.length) {

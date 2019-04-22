@@ -1,25 +1,20 @@
-import { sortBy } from 'lodash';
 import * as React from 'react';
 import { Header, Table } from 'semantic-ui-react';
 
 import { UI_DATE_FORMAT } from '../config';
 import { Provider } from '../enums';
-import { ISquad } from '../models';
-import { IScheduleService } from '../services/schedule/models';
+import { IMember } from '../models';
 import { getCurrentDate } from '../utils';
 import { MemberLink } from './MemberLink';
 import { MemberView } from './MemberView';
 import { ThemeConsumer } from './ThemeContext';
 
 interface IProps {
-    squads: ISquad[];
-    scheduleService: IScheduleService;
+    members: Array<IMember | null>;
 }
 
-export const MembersOfTheDay: React.SFC<IProps> = ({ squads, scheduleService }) => {
+export const MembersOfTheDay: React.SFC<IProps> = ({ members }) => {
     const today = getCurrentDate().startOf('day');
-    const members = sortBy(squads, (squad) => squad.name)
-        .map((squad) => scheduleService.getSchedule(squad.members, today)[0].member);
 
     return members.length
         ? (
@@ -43,10 +38,10 @@ export const MembersOfTheDay: React.SFC<IProps> = ({ squads, scheduleService }) 
                                         </Header.Content>
                                     </Header>
                                 </Table.Cell>
-                                {
-                                    members.map(
-                                        (member) => (
-                                            <Table.Cell key={member.slackId} selectable>
+                                {members.map(
+                                    (member, i) => (
+                                        <Table.Cell key={member ? member.slackId : i} selectable>
+                                            {member && (
                                                 <MemberLink
                                                     member={member}
                                                     provider={Provider.Slack}
@@ -56,10 +51,10 @@ export const MembersOfTheDay: React.SFC<IProps> = ({ squads, scheduleService }) 
                                                         todayMode={true}
                                                     />
                                                 </MemberLink>
-                                            </Table.Cell>
-                                        )
+                                            )}
+                                        </Table.Cell>
                                     )
-                                }
+                                )}
                             </Table.Row>
                         </Table.Body>
                     </Table>

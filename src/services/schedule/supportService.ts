@@ -1,12 +1,12 @@
 import { REVIEW_REFERENCE_POINT } from '../../config';
+import { eachDayRanger } from './eachDayRanger';
 import { memberSequencer } from './memberFilter';
 import { ScheduleService } from './scheduleService';
 import { sequencer } from './sequencer';
-import { workingDayRanger } from './workingDayRanger';
 
-export const reviewService = new ScheduleService(
+export const supportService = new ScheduleService(
     sequencer,
-    workingDayRanger,
+    eachDayRanger,
     memberSequencer,
     REVIEW_REFERENCE_POINT,
 );

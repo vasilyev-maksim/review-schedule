@@ -3,6 +3,21 @@ body {
     flex-direction: column;
 }
 
+.layout {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    &.dark {
+        background-color: #3a3a3a;
+    }
+}
+
+.page-wrapper {
+    flex-grow: 1;
+    margin: 40px 0;
+}
+
 #app {
     flex-grow: 1;
 }
@@ -59,4 +74,31 @@ body {
 
 td:hover .member .actions {
     display: block !important;
+}
+
+.navs.shadow {
+    box-shadow: 0 0 5px 0px rgb(39, 39, 39) !important;
+}
+
+$sidebarWidth: 210px;
+
+._container {
+    display: flex;
+    
+    &>.left {
+        flex-basis: $sidebarWidth;
+        flex-grow: 0;
+        flex-shrink: 0;
+    }
+
+    &>.center {
+        flex-grow: 1;
+        padding: 0 20px;
+    }
+
+    &>.right {
+        flex-basis: $sidebarWidth;
+        flex-grow: 0;
+        flex-shrink: 1;
+    }
 }

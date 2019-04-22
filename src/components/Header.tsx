@@ -1,19 +1,24 @@
 import React from 'react';
-import { Header as SemanticHeader, Icon } from 'semantic-ui-react';
+import { Header as SemanticHeader } from 'semantic-ui-react';
 
 import { ThemeConsumer } from './ThemeContext';
 
-export const Header: React.SFC = () => {
+interface IProps {
+    text: React.ReactNode;
+    icon: React.ReactNode;
+}
+
+export const Header: React.SFC<IProps> = ({ icon, text }) => {
     return (
         <ThemeConsumer>
             {({ darkTheme }) => (
                 <SemanticHeader as="h2" inverted={darkTheme}>
-                    <Icon name="list alternate outline" />
+                    {icon}
                     <SemanticHeader.Content>
-                        PR review schedule
+                        {text}
                         <SemanticHeader.Subheader>
                             for PASHA Bank Digital Lab developers
-                        </SemanticHeader.Subheader>
+                                    </SemanticHeader.Subheader>
                     </SemanticHeader.Content>
                 </SemanticHeader>
             )}

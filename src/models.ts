@@ -1,3 +1,4 @@
+import moment from 'moment';
 import { SemanticICONS } from 'semantic-ui-react';
 
 export interface IPeriod {
@@ -36,4 +37,9 @@ export interface IDBConfig {
     apiKey: string;
     authDomain: string;
     projectId: string;
+}
+
+export interface IScheduleDay {
+    day: moment.Moment;
+    members: Array<IMember | null>;
 }
