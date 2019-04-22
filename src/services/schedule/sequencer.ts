@@ -1,7 +1,7 @@
 import moment from 'moment';
 
-import { IMember } from '../../models';
-import { IScheduleDay, IScheduleSequencer } from './models';
+import { IMember, IScheduleDay } from '../../models';
+import { IScheduleSequencer } from './models';
 
 class Sequencer implements IScheduleSequencer {
     public getSequence (
@@ -18,7 +18,7 @@ class Sequencer implements IScheduleSequencer {
             const day = daysRange[dayIndex];
 
             if (isMemberActive(member, day)) {
-                sequence.push({ day, member });
+                sequence.push({ day, members: [member] });
                 dayIndex++;
             } else {
                 iterationsCount++;

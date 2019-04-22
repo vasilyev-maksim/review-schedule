@@ -3,21 +3,21 @@ import {
     BrowserRouter as Router,
     Redirect,
     Route,
-    Switch
+    Switch,
 } from 'react-router-dom';
-import { Container } from 'semantic-ui-react';
+import { Icon } from 'semantic-ui-react';
 
 import { API } from '../API';
 import { ICamp } from '../models';
-import { ErrorBoundary } from './ErrorBoundary';
-import { Footer } from './Footer';
+import { reviewService } from '../services/schedule/reviewService';
+import { supportService } from '../services/schedule/supportService';
+import { CampMenu } from './CampMenu';
+import { Layout } from './Layout';
 import { SchedulePage } from './SchedulePage';
-import { TestEnvIndicator } from './TestEnvIndicator';
 import { ThemeProvider } from './ThemeContext';
 
 interface IState {
     camps: ICamp[] | null;
-    error: boolean;
     loading: boolean;
     darkTheme: boolean;
 }
@@ -26,7 +26,6 @@ export class App extends React.Component<{}, IState> {
     public state: IState = {
         camps: null,
         darkTheme: true,
-        error: false,
         loading: true,
     };
 
@@ -49,40 +48,73 @@ export class App extends React.Component<{}, IState> {
                 darkTheme: this.state.darkTheme,
                 toggleDarkTheme: this.toggleTheme,
             }}>
-                <div
-                    style={{
-                        backgroundColor: this.state.darkTheme ? '#3a3a3a' : 'initial',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        height: '100%',
-                    }}
-                >
-                    <TestEnvIndicator />
-                    <Container
-                        style={{
-                            flexGrow: 1,
-                            margin: '40px 0',
-                        }}
-                    >
-                        <ErrorBoundary>
-                            <Router>
-                                <Switch>
-                                    <Route
-                                        path="/schedule"
-                                        render={() => (
-                                            <SchedulePage
-                                                camps={this.state.camps}
-                                                loading={this.state.loading}
-                                            />
-                                        )}
-                                    />
-                                    <Redirect to="/schedule" />
-                                </Switch>
-                            </Router>
-                        </ErrorBoundary>
-                    </Container>
-                    <Footer />
-                </div >
+                <Router>
+                    <Layout
+                        content={(
+                            <Switch>
+                                <Route
+                                    path="/review-schedule"
+                                    render={() => (
+                                        <SchedulePage
+                                            key="review-schedule"
+                                            scheduleService={reviewService}
+                                            camps={this.state.camps}
+                                            loading={this.state.loading}
+                                            url="/review-schedule"
+                                        />
+                                    )}
+                                />
+                                <Route
+                                    path="/support-schedule"
+                                    render={() => (
+                                        <SchedulePage
+                                            key="support-schedule"
+                                            scheduleService={supportService}
+                                            camps={this.state.camps}
+                                            loading={this.state.loading}
+                                            url="/support-schedule"
+                                        />
+                                    )}
+                                />
+                                <Redirect to="/review-schedule" />
+                            </Switch>
+                        )}
+                        headerIcon={(
+                            <Switch>
+                                <Route path="/review-schedule" render={() => <Icon name="code branch" />} />
+                                <Route path="/support-schedule" render={() => <Icon name="heartbeat" />} />
+                            </Switch>
+                        )}
+                        headerText={(
+                            <Switch>
+                                <Route path="/review-schedule" render={() => 'PR review schedule'} />
+                                <Route path="/support-schedule" render={() => 'Product support schedule'} />
+                            </Switch>
+                        )}
+                        menu={(
+                            <Switch>
+                                <Route
+                                    path="/review-schedule"
+                                    render={() => (
+                                        <CampMenu
+                                            camps={this.state.camps}
+                                            url="/review-schedule"
+                                        />
+                                    )}
+                                />
+                                <Route
+                                    path="/support-schedule"
+                                    render={() => (
+                                        <CampMenu
+                                            camps={this.state.camps}
+                                            url="/support-schedule"
+                                        />
+                                    )}
+                                />
+                            </Switch>
+                        )}
+                    />
+                </Router>
             </ThemeProvider>
         );
     }

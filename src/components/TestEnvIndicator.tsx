@@ -1,9 +1,9 @@
 import * as React from 'react';
-import MediaQuery from 'react-responsive';
-import { Icon, Responsive } from 'semantic-ui-react';
+import { Icon } from 'semantic-ui-react';
 
 import { NodeEnv } from '../enums';
 import { getEnvironment } from '../environment';
+import { MobileMediaQuery } from './MobileMediaQuery';
 
 export const TestEnvIndicator: React.SFC = () => {
     const env = getEnvironment();
@@ -11,9 +11,9 @@ export const TestEnvIndicator: React.SFC = () => {
 
     return env.nodeEnv !== NodeEnv.Production
         ? (
-            <MediaQuery {...Responsive.onlyMobile}>
+            <MobileMediaQuery>
                 {(isMobile) => {
-                    const position = isMobile ? 'right' : 'left';
+                    const position = isMobile ? 'right' : 'right';
                     const size = isMobile ? 'big' : 'huge';
                     const iconName = env.mockAPI ? 'database' : 'code';
 
@@ -27,7 +27,7 @@ export const TestEnvIndicator: React.SFC = () => {
                         </a>
                     );
                 }}
-            </MediaQuery>
+            </MobileMediaQuery>
         )
         : null;
 };

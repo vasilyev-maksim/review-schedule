@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-import { IMember } from '../../models';
+import { IMember, IScheduleDay } from '../../models';
 
 export interface IScheduleService {
     getSchedule (members: IMember[], start: moment.Moment, end?: moment.Moment): IScheduleDay[];
@@ -36,9 +36,4 @@ export interface IScheduleDayRanger {
  */
 export interface IScheduleMemberFilter {
     isMemberActive (member: IMember, day: moment.Moment): boolean;
-}
-
-export interface IScheduleDay {
-    day: moment.Moment;
-    member: IMember;
 }
