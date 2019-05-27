@@ -8,7 +8,7 @@ import { isSubstring } from '../utils';
 import { IProvider } from './models';
 
 const token = 'ecbbd561d0b52b95762492f29d64ad5e9447c238';
-const url = `https://api.github.com/orgs/PB-Digital/members`;
+const url = `https://api.github.com/orgs/PB-Digital/members?per_page=10000`;
 
 class GithubProvider implements IProvider<IGithubUser> {
     public getUserName (user: IGithubUser): string {

@@ -84,6 +84,7 @@ $sidebarWidth: 210px;
 
 ._container {
     display: flex;
+    flex-grow: 1;
     
     &>.left {
         flex-basis: $sidebarWidth;
@@ -100,5 +101,11 @@ $sidebarWidth: 210px;
         flex-basis: $sidebarWidth;
         flex-grow: 0;
         flex-shrink: 1;
+    }
+}
+
+@media only screen and (min-width: 1200px){
+    .ui.container {
+        width: 1300px !important;
     }
 }
