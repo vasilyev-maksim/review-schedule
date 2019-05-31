@@ -24,7 +24,7 @@ export const MembersOfTheDay: React.SFC<IProps> = ({ members }) => {
                         inverted={darkTheme}
                         celled
                         columns={(members.length + 1) as any}
-                        color={darkTheme ? 'black' : 'green'}
+                        color="green"
                     >
                         <Table.Body>
                             <Table.Row>

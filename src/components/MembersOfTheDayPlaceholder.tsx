@@ -17,7 +17,7 @@ export const MembersOfTheDayPlaceholder: React.SFC = () => {
                     inverted={darkTheme}
                     celled
                     columns={(PLACEHOLDER_SQUADS_COUNT + 1) as any}
-                    color={darkTheme ? 'black' : 'green'}
+                    color="green"
                 >
                     <Table.Body>
                         <Table.Row>

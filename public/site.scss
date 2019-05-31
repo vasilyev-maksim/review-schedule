@@ -109,3 +109,65 @@ $sidebarWidth: 210px;
         width: 1300px !important;
     }
 }
+
+.ui.inverted.green.table {
+    border-top: .2em solid #21ba45;
+    background-color: #1b1c1d !important;
+}
+
+.party-parrot-doodle {
+    position: fixed;
+    bottom: 0px;
+    right: 30px;
+    height: 80px;
+}
+
+.vitaliy-doodle{
+    position: fixed;
+    bottom: -50px;
+    right: 30px;
+    height: 200px;
+    animation: bounceUp 3000ms ease-in-out;
+    animation-timing-function: ease-in-out;
+    animation-duration: 3000ms;
+    animation-fill-mode: forwards;
+    transform-origin: 50% 100%;
+}
+
+@keyframes bounceUp {
+    0% {
+        transform: translateY(100%);
+    }
+
+    50% {
+        transform: translateY(100%);
+    }
+    
+    65% {
+        transform: translateY(-10%);
+    }
+
+    70% {
+        transform: translateY(0%);
+    }
+
+    75% {
+        transform: translateY(0%);
+    }
+
+    79% {
+        transform: rotateZ(10deg);
+    }
+
+    89% {
+        transform: rotateZ(-10deg);
+    }
+
+    93% {
+        transform: rotateZ(0deg);
+    }
+
+    100% {
+        transform: translateY(100%);
+    }
+}

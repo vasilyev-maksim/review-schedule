@@ -3,9 +3,11 @@ import * as React from 'react';
 import { Grid } from 'semantic-ui-react';
 
 import { Container } from './Container';
+import { Doodle } from './Doodle';
 import { ErrorBoundary } from './ErrorBoundary';
 import { Footer } from './Footer';
 import { Header } from './Header';
+import { MobileMediaQuery } from './MobileMediaQuery';
 import { Navs } from './Navs';
 import { TestEnvIndicator } from './TestEnvIndicator';
 import { ThemeConsumer } from './ThemeContext';
@@ -52,6 +54,9 @@ export class Layout extends React.Component<IProps> {
                         </Container>
 
                         <Footer />
+                        <MobileMediaQuery>
+                            {(isMobile) => !isMobile && <Doodle />}
+                        </MobileMediaQuery>
                     </div>
                 )}
             </ThemeConsumer>
