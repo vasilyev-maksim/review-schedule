@@ -128,7 +128,7 @@ export class SchedulePage extends React.Component<IProps, IState> {
                             </>
                         );
                     }}
-                </ CurrentCampProvider>
+                </CurrentCampProvider>
             );
         }
     }

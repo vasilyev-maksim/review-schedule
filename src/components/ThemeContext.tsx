@@ -6,7 +6,8 @@ interface IThemeContext {
     toggleDarkTheme (): void;
 }
 
-export const { Consumer: ThemeConsumer, Provider: ThemeProvider } = React.createContext<IThemeContext>({
+export const themeContext = React.createContext<IThemeContext>({
     darkTheme: false,
     toggleDarkTheme: noop,
 });
+export const { Consumer: ThemeConsumer, Provider: ThemeProvider } = themeContext;
