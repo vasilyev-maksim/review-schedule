@@ -17,7 +17,6 @@ export function getDBInstance (): firebase.firestore.Firestore {
 
         firebase.initializeApp(config);
         db = firebase.firestore();
-        db.settings({ timestampsInSnapshots: true });
     }
     return db;
 }
