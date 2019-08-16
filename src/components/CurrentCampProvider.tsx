@@ -2,10 +2,10 @@ import * as React from 'react';
 import { Redirect, Route, Switch } from 'react-router';
 
 import { ICamp } from '../models';
-import { getDefaultCampName } from '../utils';
+import { findCampByName, getDefaultCampName } from '../utils';
 
 interface IProps {
-    camps: ICamp[] | null | undefined;
+    camps: ICamp[] | null;
     url: string;
     children: (camp: ICamp) => React.ReactNode
 }
@@ -23,12 +23,9 @@ export const CurrentCampProvider: React.SFC<IProps> = ({ camps, url, children })
                 />
             )}
             <Route
-                path={url + '/:camp?'}
-                render={(props) => {
-                    const { camp: currentCampName } = props.match.params;
-                    const currentCamp = camps && camps.find(
-                        (camp) => encodeURIComponent(camp.name) === encodeURIComponent(currentCampName)
-                    );
+                path={url + '/:currentCampName?'}
+                render={({ match: { params: { currentCampName } } }) => {
+                    const currentCamp = findCampByName(camps, currentCampName);
 
                     if (currentCamp) {
                         return children(currentCamp);

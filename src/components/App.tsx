@@ -16,106 +16,98 @@ import { Layout } from './Layout';
 import { SchedulePage } from './SchedulePage';
 import { ThemeProvider } from './ThemeContext';
 
-interface IState {
-    camps: ICamp[] | null;
-    loading: boolean;
-    darkTheme: boolean;
-}
+export const App: React.FC = () => {
+    const [loading, setLoading] = React.useState(true);
+    const [camps, setCamps] = React.useState<ICamp[] | null>(null);
+    const [darkTheme, setDarkTheme] = React.useState(true);
 
-export class App extends React.Component<{}, IState> {
-    public state: IState = {
-        camps: null,
-        darkTheme: true,
-        loading: true,
-    };
+    const handleThemeToggle = React.useCallback(
+        () => setDarkTheme(!darkTheme),
+        [darkTheme]
+    );
 
-    public componentDidMount (): void {
-        API.getCamps((camps) => {
-            this.setState({
-                camps,
-                loading: false,
+    React.useEffect(
+        () => {
+            return API.getCamps((_camps) => {
+                setLoading(false);
+                setCamps(_camps);
             });
-        });
-    }
+        },
+        []
+    );
 
-    private toggleTheme = (): void => {
-        this.setState({ darkTheme: !this.state.darkTheme });
-    }
-
-    public render (): JSX.Element {
-        return (
-            <ThemeProvider value={{
-                darkTheme: this.state.darkTheme,
-                toggleDarkTheme: this.toggleTheme,
-            }}>
-                <Router>
-                    <Layout
-                        content={(
-                            <Switch>
-                                <Route
-                                    path="/review-schedule"
-                                    render={() => (
-                                        <SchedulePage
-                                            key="review-schedule"
-                                            scheduleService={reviewService}
-                                            camps={this.state.camps}
-                                            loading={this.state.loading}
-                                            url="/review-schedule"
-                                        />
-                                    )}
-                                />
-                                <Route
-                                    path="/support-schedule"
-                                    render={() => (
-                                        <SchedulePage
-                                            key="support-schedule"
-                                            scheduleService={supportService}
-                                            camps={this.state.camps}
-                                            loading={this.state.loading}
-                                            url="/support-schedule"
-                                        />
-                                    )}
-                                />
-                                <Redirect to="/review-schedule" />
-                            </Switch>
-                        )}
-                        headerIcon={(
-                            <Switch>
-                                <Route path="/review-schedule" render={() => <Icon name="code branch" />} />
-                                <Route path="/support-schedule" render={() => <Icon name="heartbeat" />} />
-                            </Switch>
-                        )}
-                        headerText={(
-                            <Switch>
-                                <Route path="/review-schedule" render={() => 'PR review schedule'} />
-                                <Route path="/support-schedule" render={() => 'Product support schedule'} />
-                            </Switch>
-                        )}
-                        menu={(
-                            <Switch>
-                                <Route
-                                    path="/review-schedule"
-                                    render={() => (
-                                        <CampMenu
-                                            camps={this.state.camps}
-                                            url="/review-schedule"
-                                        />
-                                    )}
-                                />
-                                <Route
-                                    path="/support-schedule"
-                                    render={() => (
-                                        <CampMenu
-                                            camps={this.state.camps}
-                                            url="/support-schedule"
-                                        />
-                                    )}
-                                />
-                            </Switch>
-                        )}
-                    />
-                </Router>
-            </ThemeProvider>
-        );
-    }
-}
+    return (
+        <ThemeProvider value={{
+            darkTheme,
+            toggleDarkTheme: handleThemeToggle,
+        }}>
+            <Router>
+                <Layout
+                    content={(
+                        <Switch>
+                            <Route
+                                path="/review-schedule"
+                                render={() => (
+                                    <SchedulePage
+                                        url="/review-schedule"
+                                        key="review-schedule"
+                                        scheduleService={reviewService}
+                                        camps={camps}
+                                        loading={loading}
+                                    />
+                                )}
+                            />
+                            <Route
+                                path="/support-schedule"
+                                render={() => (
+                                    <SchedulePage
+                                        url="/support-schedule"
+                                        key="support-schedule"
+                                        scheduleService={supportService}
+                                        camps={camps}
+                                        loading={loading}
+                                    />
+                                )}
+                            />
+                            <Redirect to="/review-schedule" />
+                        </Switch>
+                    )}
+                    headerIcon={(
+                        <Switch>
+                            <Route path="/review-schedule" render={() => <Icon name="code branch" />} />
+                            <Route path="/support-schedule" render={() => <Icon name="heartbeat" />} />
+                        </Switch>
+                    )}
+                    headerText={(
+                        <Switch>
+                            <Route path="/review-schedule" render={() => 'PR review schedule'} />
+                            <Route path="/support-schedule" render={() => 'Product support schedule'} />
+                        </Switch>
+                    )}
+                    menu={(
+                        <Switch>
+                            <Route
+                                path="/review-schedule"
+                                render={() => (
+                                    <CampMenu
+                                        camps={camps}
+                                        url="/review-schedule"
+                                    />
+                                )}
+                            />
+                            <Route
+                                path="/support-schedule"
+                                render={() => (
+                                    <CampMenu
+                                        camps={camps}
+                                        url="/support-schedule"
+                                    />
+                                )}
+                            />
+                        </Switch>
+                    )}
+                />
+            </Router>
+        </ThemeProvider>
+    );
+};

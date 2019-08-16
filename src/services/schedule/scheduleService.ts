@@ -10,7 +10,7 @@ import {
 
 export class ScheduleService implements IScheduleService {
     constructor (
-        private _sequencer: IScheduleSequencer,
+        private sequencer: IScheduleSequencer,
         private ranger: IScheduleDayRanger,
         private filter: IScheduleMemberFilter,
         private referencePoint: string,
@@ -19,7 +19,7 @@ export class ScheduleService implements IScheduleService {
     public getSchedule (members: IMember[], start: moment.Moment, end?: moment.Moment): IScheduleDay[] {
         const daysRange = this.getDaysRange(moment(this.referencePoint), end || start);
 
-        const schedule = this._sequencer.getSequence(
+        const schedule = this.sequencer.getSequence(
             members,
             daysRange,
             this.filter.isMemberActive

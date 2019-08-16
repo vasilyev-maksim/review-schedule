@@ -10,7 +10,7 @@ import { Header } from './Header';
 import { MobileMediaQuery } from './MobileMediaQuery';
 import { Navs } from './Navs';
 import { TestEnvIndicator } from './TestEnvIndicator';
-import { ThemeConsumer } from './ThemeContext';
+import { themeContext } from './ThemeContext';
 import { ThemeSwitch } from './ThemeSwitch';
 
 interface IProps {
@@ -20,46 +20,40 @@ interface IProps {
     menu: React.ReactNode;
 }
 
-export class Layout extends React.Component<IProps> {
-    public render (): JSX.Element {
-        const { content, headerText, headerIcon, menu } = this.props;
+export const Layout: React.FC<IProps> = ({ content, headerText, headerIcon, menu }) => {
+    const { darkTheme } = React.useContext(themeContext);
 
-        return (
-            <ThemeConsumer>
-                {({ darkTheme }) => (
-                    <div className={classnames('layout', { dark: darkTheme })}>
-                        <TestEnvIndicator />
-                        <Navs />
+    return (
+        <div className={classnames('layout', { dark: darkTheme })}>
+            <TestEnvIndicator />
+            <Navs />
 
-                        <Container>
-                            <ErrorBoundary>
-                                <Grid columns={2} stackable style={{ marginBottom: 0 }}>
-                                    <Grid.Row>
-                                        <Grid.Column>
-                                            <Header
-                                                text={headerText}
-                                                icon={headerIcon}
-                                            />
-                                        </Grid.Column>
-                                        <Grid.Column textAlign="right">
-                                            {menu}
-                                            &nbsp;
-                                            &nbsp;
+            <Container>
+                <ErrorBoundary>
+                    <Grid columns={2} stackable style={{ marginBottom: 0 }}>
+                        <Grid.Row>
+                            <Grid.Column>
+                                <Header
+                                    text={headerText}
+                                    icon={headerIcon}
+                                />
+                            </Grid.Column>
+                            <Grid.Column textAlign="right">
+                                {menu}
+                                &nbsp;
+                                &nbsp;
                                             <ThemeSwitch />
-                                        </Grid.Column>
-                                    </Grid.Row>
-                                </Grid>
-                                {content}
-                            </ErrorBoundary>
-                        </Container>
+                            </Grid.Column>
+                        </Grid.Row>
+                    </Grid>
+                    {content}
+                </ErrorBoundary>
+            </Container>
 
-                        <Footer />
-                        <MobileMediaQuery>
-                            {(isMobile) => !isMobile && <Doodle />}
-                        </MobileMediaQuery>
-                    </div>
-                )}
-            </ThemeConsumer>
-        );
-    }
-}
+            <Footer />
+            <MobileMediaQuery>
+                {(isMobile) => !isMobile && <Doodle />}
+            </MobileMediaQuery>
+        </div>
+    );
+};

@@ -14,8 +14,8 @@ import { IProvider } from './providers/models';
 import { slackProvider } from './providers/slackProvider';
 import { isSubstring, writeOutputJsonToFile } from './utils';
 
-interface Indexer { [K: string]: any }
-type Template<T> = { [K in keyof T]: T[K] | undefined } & Indexer;
+interface IIndexer { [K: string]: any }
+type Template<T> = { [K in keyof T]: T[K] | undefined } & IIndexer;
 
 export async function main (): Promise<any> {
     try {
@@ -31,7 +31,7 @@ export async function main (): Promise<any> {
             createdOn: moment().format(SERVER_DATE_FORMAT),
         };
 
-        const partials: Array<Partial<IMember> & Indexer> = [];
+        const partials: Array<Partial<IMember> & IIndexer> = [];
 
         for (const provider of providers) {
             const providerName = provider.getProviderName();

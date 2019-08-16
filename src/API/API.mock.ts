@@ -2,8 +2,11 @@ import { ICamp } from '../models';
 import { campsMock } from './mocks';
 import { IAPI } from './models';
 
-export const APIMock: IAPI = {
-    getCamps (callback: (camps: ICamp[]) => void): void {
-        setTimeout(() => callback(campsMock), 1000);
+class APIMockClass implements IAPI {
+    public getCamps (callback: (camps: ICamp[]) => void): () => void {
+        const id = setTimeout(() => callback(campsMock), 1000);
+        return () => clearTimeout(id);
     }
-};
+}
+
+export const APIMock = new APIMockClass();
