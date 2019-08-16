@@ -50,3 +50,7 @@ export function getDefaultCampName (camps: ICamp[] | null | undefined): string |
 
     return defaultCampName;
 }
+
+export function findCampByName (camps: ICamp[] | null, currentCampName: any): ICamp | null {
+    return camps && camps.find((camp) => encodeURIComponent(camp.name) === encodeURIComponent(currentCampName)) || null;
+}

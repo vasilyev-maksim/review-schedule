@@ -21,6 +21,11 @@ export const App: React.FC = () => {
     const [camps, setCamps] = React.useState<ICamp[] | null>(null);
     const [darkTheme, setDarkTheme] = React.useState(true);
 
+    const handleThemeToggle = React.useCallback(
+        () => setDarkTheme(!darkTheme),
+        [darkTheme]
+    );
+
     React.useEffect(
         () => {
             return API.getCamps((_camps) => {
@@ -29,11 +34,6 @@ export const App: React.FC = () => {
             });
         },
         []
-    );
-
-    const handleThemeToggle = React.useCallback(
-        () => setDarkTheme(!darkTheme),
-        [darkTheme]
     );
 
     return (
@@ -49,11 +49,11 @@ export const App: React.FC = () => {
                                 path="/review-schedule"
                                 render={() => (
                                     <SchedulePage
+                                        url="/review-schedule"
                                         key="review-schedule"
                                         scheduleService={reviewService}
                                         camps={camps}
                                         loading={loading}
-                                        url="/review-schedule"
                                     />
                                 )}
                             />
@@ -61,11 +61,11 @@ export const App: React.FC = () => {
                                 path="/support-schedule"
                                 render={() => (
                                     <SchedulePage
+                                        url="/support-schedule"
                                         key="support-schedule"
                                         scheduleService={supportService}
                                         camps={camps}
                                         loading={loading}
-                                        url="/support-schedule"
                                     />
                                 )}
                             />

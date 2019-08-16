@@ -8,7 +8,7 @@ import { CurrentCampProvider } from './CurrentCampProvider';
 import { themeContext } from './ThemeContext';
 
 interface IProps {
-    camps?: ICamp[] | null;
+    camps: ICamp[] | null;
     url: string;
 }
 
